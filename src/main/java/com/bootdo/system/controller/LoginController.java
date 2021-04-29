@@ -41,8 +41,7 @@ public class LoginController extends BaseController {
 
     @GetMapping({"/", ""})
     String welcome(Model model) {
-
-        return "redirect:/blog";
+        return "redirect:/login";
     }
 
     @Log("请求访问主页")
@@ -80,13 +79,12 @@ public class LoginController extends BaseController {
         try {
             //从session中获取随机数
             String random = (String) request.getSession().getAttribute(RandomValidateCodeUtil.RANDOMCODEKEY);
-            if (StringUtils.isBlank(verify)) {
-                return R.error("请输入验证码");
-            }
-            if (random.equals(verify)) {
-            } else {
-                return R.error("请输入正确的验证码");
-            }
+//            if (StringUtils.isBlank(verify)) {
+//                return R.error("请输入验证码");
+//            }
+//            if (!random.equals(verify)) {
+//                return R.error("请输入正确的验证码");
+//            }
         } catch (Exception e) {
             logger.error("验证码校验失败", e);
             return R.error("验证码校验失败");

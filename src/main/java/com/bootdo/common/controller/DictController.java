@@ -69,7 +69,7 @@ public class DictController extends BaseController {
 	@RequiresPermissions("common:dict:add")
 	public R save(DictDO dict) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		if (dictService.save(dict) > 0) {
 			return R.ok();
@@ -85,7 +85,7 @@ public class DictController extends BaseController {
 	@RequiresPermissions("common:dict:edit")
 	public R update(DictDO dict) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		dictService.update(dict);
 		return R.ok();
@@ -99,7 +99,7 @@ public class DictController extends BaseController {
 	@RequiresPermissions("common:dict:remove")
 	public R remove(Long id) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		if (dictService.remove(id) > 0) {
 			return R.ok();
@@ -115,7 +115,7 @@ public class DictController extends BaseController {
 	@RequiresPermissions("common:dict:batchRemove")
 	public R remove(@RequestParam("ids[]") Long[] ids) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		dictService.batchRemove(ids);
 		return R.ok();

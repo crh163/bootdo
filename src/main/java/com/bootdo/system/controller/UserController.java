@@ -83,7 +83,7 @@ public class UserController extends BaseController {
 	@ResponseBody
 	R save(UserDO user) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		user.setPassword(MD5Utils.encrypt(user.getUsername(), user.getPassword()));
 		if (userService.save(user) > 0) {
@@ -98,7 +98,7 @@ public class UserController extends BaseController {
 	@ResponseBody
 	R update(UserDO user) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		if (userService.update(user) > 0) {
 			return R.ok();
@@ -113,7 +113,7 @@ public class UserController extends BaseController {
 	@ResponseBody
 	R updatePeronal(UserDO user) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		if (userService.updatePersonal(user) > 0) {
 			return R.ok();
@@ -128,7 +128,7 @@ public class UserController extends BaseController {
 	@ResponseBody
 	R remove(Long id) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		if (userService.remove(id) > 0) {
 			return R.ok();
@@ -142,7 +142,7 @@ public class UserController extends BaseController {
 	@ResponseBody
 	R batchRemove(@RequestParam("ids[]") Long[] userIds) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		int r = userService.batchremove(userIds);
 		if (r > 0) {
@@ -174,7 +174,7 @@ public class UserController extends BaseController {
 	@ResponseBody
 	R resetPwd(UserVO userVO) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		try{
 			userService.resetPwd(userVO,getUser());
@@ -190,7 +190,7 @@ public class UserController extends BaseController {
 	@ResponseBody
 	R adminResetPwd(UserVO userVO) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		try{
 			userService.adminResetPwd(userVO);
@@ -225,7 +225,7 @@ public class UserController extends BaseController {
 	@PostMapping("/uploadImg")
 	R uploadImg(@RequestParam("avatar_file") MultipartFile file, String avatar_data, HttpServletRequest request) {
 		if ("test".equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		Map<String, Object> result = new HashMap<>();
 		try {

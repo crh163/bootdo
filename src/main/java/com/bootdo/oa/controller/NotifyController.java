@@ -89,7 +89,7 @@ public class NotifyController extends BaseController {
 	@RequiresPermissions("oa:notify:add")
 	public R save(NotifyDO notify) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		notify.setCreateBy(getUserId());
 		if (notifyService.save(notify) > 0) {
@@ -106,7 +106,7 @@ public class NotifyController extends BaseController {
 	@RequiresPermissions("oa:notify:edit")
 	public R update(NotifyDO notify) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		notifyService.update(notify);
 		return R.ok();
@@ -120,7 +120,7 @@ public class NotifyController extends BaseController {
 	@RequiresPermissions("oa:notify:remove")
 	public R remove(Long id) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		if (notifyService.remove(id) > 0) {
 			return R.ok();
@@ -136,7 +136,7 @@ public class NotifyController extends BaseController {
 	@RequiresPermissions("oa:notify:batchRemove")
 	public R remove(@RequestParam("ids[]") Long[] ids) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		notifyService.batchRemove(ids);
 		return R.ok();

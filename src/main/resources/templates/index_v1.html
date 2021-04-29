@@ -4,9 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="renderer" content="webkit">
-    <title>面向学习型的开源框架，简洁高效，减少过渡封装，展现技术本质</title>
-    <meta name="keywords" content="面向学习型的开源框架，简洁高效，杜绝过渡封装，展现技术本质本质">
-    <meta name="description" content="面向学习型的开源框架，简洁高效，杜绝过渡封装，展现技术本质本质">
+    <title>首页</title>
+    <meta name="keywords" content="首页">
+    <meta name="description" content="首页">
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
@@ -31,18 +31,18 @@
                     <div>
                         <span><img alt="image" class="img-circle" height="60" width="60" th:src="${picUrl}"/></span>
                         <h3 class="" style="color: #ffffff">
-                            </i>BootDo后台管理系统
+                            </i>后台管理系统
                         </h3>
                     </div>
                     <div class="dropdown profile-element hidden">
 
-                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-                            <span class="clear">
-                            <span class="block m-t-xs"><strong class="font-bold"
-                                                               th:text="${username}">admin</strong></span>
-                            <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>
-                             </span>
-                        </a>
+<!--                        <a data-toggle="dropdown" class="dropdown-toggle" href="#">-->
+<!--                            <span class="clear">-->
+<!--                            <span class="block m-t-xs"><strong class="font-bold"-->
+<!--                                                               th:text="${username}">admin</strong></span>-->
+<!--                            <span class="text-muted text-xs block">超级管理员<b class="caret"></b></span>-->
+<!--                             </span>-->
+<!--                        </a>-->
                         <ul class="dropdown-menu animated fadeInRight m-t-xs">
                             <li><a @click="personal" href="#">修改头像</a>
                             </li>
@@ -56,7 +56,6 @@
                             <li><a href="/logout">安全退出</a>
                             </li>
                         </ul>
-                        <div class="logo-element">BootDo</div>
                     </div>
                 </li>
                 <li><a href="#"> <i class="fa fa-home"></i> <span
@@ -64,7 +63,7 @@
                 </a>
                     <ul class="nav nav-second-level">
                         <li><a id="index001" class="J_menuItem" href="index_v1.html"
-                               data-index="0" th:href="@{/main}">了解BootDo</a></li>
+                               data-index="0" th:href="@{/main}">首页</a></li>
                     </ul>
                 </li>
                 <li th:each="menu : ${menus}"><a href="#"> <i
@@ -100,8 +99,6 @@
                     </form>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
-                    <li class="hidden-xs"><a href="/blog" target="_Blank"
-                                             class=""><i class="fa fa-rss-square"></i>博客</a></li>
                     <li class="dropdown"><a class="dropdown-toggle count-info"
                                             data-toggle="dropdown" href="#"> <i class="fa fa-envelope"></i>
                         <span class="label label-warning">{{total}}</span>通知
@@ -171,21 +168,13 @@
                     seamless></iframe>
         </div>
         <div class="footer">
-            <div class="pull-right">BootDo面向学习型的开源框架</div>
+            <div class="pull-right">&copy; 2021 All Rights Reserved.crh</div>
         </div>
     </div>
     <!--右侧部分结束-->
     <!--右侧边栏开始-->
     <div id="right-sidebar">
         <div class="sidebar-container">
-            <ul class="nav nav-tabs navs-3">
-
-                <li class="active"><a data-toggle="tab" href="#tab-1"> <i
-                        class="fa fa-gear"></i> 主题
-                </a></li>
-                <li class=""><a data-toggle="tab" href="#tab-2"> 通知 </a></li>
-                <li><a data-toggle="tab" href="#tab-3"> 项目进度 </a></li>
-            </ul>
             <div class="tab-content">
                 <div id="tab-1" class="tab-pane active">
                     <div class="sidebar-title">
@@ -239,17 +228,17 @@
                             </div>
                         </div>
                         <div class="title">皮肤选择</div>
-                        <div class="setings-item default-skin nb">
+                        <div class="setings-item default-skin nb s-skin-parent-0">
 								<span class="skin-name "> <a href="#" class="s-skin-0">
 										默认皮肤 </a>
 								</span>
                         </div>
-                        <div class="setings-item blue-skin nb">
+                        <div class="setings-item blue-skin nb s-skin-parent-1">
 								<span class="skin-name "> <a href="#" class="s-skin-1">
 										蓝色主题 </a>
 								</span>
                         </div>
-                        <div class="setings-item yellow-skin nb">
+                        <div class="setings-item yellow-skin nb s-skin-parent-3">
 								<span class="skin-name "> <a href="#" class="s-skin-3">
 										黄色/紫色主题 </a>
 								</span>

@@ -70,7 +70,7 @@ public class JobController extends BaseController{
 	@PostMapping("/save")
 	public R save(TaskDO taskScheduleJob) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		if (taskScheduleJobService.save(taskScheduleJob) > 0) {
 			return R.ok();
@@ -85,7 +85,7 @@ public class JobController extends BaseController{
 	@PostMapping("/update")
 	public R update(TaskDO taskScheduleJob) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		taskScheduleJobService.update(taskScheduleJob);
 		return R.ok();
@@ -98,7 +98,7 @@ public class JobController extends BaseController{
 	@ResponseBody
 	public R remove(Long id) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		if (taskScheduleJobService.remove(id) > 0) {
 			return R.ok();
@@ -113,7 +113,7 @@ public class JobController extends BaseController{
 	@ResponseBody
 	public R remove(@RequestParam("ids[]") Long[] ids) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		taskScheduleJobService.batchRemove(ids);
 
@@ -124,7 +124,7 @@ public class JobController extends BaseController{
 	@ResponseBody
 	public R changeJobStatus(Long id,String cmd ) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		String label = "停止";
 		if ("start".equals(cmd)) {

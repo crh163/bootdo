@@ -57,7 +57,7 @@ public class RoleController extends BaseController {
 	@ResponseBody()
 	R save(RoleDO role) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		if (roleService.save(role) > 0) {
 			return R.ok();
@@ -72,7 +72,7 @@ public class RoleController extends BaseController {
 	@ResponseBody()
 	R update(RoleDO role) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		if (roleService.update(role) > 0) {
 			return R.ok();
@@ -87,7 +87,7 @@ public class RoleController extends BaseController {
 	@ResponseBody()
 	R save(Long id) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		if (roleService.remove(id) > 0) {
 			return R.ok();
@@ -102,7 +102,7 @@ public class RoleController extends BaseController {
 	@ResponseBody
 	R batchRemove(@RequestParam("ids[]") Long[] ids) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		int r = roleService.batchremove(ids);
 		if (r > 0) {

@@ -82,7 +82,7 @@ public class DeptController extends BaseController {
 	@RequiresPermissions("system:sysDept:add")
 	public R save(DeptDO sysDept) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		if (sysDeptService.save(sysDept) > 0) {
 			return R.ok();
@@ -98,7 +98,7 @@ public class DeptController extends BaseController {
 	@RequiresPermissions("system:sysDept:edit")
 	public R update(DeptDO sysDept) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		if (sysDeptService.update(sysDept) > 0) {
 			return R.ok();
@@ -114,7 +114,7 @@ public class DeptController extends BaseController {
 	@RequiresPermissions("system:sysDept:remove")
 	public R remove(Long deptId) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("parentId", deptId);
@@ -139,7 +139,7 @@ public class DeptController extends BaseController {
 	@RequiresPermissions("system:sysDept:batchRemove")
 	public R remove(@RequestParam("ids[]") Long[] deptIds) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		sysDeptService.batchRemove(deptIds);
 		return R.ok();

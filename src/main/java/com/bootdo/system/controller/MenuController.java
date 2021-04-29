@@ -7,12 +7,14 @@ import com.bootdo.common.domain.Tree;
 import com.bootdo.common.utils.R;
 import com.bootdo.system.domain.MenuDO;
 import com.bootdo.system.service.MenuService;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -75,7 +77,7 @@ public class MenuController extends BaseController {
 	@ResponseBody
 	R save(MenuDO menu) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		if (menuService.save(menu) > 0) {
 			return R.ok();
@@ -90,7 +92,7 @@ public class MenuController extends BaseController {
 	@ResponseBody
 	R update(MenuDO menu) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		if (menuService.update(menu) > 0) {
 			return R.ok();
@@ -105,7 +107,7 @@ public class MenuController extends BaseController {
 	@ResponseBody
 	R remove(Long id) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
-			return R.error(1, "演示系统不允许修改,完整体验请部署程序");
+			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		if (menuService.remove(id) > 0) {
 			return R.ok();
@@ -113,6 +115,7 @@ public class MenuController extends BaseController {
 			return R.error(1, "删除失败");
 		}
 	}
+
 
 	@GetMapping("/tree")
 	@ResponseBody

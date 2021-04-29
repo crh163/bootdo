@@ -3025,6 +3025,10 @@ a.forum-item-title:hover {
     border-bottom: 1px solid #e7eaec;
 }
 
+.s-skin-parent-0 .s-skin-parent-1 .s-skin-parent-3 {
+    cursor: pointer;
+}
+
 body {
     font-family: "open sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 13px;
