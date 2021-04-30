@@ -1,19 +1,15 @@
 package com.bootdo.common.aspect;
 
-import com.bootdo.common.utils.HttpContextUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
-import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import sun.net.util.IPAddressUtil;
 
 import javax.servlet.http.HttpServletRequest;
-import java.lang.reflect.Method;
 import java.util.Arrays;
 
 @Aspect
@@ -36,12 +32,9 @@ public class WebLogAspect {
         // 记录下请求内容
         logger.info("请求地址 : " + request.getRequestURL().toString());
         logger.info("HTTP METHOD : " + request.getMethod());
-        // 获取真实的ip地址
-        //logger.info("IP : " + IPAddressUtil.getClientIpAddress(request));
         logger.info("CLASS_METHOD : " + joinPoint.getSignature().getDeclaringTypeName() + "."
                 + joinPoint.getSignature().getName());
         logger.info("参数 : " + Arrays.toString(joinPoint.getArgs()));
-//        loggger.info("参数 : " + joinPoint.getArgs());
 
     }
 

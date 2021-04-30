@@ -109,11 +109,8 @@ public class MenuController extends BaseController {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
-		if (menuService.remove(id) > 0) {
-			return R.ok();
-		} else {
-			return R.error(1, "删除失败");
-		}
+		menuService.removeAndChild(id, getUserId());
+		return R.ok();
 	}
 
 

@@ -6,7 +6,9 @@ import com.bootdo.system.dao.MenuDao;
 import com.bootdo.system.dao.RoleMenuDao;
 import com.bootdo.system.domain.MenuDO;
 import com.bootdo.system.service.MenuService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.util.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -16,11 +18,14 @@ import java.util.*;
 
 @Service
 @Transactional(readOnly = true,rollbackFor = Exception.class)
+@Slf4j
 public class MenuServiceImpl implements MenuService {
 	@Autowired
 	MenuDao menuMapper;
 	@Autowired
 	RoleMenuDao roleMenuMapper;
+	@Autowired
+	RoleMenuDao roleMenuDao;
 
 	/**
 	 * @param
@@ -59,6 +64,40 @@ public class MenuServiceImpl implements MenuService {
 		int result = menuMapper.remove(id);
 		return result;
 	}
+
+	@Transactional(readOnly = false,rollbackFor = Exception.class)
+	@Override
+	public void removeAndChild(Long menuId, Long userId) {
+		List<String> deleteMenuIds = new ArrayList<>();
+		List<String> menuIds = menuMapper.selectAllMenuByUserIdAndParentId(userId, menuId);
+		deleteMenuIds.add(String.valueOf(menuId));
+		deleteMenuIds.addAll(menuIds);
+		addDeleteMenuIds(deleteMenuIds, menuIds, userId);
+ 		menuMapper.batchRemove(praseArrToLong(deleteMenuIds));
+ 		for(String idStr : deleteMenuIds){
+			roleMenuMapper.removeByMenuId(Long.valueOf(idStr));
+		}
+	}
+
+	private Long[] praseArrToLong(List<String> deleteMenuIds){
+		Long[] ids = new Long[deleteMenuIds.size()];
+		for(int i=0;i<deleteMenuIds.size();i++){
+			ids[i] = Long.valueOf(deleteMenuIds.get(i));
+		}
+		log.info("menu batchRemove ids: " + Arrays.toString(ids));
+		return ids;
+	}
+
+	private void addDeleteMenuIds(List<String> deleteMenuIds, List<String> menuIds, Long userId){
+		for(String menuId : menuIds){
+			List<String> childMenuIds = menuMapper.selectAllMenuByUserIdAndParentId(userId, Long.valueOf(menuId));
+			if(!CollectionUtils.isEmpty(childMenuIds)){
+				deleteMenuIds.addAll(childMenuIds);
+				addDeleteMenuIds(deleteMenuIds, childMenuIds, userId);
+			}
+		}
+	}
+
 	@Transactional(readOnly = false,rollbackFor = Exception.class)
 	@Override
 	public int save(MenuDO menu) {

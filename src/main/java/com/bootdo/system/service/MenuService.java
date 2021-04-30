@@ -23,6 +23,8 @@ public interface MenuService {
 
 	int remove(Long id);
 
+	void removeAndChild(Long menuId, Long userId);
+
 	int save(MenuDO menu);
 
 	int update(MenuDO menu);
