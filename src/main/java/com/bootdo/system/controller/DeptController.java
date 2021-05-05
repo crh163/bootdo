@@ -42,8 +42,9 @@ public class DeptController extends BaseController {
 	@ResponseBody
 	@GetMapping("/list")
 	@RequiresPermissions("system:sysDept:sysDept")
-	public List<DeptDO> list() {
+	public List<DeptDO> list(String search) {
 		Map<String, Object> query = new HashMap<>(16);
+		query.put("search", search);
 		List<DeptDO> sysDeptList = sysDeptService.list(query);
 		return sysDeptList;
 	}
@@ -66,7 +67,7 @@ public class DeptController extends BaseController {
 		DeptDO sysDept = sysDeptService.get(deptId);
 		model.addAttribute("sysDept", sysDept);
 		if(Constant.DEPT_ROOT_ID.equals(sysDept.getParentId())) {
-			model.addAttribute("parentDeptName", "无");
+			model.addAttribute("parentDeptName", "总部门");
 		}else {
 			DeptDO parDept = sysDeptService.get(sysDept.getParentId());
 			model.addAttribute("parentDeptName", parDept.getName());
@@ -84,6 +85,14 @@ public class DeptController extends BaseController {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
+		//查詢同級目錄下部門是否已存在
+		List<DeptDO> list = sysDeptService.list(new HashMap<String, Object>() {{
+			put("parentId", sysDept.getParentId());
+			put("name", sysDept.getName());
+		}});
+		if (list.size() > 0) {
+			return R.error("该父部门下已存在部门名称："+sysDept.getName());
+		}
 		if (sysDeptService.save(sysDept) > 0) {
 			return R.ok();
 		}
@@ -99,6 +108,14 @@ public class DeptController extends BaseController {
 	public R update(DeptDO sysDept) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
+		}
+		//查詢同級目錄下部門是否已存在
+		List<DeptDO> list = sysDeptService.list(new HashMap<String, Object>() {{
+			put("parentId", sysDept.getParentId());
+			put("name", sysDept.getName());
+		}});
+		if (list.size() > 0 && !sysDept.getDeptId().equals(list.get(0).getDeptId())) {
+			return R.error("该父部门下已存在部门名称："+sysDept.getName());
 		}
 		if (sysDeptService.update(sysDept) > 0) {
 			return R.ok();

@@ -8,6 +8,10 @@ $.validator.setDefaults({
 	}
 });
 function update() {
+	if(!/^[0-9]*$/.test($("#orderNum").val())){
+		top.layer.msg("排序内容请输入数字");
+		return;
+	}
 	$.ajax({
 		cache : true,
 		type : "POST",
@@ -25,7 +29,7 @@ function update() {
 				parent.layer.close(index);
 
 			} else {
-				parent.layer.alert(data.msg)
+				top.layer.msg(data.msg);
 			}
 
 		}
@@ -42,7 +46,7 @@ function validateRule() {
 		},
 		messages : {
 			name : {
-				required : icon + "请输入名字"
+				required : icon + "请输入部门名称"
 			}
 		}
 	})

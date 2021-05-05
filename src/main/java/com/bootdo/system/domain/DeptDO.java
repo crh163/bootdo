@@ -2,8 +2,6 @@ package com.bootdo.system.domain;
 
 import java.io.Serializable;
 
-
-
 /**
  * 部门管理
  * 
@@ -14,7 +12,6 @@ import java.io.Serializable;
 public class DeptDO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
-	//
 	private Long deptId;
 	//上级部门ID，一级部门为0
 	private Long parentId;
@@ -22,8 +19,6 @@ public class DeptDO implements Serializable {
 	private String name;
 	//排序
 	private Integer orderNum;
-	//是否删除  -1：已删除  0：正常
-	private Integer delFlag;
 
 	/**
 	 * 设置：
@@ -73,18 +68,6 @@ public class DeptDO implements Serializable {
 	public Integer getOrderNum() {
 		return orderNum;
 	}
-	/**
-	 * 设置：是否删除  -1：已删除  0：正常
-	 */
-	public void setDelFlag(Integer delFlag) {
-		this.delFlag = delFlag;
-	}
-	/**
-	 * 获取：是否删除  -1：已删除  0：正常
-	 */
-	public Integer getDelFlag() {
-		return delFlag;
-	}
 
 	@Override
 	public String toString() {
@@ -93,7 +76,6 @@ public class DeptDO implements Serializable {
 				", parentId=" + parentId +
 				", name='" + name + '\'' +
 				", orderNum=" + orderNum +
-				", delFlag=" + delFlag +
 				'}';
 	}
 }

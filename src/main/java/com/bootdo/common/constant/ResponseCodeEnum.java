@@ -7,7 +7,9 @@ public enum ResponseCodeEnum {
      * 响应状态码
      */
     SUCCESS(200, "请求成功"),
-    FAIL(500, "请求异常");
+    FAIL(500, "请求异常"),
+
+    DEPT_COMMON_PARENT_AND_NAME(601, "");
 
     private Integer code;
 

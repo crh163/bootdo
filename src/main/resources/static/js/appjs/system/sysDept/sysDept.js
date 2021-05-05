@@ -12,7 +12,7 @@ function load() {
 				code : 'deptId',
                 parentCode : 'parentId',
 				type : "GET", // 请求数据的ajax类型
-				url : prefix + '/list', // 请求数据的ajax的url
+				url : prefix + '/list?search=' +$("#searchName").val(), // 请求数据的ajax的url
 				ajaxParams : {}, // 请求数据的ajax的data属性
 				expandColumn : '1', // 在哪一列上面显示展开按钮
 				striped : true, // 是否各行渐变色
@@ -41,19 +41,19 @@ function load() {
                         align : 'center',
                         valign : 'center',
 					},
-					{
-						field : 'delFlag',
-						title : '状态',
-						align : 'center',
-                        valign : 'center',
-						formatter : function(item, index) {
-							if (item.delFlag == '0') {
-								return '<span class="label label-danger">禁用</span>';
-							} else if (item.delFlag == '1') {
-								return '<span class="label label-primary">正常</span>';
-							}
-						}
-					},
+					// {
+					// 	field : 'delFlag',
+					// 	title : '状态',
+					// 	align : 'center',
+                    //     valign : 'center',
+					// 	formatter : function(item, index) {
+					// 		if (item.delFlag == '0') {
+					// 			return '<span class="label label-danger">禁用</span>';
+					// 		} else if (item.delFlag == '1') {
+					// 			return '<span class="label label-primary">正常</span>';
+					// 		}
+					// 	}
+					// },
 					{
 						title : '操作',
 						field : 'id',
@@ -78,6 +78,8 @@ function load() {
 			});
 }
 function reLoad() {
+	$(".fixed-table-container").remove();
+	$(".ibox-body").append('<table id="exampleTable" data-mobile-responsive="true"></table>');
 	load();
 }
 function add(pId) {
@@ -86,7 +88,7 @@ function add(pId) {
 		title : '增加',
 		maxmin : true,
 		shadeClose : false, // 点击遮罩关闭层
-		area : [ '800px', '520px' ],
+		area : [ '800px', '420px' ],
 		content : prefix + '/add/' + pId
 	});
 }
