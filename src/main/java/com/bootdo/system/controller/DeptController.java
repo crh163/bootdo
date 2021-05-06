@@ -136,14 +136,14 @@ public class DeptController extends BaseController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("parentId", deptId);
 		if(sysDeptService.count(map)>0) {
-			return R.error(1, "包含下级部门,不允许修改");
+			return R.error(1, "包含下级部门,不允许删除");
 		}
 		if(sysDeptService.checkDeptHasUser(deptId)) {
 			if (sysDeptService.remove(deptId) > 0) {
 				return R.ok();
 			}
 		}else {
-			return R.error(1, "部门包含用户,不允许修改");
+			return R.error(1, "部门包含用户,不允许删除");
 		}
 		return R.error();
 	}

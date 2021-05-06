@@ -7368,3 +7368,6 @@ body.skin-3 {
     border-color: #cccccc!important;
 }
 
+.fixed-table-toolbar button .fa{
+    margin-right : 5px;
+}
