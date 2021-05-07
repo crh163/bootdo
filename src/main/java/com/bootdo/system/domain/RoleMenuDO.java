@@ -2,7 +2,7 @@ package com.bootdo.system.domain;
 
 public class RoleMenuDO {
 	private Long id;
-	private Long  roleId;
+	private Long roleId;
 	private Long menuId;
 	
 	public Long getId() {

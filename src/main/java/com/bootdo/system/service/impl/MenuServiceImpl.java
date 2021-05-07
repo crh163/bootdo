@@ -1,10 +1,12 @@
 package com.bootdo.system.service.impl;
 
+import com.bootdo.common.constant.RoleAdminEnum;
 import com.bootdo.common.domain.Tree;
 import com.bootdo.common.utils.BuildTree;
 import com.bootdo.system.dao.MenuDao;
 import com.bootdo.system.dao.RoleMenuDao;
 import com.bootdo.system.domain.MenuDO;
+import com.bootdo.system.domain.RoleMenuDO;
 import com.bootdo.system.service.MenuService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -102,6 +104,11 @@ public class MenuServiceImpl implements MenuService {
 	@Override
 	public int save(MenuDO menu) {
 		int r = menuMapper.save(menu);
+		//新增菜单时，需要提交权限给admin
+		RoleMenuDO roleMenu = new RoleMenuDO();
+		roleMenu.setRoleId(RoleAdminEnum.ADMIN.getRoleId());
+		roleMenu.setMenuId(menu.getMenuId());
+		roleMenuMapper.save(roleMenu);
 		return r;
 	}
 
@@ -114,8 +121,7 @@ public class MenuServiceImpl implements MenuService {
 
 	@Override
 	public MenuDO get(Long id) {
-		MenuDO menuDO = menuMapper.get(id);
-		return menuDO;
+		return menuMapper.get(id);
 	}
 
 	@Override

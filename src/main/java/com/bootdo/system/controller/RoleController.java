@@ -89,6 +89,7 @@ public class RoleController extends BaseController {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
+		//TODO not delete admin
 		if (roleService.remove(id) > 0) {
 			return R.ok();
 		} else {
