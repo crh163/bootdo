@@ -34,8 +34,8 @@ function load(deptId) {
 					return {
 						// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
 						limit : params.limit,
-						offset : params.offset,
-						name : $('#searchName').val(),
+						offset : 0,
+						searchName : $('#searchName').val(),
 						deptId : deptId
 					};
 				},
@@ -122,10 +122,10 @@ function remove(id) {
 			},
 			success : function(r) {
 				if (r.code == 0) {
-					layer.msg(r.msg);
+					top.layer.msg(r.msg);
 					reLoad();
 				} else {
-					layer.msg(r.msg);
+					top.layer.msg(r.msg);
 				}
 			}
 		});
@@ -157,7 +157,7 @@ function batchRemove() {
 		layer.msg("请选择要删除的数据");
 		return;
 	}
-	layer.confirm("确认要删除选中的'" + rows.length + "'条数据吗?", {
+	layer.confirm("确认要删除选中的 " + rows.length + " 条数据吗?", {
 		btn : [ '确定', '取消' ]
 	// 按钮
 	}, function() {
@@ -174,10 +174,10 @@ function batchRemove() {
 			url : prefix + '/batchRemove',
 			success : function(r) {
 				if (r.code == 0) {
-					layer.msg(r.msg);
+					top.layer.msg(r.msg);
 					reLoad();
 				} else {
-					layer.msg(r.msg);
+					top.layer.msg(r.msg);
 				}
 			}
 		});

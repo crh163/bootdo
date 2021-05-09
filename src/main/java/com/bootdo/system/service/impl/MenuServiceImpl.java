@@ -1,6 +1,6 @@
 package com.bootdo.system.service.impl;
 
-import com.bootdo.common.constant.RoleAdminEnum;
+import com.bootdo.common.constant.AdminEnum;
 import com.bootdo.common.domain.Tree;
 import com.bootdo.common.utils.BuildTree;
 import com.bootdo.system.dao.MenuDao;
@@ -106,7 +106,7 @@ public class MenuServiceImpl implements MenuService {
 		int r = menuMapper.save(menu);
 		//新增菜单时，需要提交权限给admin
 		RoleMenuDO roleMenu = new RoleMenuDO();
-		roleMenu.setRoleId(RoleAdminEnum.ADMIN.getRoleId());
+		roleMenu.setRoleId(AdminEnum.ROLE_ADMIN.getId());
 		roleMenu.setMenuId(menu.getMenuId());
 		roleMenuMapper.save(roleMenu);
 		return r;

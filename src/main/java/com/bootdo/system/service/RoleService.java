@@ -11,6 +11,8 @@ public interface RoleService {
 
 	RoleDO get(Long id);
 
+	RoleDO getByRoleName(String roleName);
+
 	List<RoleDO> list();
 
 	int save(RoleDO role);

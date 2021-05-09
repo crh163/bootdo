@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="gray-bg">
@@ -50,7 +50,7 @@
 								<label class="col-sm-3 control-label">状态:</label>
 								<div class="col-sm-8">
 									<label class="radio-inline"> <input type="radio"
-										name="status" value="1" /> 正常
+										name="status" value="1" checked/> 正常
 									</label> <label class="radio-inline"> <input type="radio"
 										name="status" value="0" /> 禁用
 									</label>

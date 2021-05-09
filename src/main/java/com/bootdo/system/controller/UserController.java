@@ -2,6 +2,7 @@ package com.bootdo.system.controller;
 
 import com.bootdo.common.annotation.Log;
 import com.bootdo.common.config.Constant;
+import com.bootdo.common.constant.AdminEnum;
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.domain.FileDO;
 import com.bootdo.common.domain.Tree;
@@ -85,6 +86,9 @@ public class UserController extends BaseController {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
+		if (userService.getByUsername(user.getUsername())) {
+            return R.error(1, "已存在用户名："+user.getUsername());
+        }
 		user.setPassword(MD5Utils.encrypt(user.getUsername(), user.getPassword()));
 		if (userService.save(user) > 0) {
 			return R.ok();
@@ -99,6 +103,9 @@ public class UserController extends BaseController {
 	R update(UserDO user) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
+		}
+		if (AdminEnum.USER_ADMIN.getId().equals(user.getUserId())) {
+			return R.error(1, "不允许修改admin账号");
 		}
 		if (userService.update(user) > 0) {
 			return R.ok();
@@ -130,6 +137,9 @@ public class UserController extends BaseController {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
+		if (AdminEnum.USER_ADMIN.getId().equals(id)) {
+			return R.error(1, "不允许删除admin账号");
+		}
 		if (userService.remove(id) > 0) {
 			return R.ok();
 		}
@@ -143,6 +153,9 @@ public class UserController extends BaseController {
 	R batchRemove(@RequestParam("ids[]") Long[] userIds) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
+		}
+		if (containAdmin(userIds)) {
+			return R.error(1, "不允许删除admin账号");
 		}
 		int r = userService.batchremove(userIds);
 		if (r > 0) {
@@ -238,5 +251,14 @@ public class UserController extends BaseController {
 		}else {
 			return R.error("更新图像失败！");
 		}
+	}
+
+	private Boolean containAdmin(Long[] ids){
+		for(Long id : ids){
+			if (AdminEnum.ROLE_ADMIN.getId().equals(id)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

@@ -52,7 +52,10 @@ function load() {
 								},
 								{
 									field : '',
-									title : '权限'
+									title : '权限',
+									formatter : function(value, row, index) {
+										return row.roleId == '1' ? '所有权限' : '部分权限';
+									}
 								},
 								{
 									title : '操作',
@@ -96,10 +99,10 @@ function remove(id) {
 			},
 			success : function(r) {
 				if (r.code === 0) {
-					layer.msg("删除成功");
+					top.layer.msg("删除成功");
 					reLoad();
 				} else {
-					layer.msg(r.msg);
+					top.layer.msg(r.msg);
 				}
 			}
 		});
@@ -107,6 +110,10 @@ function remove(id) {
 
 }
 function edit(id) {
+	if(id == 1){
+		top.layer.msg("不允许修改admin角色");
+		return;
+	}
 	layer.open({
 		type : 2,
 		title : '角色修改',
@@ -120,10 +127,10 @@ function batchRemove() {
 	
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	if (rows.length == 0) {
-		layer.msg("请选择要删除的数据");
+		top.layer.msg("请选择要删除的数据");
 		return;
 	}
-	layer.confirm("确认要删除选中的'" + rows.length + "'条数据吗?", {
+	layer.confirm("确认要删除选中的 " + rows.length + " 条数据吗?", {
 		btn : [ '确定', '取消' ]
 	}, function() {
 		var ids = new Array();
@@ -139,10 +146,10 @@ function batchRemove() {
 			url : prefix + '/batchRemove',
 			success : function(r) {
 				if (r.code == 0) {
-					layer.msg(r.msg);
+					top.layer.msg(r.msg);
 					reLoad();
 				} else {
-					layer.msg(r.msg);
+					top.layer.msg(r.msg);
 				}
 			}
 		});

@@ -60,6 +60,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean getByUsername(String username) {
+        Map<String, Object> map = new HashMap<String, Object>() {{
+            put("username", username);
+        }};
+        return userMapper.list(map).size() > 0;
+    }
+
+    @Override
     public List<UserDO> list(Map<String, Object> map) {
         String deptId = map.get("deptId").toString();
         if (StringUtils.isNotBlank(deptId)) {

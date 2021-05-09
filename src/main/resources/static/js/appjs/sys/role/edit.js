@@ -56,13 +56,13 @@ function update() {
 		},
 		success : function(r) {
 			if (r.code == 0) {
-				parent.layer.msg(r.msg);
+				top.layer.msg(r.msg);
 				parent.reLoad();
 				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
-				parent.layer.close(index);
+				top.layer.close(index);
 
 			} else {
-				parent.layer.msg(r.msg);
+				top.layer.msg(r.msg);
 			}
 
 		}

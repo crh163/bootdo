@@ -1,0 +1,16 @@
+
+#办公管理-通告功能 sql
+
+INSERT INTO sys_menu(`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`, `gmt_create`, `gmt_modified`) VALUES (0, '办公管理', '', '', 0, 'fa fa-laptop', 5, NULL, NULL);
+INSERT INTO sys_menu(`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`, `gmt_create`, `gmt_modified`) VALUES (84, '通知公告', 'oa/notify', 'oa:notify:notify', 1, 'fa fa-pencil-square', NULL, NULL, NULL);
+INSERT INTO sys_menu(`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`, `gmt_create`, `gmt_modified`) VALUES (85, '新增', 'oa/notify/add', 'oa:notify:add', 2, 'fa fa-plus', 1, NULL, NULL);
+INSERT INTO sys_menu(`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`, `gmt_create`, `gmt_modified`) VALUES (85, '编辑', 'oa/notify/edit', 'oa:notify:edit', 2, 'fa fa-pencil-square-o', 2, NULL, NULL);
+INSERT INTO sys_menu(`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`, `gmt_create`, `gmt_modified`) VALUES (85, '删除', 'oa/notify/remove', 'oa:notify:remove', 2, 'fa fa-minus', NULL, NULL, NULL);
+INSERT INTO sys_menu(`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`, `gmt_create`, `gmt_modified`) VALUES (85, '批量删除', 'oa/notify/batchRemove', 'oa:notify:batchRemove', 2, '', NULL, NULL, NULL);
+INSERT INTO sys_menu(`parent_id`, `name`, `url`, `perms`, `type`, `icon`, `order_num`, `gmt_create`, `gmt_modified`) VALUES (84, '我的通知', 'oa/notify/selfNotify', '', 1, 'fa fa-envelope-square', NULL, NULL, NULL);
+
+INSERT INTO sys_role_menu(`role_id`, `menu_id`) VALUES (1, 88);
+INSERT INTO sys_role_menu(`role_id`, `menu_id`) VALUES (1, 89);
+INSERT INTO sys_role_menu(`role_id`, `menu_id`) VALUES (1, 86);
+INSERT INTO sys_role_menu(`role_id`, `menu_id`) VALUES (1, 87);
+INSERT INTO sys_role_menu(`role_id`, `menu_id`) VALUES (1, 90);

@@ -2,6 +2,7 @@ package com.bootdo.system.controller;
 
 import com.bootdo.common.annotation.Log;
 import com.bootdo.common.config.Constant;
+import com.bootdo.common.constant.AdminEnum;
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.R;
 import com.bootdo.system.domain.RoleDO;
@@ -13,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Objects;
 
 @RequestMapping("/sys/role")
 @Controller
@@ -59,6 +61,9 @@ public class RoleController extends BaseController {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
+		if (!Objects.isNull(roleService.getByRoleName(role.getRoleName()))) {
+			return R.error(1, "保存失败，已存在角色名：" + role.getRoleName());
+		}
 		if (roleService.save(role) > 0) {
 			return R.ok();
 		} else {
@@ -73,6 +78,12 @@ public class RoleController extends BaseController {
 	R update(RoleDO role) {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
+		}
+		if (AdminEnum.ROLE_ADMIN.getId().equals(role.getRoleId())) {
+			return R.error(1, "不允许修改admin角色");
+		}
+		if (!Objects.isNull(roleService.getByRoleName(role.getRoleName()))) {
+			return R.error(1, "修改失败，已存在角色名：" + role.getRoleName());
 		}
 		if (roleService.update(role) > 0) {
 			return R.ok();
@@ -89,7 +100,9 @@ public class RoleController extends BaseController {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
-		//TODO not delete admin
+		if (AdminEnum.ROLE_ADMIN.getId().equals(id)) {
+			return R.error(1, "不允许删除admin角色");
+		}
 		if (roleService.remove(id) > 0) {
 			return R.ok();
 		} else {
@@ -105,10 +118,22 @@ public class RoleController extends BaseController {
 		if (Constant.DEMO_ACCOUNT.equals(getUsername())) {
 			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
+		if (containAdmin(ids)) {
+			return R.error(1, "不允许删除admin角色");
+		}
 		int r = roleService.batchremove(ids);
 		if (r > 0) {
 			return R.ok();
 		}
 		return R.error();
+	}
+
+	private Boolean containAdmin(Long[] ids){
+		for(Long id : ids){
+			if (AdminEnum.ROLE_ADMIN.getId().equals(id)) {
+				return true;
+			}
+		}
+		return false;
 	}
 }

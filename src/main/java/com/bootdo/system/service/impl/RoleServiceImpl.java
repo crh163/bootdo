@@ -89,8 +89,12 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public RoleDO get(Long id) {
-        RoleDO roleDO = roleMapper.get(id);
-        return roleDO;
+        return roleMapper.get(id);
+    }
+
+    @Override
+    public RoleDO getByRoleName(String roleName) {
+        return roleMapper.getByRoleName(roleName);
     }
 
     @Override

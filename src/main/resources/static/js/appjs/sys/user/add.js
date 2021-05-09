@@ -20,6 +20,14 @@ function getCheckedRoles() {
 }
 function save() {
 	$("#roleIds").val(getCheckedRoles());
+	if ($("#deptId").val() == ''){
+		top.layer.msg("所属部门不能为空");
+		return;
+	}
+	if ($("#roleIds").val() == ''){
+		top.layer.msg("所属角色不能为空");
+		return;
+	}
 	$.ajax({
 		cache : true,
 		type : "POST",
@@ -27,17 +35,17 @@ function save() {
 		data : $('#signupForm').serialize(),// 你的formid
 		async : false,
 		error : function(request) {
-			parent.layer.alert("Connection error");
+			top.layer.alert("Connection error");
 		},
 		success : function(data) {
 			if (data.code == 0) {
-				parent.layer.msg("操作成功");
+				top.layer.msg("操作成功");
 				parent.reLoad();
 				var index = parent.layer.getFrameIndex(window.name); // 获取窗口索引
 				parent.layer.close(index);
 
 			} else {
-				parent.layer.alert(data.msg)
+				top.layer.alert(data.msg)
 			}
 
 		}
@@ -74,10 +82,6 @@ function validateRule() {
 				minlength : 6,
 				equalTo : "#password"
 			},
-			email : {
-				required : true,
-				email : true
-			},
 			topic : {
 				required : "#newsletter:checked",
 				minlength : 2
@@ -103,7 +107,6 @@ function validateRule() {
 				minlength : icon + "密码必须6个字符以上",
 				equalTo : icon + "两次输入的密码不一致"
 			},
-			email : icon + "请输入您的E-mail",
 		}
 	})
 }

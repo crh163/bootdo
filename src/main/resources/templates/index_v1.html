@@ -99,34 +99,35 @@
                     </form>
                 </div>
                 <ul class="nav navbar-top-links navbar-right">
-                    <li class="dropdown"><a class="dropdown-toggle count-info"
-                                            data-toggle="dropdown" href="#"> <i class="fa fa-envelope"></i>
-                        <span class="label label-warning">{{total}}</span>通知
-                    </a>
-                        <ul class="dropdown-menu dropdown-messages">
-                            <li v-for="row in rows" class="m-t-xs">
-                                <div class="dropdown-messages-box">
-                                    <a class="pull-left"> <i
-                                            class="fa fa-server"></i>
-                                    </a>
-                                    <div class="media-body">
-                                        <small class="pull-right">{{row.before}}</small>
-                                        <strong>{{row.sender}}</strong>
-                                        {{row.title}} <br>
-                                        <small class="text-muted">{{row.updateDate}}</small>
-                                    </div>
-                                </div>
-                                <div class="divider"></div>
-                            </li>
-                            <li>
-                                <div class="text-center link-block">
-                                    <a class="J_menuItem" href="/oa/notify/selfNotify"> <i
-                                            class="fa fa-envelope"></i> <strong> 查看所有消息</strong>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
+                    <!-- TODO CRH 通知功能 -->
+<!--                    <li class="dropdown"><a class="dropdown-toggle count-info"-->
+<!--                                            data-toggle="dropdown" href="#"> <i class="fa fa-envelope"></i>-->
+<!--                        <span class="label label-warning">{{total}}</span>通知-->
+<!--                    </a>-->
+<!--                        <ul class="dropdown-menu dropdown-messages">-->
+<!--                            <li v-for="row in rows" class="m-t-xs">-->
+<!--                                <div class="dropdown-messages-box">-->
+<!--                                    <a class="pull-left"> <i-->
+<!--                                            class="fa fa-server"></i>-->
+<!--                                    </a>-->
+<!--                                    <div class="media-body">-->
+<!--                                        <small class="pull-right">{{row.before}}</small>-->
+<!--                                        <strong>{{row.sender}}</strong>-->
+<!--                                        {{row.title}} <br>-->
+<!--                                        <small class="text-muted">{{row.updateDate}}</small>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                                <div class="divider"></div>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <div class="text-center link-block">-->
+<!--                                    <a class="J_menuItem" href="/oa/notify/selfNotify"> <i-->
+<!--                                            class="fa fa-envelope"></i> <strong> 查看所有消息</strong>-->
+<!--                                    </a>-->
+<!--                                </div>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
                     <li class="hidden-xs"><a @click="personal" href="#" ><i class="fa fa-id-card"></i> 个人</a></li>
                     <li class="dropdown hidden-xs"><a
                             class="right-sidebar-toggle" aria-expanded="false"> <i
@@ -245,24 +246,24 @@
                         </div>
                     </div>
                 </div>
-                <div id="tab-2" class="tab-pane">
+<!--                <div id="tab-2" class="tab-pane">-->
 
-                    <div class="sidebar-title">
-                        <h3>
-                            <i class="fa fa-comments-o"></i> 最新通知
-                        </h3>
-                        <small><i class="fa fa-tim"></i> 您当前有10条未读信息</small>
-                    </div>
-                </div>
-                <div id="tab-3" class="tab-pane">
+<!--                    <div class="sidebar-title">-->
+<!--                        <h3>-->
+<!--                            <i class="fa fa-comments-o"></i> 最新通知-->
+<!--                        </h3>-->
+<!--                        <small><i class="fa fa-tim"></i> 您当前有10条未读信息</small>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div id="tab-3" class="tab-pane">-->
 
-                    <div class="sidebar-title">
-                        <h3>
-                            <i class="fa fa-cube"></i> 最新任务
-                        </h3>
-                        <small><i class="fa fa-tim"></i> 您当前有14个任务，10个已完成</small>
-                    </div>
-                </div>
+<!--                    <div class="sidebar-title">-->
+<!--                        <h3>-->
+<!--                            <i class="fa fa-cube"></i> 最新任务-->
+<!--                        </h3>-->
+<!--                        <small><i class="fa fa-tim"></i> 您当前有14个任务，10个已完成</small>-->
+<!--                    </div>-->
+<!--                </div>-->
             </div>
 
         </div>
