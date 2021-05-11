@@ -34,13 +34,6 @@ public interface DictService {
 	String getName(String type,String value);
 
 	/**
-	 * 获取爱好列表
-	 * @return
-     * @param userDO
-	 */
-	List<DictDO> getHobbyList(UserDO userDO);
-
-	/**
 	 * 获取性别列表
  	 * @return
 	 */

@@ -64,6 +64,7 @@ public class UserController extends BaseController {
 	String add(Model model) {
 		List<RoleDO> roles = roleService.list();
 		model.addAttribute("roles", roles);
+		model.addAttribute("sexList",dictService.getSexList());
 		return prefix + "/add";
 	}
 
@@ -75,6 +76,7 @@ public class UserController extends BaseController {
 		model.addAttribute("user", userDO);
 		List<RoleDO> roles = roleService.list(id);
 		model.addAttribute("roles", roles);
+		model.addAttribute("sexList",dictService.getSexList());
 		return prefix+"/edit";
 	}
 
@@ -232,24 +234,6 @@ public class UserController extends BaseController {
 		model.addAttribute("user",userDO);
 		model.addAttribute("sexList",dictService.getSexList());
 		return prefix + "/personal";
-	}
-	@ResponseBody
-	@PostMapping("/uploadImg")
-	R uploadImg(@RequestParam("avatar_file") MultipartFile file, String avatar_data, HttpServletRequest request) {
-		if ("test".equals(getUsername())) {
-			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
-		}
-		Map<String, Object> result = new HashMap<>();
-		try {
-			result = userService.updatePersonalImg(file, avatar_data, getUserId());
-		} catch (Exception e) {
-			return R.error("更新图像失败！");
-		}
-		if(result!=null && result.size()>0){
-			return R.ok(result);
-		}else {
-			return R.error("更新图像失败！");
-		}
 	}
 
 	private Boolean containAdmin(Long[] ids){

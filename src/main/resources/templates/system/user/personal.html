@@ -14,7 +14,6 @@
                     <div class="gg-nav">
                         <ul class="nav nav-tabs">
                             <li class="active"><a href="#basic_info" data-toggle="tab">基本资料</a></li>
-                            <li><a href="#photo_info" data-toggle="tab">头像修改</a></li>
                             <li><a href="#pwd_info" data-toggle="tab">修改密码</a></li>
                         </ul>
                     </div>
@@ -35,43 +34,29 @@
                             </div>
                             <div class="gg-formGroup">
                                 <div class="gg-formTitle">
-                                    <em class="gg-star">*</em>
                                     <span>性别:</span>
                                 </div>
                                 <div class="gg-formDetail">
-                                    <div class="radio i-checks">
-                                        <label class="radio-inline" th:each="sex:${sexList}"> <input
-                                                th:field="*{user.sex}" type="radio" name="sex" th:value="${sex.id}" th:text="${sex.name}"/>
-                                        </label>
-                                    </div>
+                                    <label class="radio-inline" th:each="sex:${sexList}">
+                                        <input th:field="*{user.sex}" type="radio" name="sex" th:value="${sex.value}"
+                                               th:text="${sex.name}"/>
+                                    </label>
                                 </div>
                             </div>
                             <div class="gg-formGroup">
                                 <div class="gg-formTitle">
-                                    <em class="gg-star">*</em>
-                                    <span>出生年月:</span>
-                                </div>
-                                <div class="gg-formDetail">
-                                    <input type="text" class="laydate-icon layer-date form-control" id="birth" name="birth" th:value="${user.birth}==null?null:${#dates.format(user.birth,'yyyy-MM-dd')}" placeholder="请选择出生年月"
-                                           onclick="laydate({istime: true, format: 'YYYY-MM-DD'})" style="background-color: #fff;" readonly="readonly"/>
-                                </div>
-                            </div>
-                            <div class="gg-formGroup">
-                                <div class="gg-formTitle">
-                                    <em class="gg-star">*</em>
                                     <span>手机:</span>
                                 </div>
                                 <div class="gg-formDetail">
-                                    <input type="text" class="form-control" id="phone" name="mobile"  th:value="${user.mobile}" placeholder="请输入手机号" />
+                                    <input type="text" class="form-control" id="phone" name="mobile" th:value="${user.mobile}" />
                                 </div>
                             </div>
                             <div class="gg-formGroup">
                                 <div class="gg-formTitle">
-                                    <em class="gg-star">*</em>
                                     <span>邮箱:</span>
                                 </div>
                                 <div class="gg-formDetail">
-                                    <input type="text" class="form-control" id="email" name="email" th:value="${user.email}" placeholder="请输入邮箱" />
+                                    <input type="text" class="form-control" id="email" name="email" th:value="${user.email}" />
                                 </div>
                             </div>
                         </form>

@@ -71,28 +71,6 @@ public class DictServiceImpl implements DictService {
     }
 
     @Override
-    public List<DictDO> getHobbyList(UserDO userDO) {
-        Map<String, Object> param = new HashMap<>(16);
-        param.put("type", "hobby");
-        List<DictDO> hobbyList = dictDao.list(param);
-
-        if (StringUtils.isNotEmpty(userDO.getHobby())) {
-            String userHobbys[] = userDO.getHobby().split(";");
-            for (String userHobby : userHobbys) {
-                for (DictDO hobby : hobbyList) {
-                    if (!Objects.equals(userHobby, hobby.getId().toString())) {
-                        continue;
-                    }
-                    hobby.setRemarks("true");
-                    break;
-                }
-            }
-        }
-
-        return hobbyList;
-    }
-
-    @Override
     public List<DictDO> getSexList() {
         Map<String, Object> param = new HashMap<>(16);
         param.put("type", "sex");

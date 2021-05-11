@@ -1,4 +1,6 @@
 $().ready(function() {
+	//默认选中性别
+	$("input[type='radio']").eq(0).prop("checked",true);
 	validateRule();
 });
 

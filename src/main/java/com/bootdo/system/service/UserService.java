@@ -43,14 +43,5 @@ public interface UserService {
 	 */
 	int updatePersonal(UserDO userDO);
 
-	/**
-	 * 更新个人图片
-	 * @param file 图片
-	 * @param avatar_data 裁剪信息
-	 * @param userId 用户ID
-	 * @throws Exception
-	 */
-    Map<String, Object> updatePersonalImg(MultipartFile file, String avatar_data, Long userId) throws Exception;
-
 	boolean getByUsername(String username);
 }

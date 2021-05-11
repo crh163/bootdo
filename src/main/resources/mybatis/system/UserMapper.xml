@@ -4,12 +4,13 @@
 <mapper namespace="com.bootdo.system.dao.UserDao">
 
     <select id="get" resultType="com.bootdo.system.domain.UserDO">
-		select `user_id`,`username`,`name`,`password`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district` from sys_user where user_id = #{value}
+		select `user_id`,`username`,`name`,`password`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`
+		from sys_user where user_id = #{value}
 	</select>
 
     <select id="list" resultType="com.bootdo.system.domain.UserDO">
         select
-        `user_id`,`username`,`name`,`password`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`,`birth`,`pic_id`,`live_address`,`hobby`,`province`,`city`,`district`
+        `user_id`,`username`,`name`,`password`,`dept_id`,`email`,`mobile`,`status`,`user_id_create`,`gmt_create`,`gmt_modified`,`sex`
         from sys_user
         <where>
             <if test="userId != null and userId != ''">and user_id = #{userId}</if>
@@ -30,13 +31,6 @@
             <if test="gmtCreate != null and gmtCreate != ''">and gmt_create = #{gmtCreate}</if>
             <if test="gmtModified != null and gmtModified != ''">and gmt_modified = #{gmtModified}</if>
             <if test="sex != null and sex != ''">and sex = #{sex}</if>
-            <if test="birth != null and birth != ''">and birth = #{birth}</if>
-            <if test="picId != null and picId != ''">and pic_id = #{picId}</if>
-            <if test="liveAddress != null and liveAddress != ''">and live_address = #{liveAddress}</if>
-            <if test="hobby != null and hobby != ''">and hobby = #{hobby}</if>
-            <if test="province != null and province != ''">and province = #{province}</if>
-            <if test="city != null and city != ''">and city = #{city}</if>
-            <if test="district != null and district != ''">and district = #{district}</if>
         </where>
         <choose>
             <when test="sort != null and sort.trim() != ''">
@@ -67,13 +61,6 @@
             <if test="gmtCreate != null and gmtCreate != ''">and gmt_create = #{gmtCreate}</if>
             <if test="gmtModified != null and gmtModified != ''">and gmt_modified = #{gmtModified}</if>
             <if test="sex != null and sex != ''">and sex = #{sex}</if>
-            <if test="birth != null and birth != ''">and birth = #{birth}</if>
-            <if test="picId != null and picId != ''">and pic_id = #{picId}</if>
-            <if test="liveAddress != null and liveAddress != ''">and live_address = #{liveAddress}</if>
-            <if test="hobby != null and hobby != ''">and hobby = #{hobby}</if>
-            <if test="province != null and province != ''">and province = #{province}</if>
-            <if test="city != null and city != ''">and city = #{city}</if>
-            <if test="district != null and district != ''">and district = #{district}</if>
         </where>
     </select>
 
@@ -91,13 +78,6 @@
 			`gmt_create`, 
 			`gmt_modified`, 
 			`sex`, 
-			`birth`, 
-			`pic_id`, 
-			`live_address`, 
-			`hobby`, 
-			`province`, 
-			`city`, 
-			`district`
 		)
 		values
 		(
@@ -112,13 +92,6 @@
 			#{gmtCreate}, 
 			#{gmtModified}, 
 			#{sex}, 
-			#{birth}, 
-			#{picId}, 
-			#{liveAddress}, 
-			#{hobby}, 
-			#{province}, 
-			#{city}, 
-			#{district}
 		)
 	</insert>
 
@@ -136,13 +109,6 @@
             <if test="gmtCreate != null">`gmt_create` = #{gmtCreate},</if>
             <if test="gmtModified != null">`gmt_modified` = #{gmtModified},</if>
             <if test="sex != null">`sex` = #{sex},</if>
-            <if test="birth != null">`birth` = #{birth},</if>
-            <if test="picId != null">`pic_id` = #{picId},</if>
-            <if test="liveAddress != null">`live_address` = #{liveAddress},</if>
-            <if test="hobby != null">`hobby` = #{hobby},</if>
-            <if test="province != null">`province` = #{province},</if>
-            <if test="city != null">`city` = #{city},</if>
-            <if test="district != null">`district` = #{district}</if>
         </set>
         where user_id = #{userId}
     </update>

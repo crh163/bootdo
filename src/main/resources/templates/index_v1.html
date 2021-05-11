@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,7 +29,8 @@
             <ul class="nav" id="side-menu">
                 <li class="nav-header">
                     <div>
-                        <span><img alt="image" class="img-circle" height="60" width="60" th:src="${picUrl}"/></span>
+                        <span><img alt="image" class="img-circle" height="60" width="60"
+                                   src="/img/photo_s.jpg"/></span>
                         <h3 class="" style="color: #ffffff">
                             </i>后台管理系统
                         </h3>
@@ -348,7 +349,7 @@
                     title: '个人设置',
                     maxmin: true,
                     shadeClose: false,
-                    area: ['800px', '600px'],
+                    area: ['800px', '550px'],
                     content: '/sys/user/personal'
                 });
             }
