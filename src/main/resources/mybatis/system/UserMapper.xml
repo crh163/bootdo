@@ -77,7 +77,7 @@
 			`user_id_create`, 
 			`gmt_create`, 
 			`gmt_modified`, 
-			`sex`, 
+			`sex`
 		)
 		values
 		(
@@ -91,7 +91,7 @@
 			#{userIdCreate}, 
 			#{gmtCreate}, 
 			#{gmtModified}, 
-			#{sex}, 
+			#{sex}
 		)
 	</insert>
 

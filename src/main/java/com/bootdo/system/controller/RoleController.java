@@ -5,6 +5,7 @@ import com.bootdo.common.config.Constant;
 import com.bootdo.common.constant.AdminEnum;
 import com.bootdo.common.controller.BaseController;
 import com.bootdo.common.utils.R;
+import com.bootdo.system.domain.DeptDO;
 import com.bootdo.system.domain.RoleDO;
 import com.bootdo.system.service.RoleService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -82,7 +84,9 @@ public class RoleController extends BaseController {
 		if (AdminEnum.ROLE_ADMIN.getId().equals(role.getRoleId())) {
 			return R.error(1, "不允许修改admin角色");
 		}
-		if (!Objects.isNull(roleService.getByRoleName(role.getRoleName()))) {
+		RoleDO roleDO = roleService.get(role.getRoleId());
+		if (!roleDO.getRoleName().equals(role.getRoleName()) &&
+			!Objects.isNull(roleService.getByRoleName(role.getRoleName()))) {
 			return R.error(1, "修改失败，已存在角色名：" + role.getRoleName());
 		}
 		if (roleService.update(role) > 0) {

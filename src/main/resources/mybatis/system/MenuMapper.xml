@@ -127,16 +127,15 @@
 
 	<select id="listUserPerms" resultType="string">
 		select distinct m.perms
-		from sys_menu m left join
-		sys_role_menu rm on m.menu_id = rm.menu_id
-		left join sys_user_role ur
-		on rm.role_id = ur.role_id where ur.user_id
-		= #{id}
+		from sys_menu m
+		left join sys_role_menu rm on m.menu_id = rm.menu_id
+		left join sys_user_role ur on rm.role_id = ur.role_id
+		where ur.user_id = #{id}
 	</select>
 
 	<select id="selectAllMenuByUserIdAndParentId" resultType="String">
-		select a.menu_id menuId from
-		sys_menu a
+		select a.menu_id menuId
+		from sys_menu a
 		left join sys_role_menu b on a.menu_id=b.menu_id
 		left join sys_user_role c on b.role_id=c.role_id
 		where c.user_id = #{userId} and parent_id = #{parentId}
