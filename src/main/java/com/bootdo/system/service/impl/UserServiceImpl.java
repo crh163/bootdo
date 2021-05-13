@@ -11,6 +11,7 @@ import com.bootdo.common.utils.*;
 import com.bootdo.system.service.DeptService;
 import com.bootdo.system.vo.UserVO;
 import org.apache.commons.lang.ArrayUtils;
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -147,8 +148,14 @@ public class UserServiceImpl implements UserService {
     public int resetPwd(UserVO userVO, UserDO userDO) throws Exception {
         if (Objects.equals(userVO.getUserDO().getUserId(), userDO.getUserId())) {
             if (Objects.equals(MD5Utils.encrypt(userDO.getUsername(), userVO.getPwdOld()), userDO.getPassword())) {
-                userDO.setPassword(MD5Utils.encrypt(userDO.getUsername(), userVO.getPwdNew()));
-                return userMapper.update(userDO);
+                UserDO newUser = new UserDO();
+                newUser.setUserId(userDO.getUserId());
+                newUser.setPassword(MD5Utils.encrypt(userDO.getUsername(), userVO.getPwdNew()));
+                int update = userMapper.update(newUser);
+                //更新shiro user
+                UserDO sessionUser = (UserDO) SecurityUtils.getSubject().getPrincipals().getPrimaryPrincipal();
+                sessionUser.setPassword(newUser.getPassword());
+                return update;
             } else {
                 throw new Exception("输入的旧密码有误！");
             }
@@ -164,9 +171,11 @@ public class UserServiceImpl implements UserService {
             throw new Exception("超级管理员的账号不允许直接重置！");
         }
         userDO.setPassword(MD5Utils.encrypt(userDO.getUsername(), userVO.getPwdNew()));
-        return userMapper.update(userDO);
-
-
+        int update = userMapper.update(userDO);
+        //更新shiro user
+        UserDO sessionUser = (UserDO) SecurityUtils.getSubject().getPrincipals().getPrimaryPrincipal();
+        sessionUser.setPassword(userDO.getPassword());
+        return update;
     }
 
     @Transactional

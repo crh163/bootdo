@@ -1,4 +1,3 @@
-var prefix = "/sys/user"
 $(function () {
 });
 /**
@@ -12,7 +11,7 @@ $("#base_save").click(function () {
     $.ajax({
         cache : true,
         type : "POST",
-        url :"/sys/user/updatePeronal",
+        url : ctx + "sys/user/updatePeronal",
         data : $('#basicInfoForm').serialize(),
         async : false,
         error : function(request) {
@@ -33,7 +32,7 @@ $("#pwd_save").click(function () {
         $.ajax({
             cache : true,
             type : "POST",
-            url :"/sys/user/resetPwd",
+            url : ctx + "sys/user/resetPwd",
             data : $('#modifyPwd').serialize(),
             async : false,
             error : function(request) {

@@ -16,6 +16,7 @@ import com.bootdo.system.service.UserService;
 import com.bootdo.system.vo.UserVO;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -125,6 +126,11 @@ public class UserController extends BaseController {
 			return R.error(1, "演示账号不允许进行该操作，请更换正式账号");
 		}
 		if (userService.updatePersonal(user) > 0) {
+			UserDO sessionUser = (UserDO) SecurityUtils.getSubject().getPrincipals().getPrimaryPrincipal();
+			sessionUser.setEmail(user.getEmail());
+			sessionUser.setMobile(user.getMobile());
+			sessionUser.setSex(user.getSex());
+			sessionUser.setName(user.getName());
 			return R.ok();
 		}
 		return R.error();

@@ -14,7 +14,7 @@ public class Constant {
     //通知公告阅读状态-已读
     public static int OA_NOTIFY_READ_YES = 1;
     //部门根节点id
-    public static Long DEPT_ROOT_ID = 0l;
+    public static Long DEPT_ROOT_ID = 0L;
     //缓存方式
     public static String CACHE_TYPE_REDIS ="redis";
 

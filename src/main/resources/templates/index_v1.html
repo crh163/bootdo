@@ -10,12 +10,12 @@
     <!--[if lt IE 9]>
     <meta http-equiv="refresh" content="0;ie.html"/>
     <![endif]-->
-    <link rel="shortcut icon" href="favicon.ico">
-    <link href="/css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
-    <link href="/css/font-awesome.min.css?v=4.4.0" rel="stylesheet">
-    <link href="/css/plugins/toastr/toastr.min.css" rel="stylesheet">
-    <link href="/css/animate.css" rel="stylesheet">
-    <link href="/css/style.css?v=4.1.0" rel="stylesheet">
+    <link rel="shortcut icon" href="/img/favicon.ico" th:href="@{/img/favicon.ico}">
+    <link th:href="@{/css/bootstrap.min.css?v=3.3.6}" rel="stylesheet">
+    <link th:href="@{/css/font-awesome.min.css?v=4.4.0}" rel="stylesheet">
+    <link th:href="@{/css/plugins/toastr/toastr.min.css}" rel="stylesheet">
+    <link th:href="@{/css/animate.css}" rel="stylesheet">
+    <link th:href="@{/css/style.css?v=4.1.0}" rel="stylesheet">
 </head>
 <body class="fixed-sidebar full-height-layout gray-bg"
       style="overflow: hidden">
@@ -30,7 +30,7 @@
                 <li class="nav-header">
                     <div>
                         <span><img alt="image" class="img-circle" height="60" width="60"
-                                   src="/img/photo_s.jpg"/></span>
+                                   th:src="@{/img/photo_s.jpg}"/></span>
                         <h3 class="" style="color: #ffffff">
                             </i>后台管理系统
                         </h3>
@@ -271,33 +271,31 @@
     </div>
 </div>
 <!-- 全局js -->
-<script src="/js/jquery.min.js?v=2.1.4"></script>
-<script src="/js/bootstrap.min.js?v=3.3.6"></script>
-<script src="/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="/js/plugins/layer/layer.min.js"></script>
+<script th:inline="javascript"> var ctx = [[@{/}]] ; </script>
+<script th:src="@{/js/jquery.min.js?v=2.1.4}"></script>
+<script th:src="@{/js/bootstrap.min.js?v=3.3.6}"></script>
+<script th:src="@{/js/plugins/metisMenu/jquery.metisMenu.js}"></script>
+<script th:src="@{/js/plugins/slimscroll/jquery.slimscroll.min.js}"></script>
+<script th:src="@{/js/plugins/layer/layer.min.js}"></script>
 <!-- 自定义js -->
-<script src="/js/app.js?v=4.1.0"></script>
-<script type="text/javascript" src="/js/contabs.js"></script>
+<script th:src="@{/js/app.js?v=4.1.0}"></script>
+<script type="text/javascript" th:src="@{/js/contabs.js}"></script>
 <!-- 第三方插件 -->
-<script src="/js/plugins/pace/pace.min.js"></script>
+<script th:src="@{/js/plugins/pace/pace.min.js}"></script>
 <!-- vue -->
-<script type="text/javascript"
-        src="/js/vue.min.js">
-
-</script>
-<script src="/js/appjs/oa/webSocket/sockjs.min.js"></script>
-<script src="/js/appjs/oa/webSocket/stomp.min.js"></script>
+<script type="text/javascript" th:src="@{/js/vue.min.js}"></script>
+<script th:src="@{/js/appjs/oa/webSocket/sockjs.min.js}"></script>
+<script th:src="@{/js/appjs/oa/webSocket/stomp.min.js}"></script>
 <!-- Toastr script -->
-<script src="/js/plugins/toastr/toastr.min.js"></script>
+<script th:src="@{/js/plugins/toastr/toastr.min.js}"></script>
 <script type="text/javascript">
     var stompClient = null;
     $(function () {
-        connect();
+        // connect();
     });
 
     function connect() {
-        var sock = new SockJS("/endpointChat");
+        var sock = new SockJS(ctx + "endpointChat");
         var stomp = Stomp.over(sock);
         stomp.connect('guest', 'guest', function(frame) {
 
@@ -305,7 +303,8 @@
              *  这里多用了一个/user,并且这个user 是必须的,使用user 才会发送消息到指定的用户。 
              *  */
             stomp.subscribe("/user/queue/notifications", handleNotification);
-            stomp.subscribe('/topic/getResponse', function (response) { //订阅/topic/getResponse 目标发送的消息。这个是在控制器的@SendTo中定义的。
+            //订阅/topic/getResponse 目标发送的消息。这个是在控制器的@SendTo中定义的。
+            stomp.subscribe('/topic/getResponse', function (response) {
                 toastr.options = {
                     "closeButton": true,
                     "debug": false,
@@ -338,7 +337,7 @@
         },
         methods: {
             notify: function () {
-                $.getJSON('/oa/notify/message', function (r) {
+                $.getJSON(ctx + 'oa/notify/message', function (r) {
                     wrapper.total = r.total;
                     wrapper.rows = r.rows;
                 });
@@ -350,7 +349,7 @@
                     maxmin: true,
                     shadeClose: false,
                     area: ['800px', '550px'],
-                    content: '/sys/user/personal'
+                    content: ctx + 'sys/user/personal'
                 });
             }
         },
