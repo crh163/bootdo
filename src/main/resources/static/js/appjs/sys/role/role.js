@@ -99,10 +99,10 @@ function remove(id) {
 			},
 			success : function(r) {
 				if (r.code === 0) {
-					top.layer.msg("删除成功");
+					layer.msg("删除成功");
 					reLoad();
 				} else {
-					top.layer.msg(r.msg);
+					layer.msg(r.msg);
 				}
 			}
 		});
@@ -146,10 +146,10 @@ function batchRemove() {
 			url : prefix + '/batchRemove',
 			success : function(r) {
 				if (r.code == 0) {
-					top.layer.msg(r.msg);
+					layer.msg(r.msg);
 					reLoad();
 				} else {
-					top.layer.msg(r.msg);
+					layer.msg(r.msg);
 				}
 			}
 		});

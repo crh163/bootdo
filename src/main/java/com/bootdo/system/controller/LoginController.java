@@ -54,6 +54,11 @@ public class LoginController extends BaseController {
         return "index_v1";
     }
 
+    @GetMapping("/FontIcoList")
+    String fontIcoList() {
+        return "FontIcoList";
+    }
+
     @GetMapping("/login")
     String login(Model model) {
         model.addAttribute("username", bootdoConfig.getUsername());

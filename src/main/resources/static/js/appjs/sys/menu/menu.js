@@ -1,4 +1,4 @@
-var prefix = "/sys/menu"
+var prefix = ctx + "sys/menu"
 $(document).ready(function () {
     load();
 });
@@ -151,6 +151,4 @@ function edit(id) {
 }
 
 function batchRemove() {
-    // var rows = $('#exampleTable').bootstrapTable('getSelections');
-
 }

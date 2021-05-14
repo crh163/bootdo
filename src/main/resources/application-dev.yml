@@ -1,5 +1,5 @@
 bootdo:
-  uploadPath: E:/var/uploaded_files/
+  uploadPath: uploaded_files/
   username: admin
   password: 111111
 logging:

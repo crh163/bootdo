@@ -49,7 +49,8 @@
 		</div>
 	</div>
 	<div th:include="include::footer"></div>
-	<script src="/js/appjs/sys/menu/menu.js"></script>
+	<script th:inline="javascript"> var ctx = [[@{/}]] ; </script>
+	<script th:src="@{/js/appjs/sys/menu/menu.js}"></script>
 </body>
 
 </html>
