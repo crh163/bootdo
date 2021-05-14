@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
@@ -22,8 +22,7 @@
 		</div>
 	</div>
 	<div th:include="include :: footer"></div>
-
-
+	<script th:inline="javascript"> var ctx = [[@{/}]] ; </script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			getTreeData()
@@ -31,7 +30,7 @@
 		function getTreeData() {
 			$.ajax({
 				type : "GET",
-				url : "/system/sysDept/tree",
+				url : ctx + "system/sysDept/tree",
 				success : function(tree) {
 					loadTree(tree);
 				}

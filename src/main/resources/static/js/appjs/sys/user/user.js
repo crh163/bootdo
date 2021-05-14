@@ -1,4 +1,4 @@
-var prefix = "/sys/user"
+var prefix = ctx + "sys/user"
 $(function() {
 	var deptId = '';
 	getTreeData();
@@ -115,17 +115,17 @@ function remove(id) {
 		btn : [ '确定', '取消' ]
 	}, function() {
 		$.ajax({
-			url : "/sys/user/remove",
+			url : prefix + "/remove",
 			type : "post",
 			data : {
 				'id' : id
 			},
 			success : function(r) {
 				if (r.code == 0) {
-					top.layer.msg(r.msg);
+					layer.msg(r.msg);
 					reLoad();
 				} else {
-					top.layer.msg(r.msg);
+					layer.msg(r.msg);
 				}
 			}
 		});
@@ -174,10 +174,10 @@ function batchRemove() {
 			url : prefix + '/batchRemove',
 			success : function(r) {
 				if (r.code == 0) {
-					top.layer.msg(r.msg);
+					layer.msg(r.msg);
 					reLoad();
 				} else {
-					top.layer.msg(r.msg);
+					layer.msg(r.msg);
 				}
 			}
 		});
@@ -186,7 +186,7 @@ function batchRemove() {
 function getTreeData() {
 	$.ajax({
 		type : "GET",
-		url : "/system/sysDept/tree",
+		url : ctx + "/system/sysDept/tree",
 		success : function(tree) {
 			loadTree(tree);
 		}

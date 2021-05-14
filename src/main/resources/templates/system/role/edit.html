@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <meta charset="utf-8">
 <head th:include="include::header"></head>
 <body class="gray-bg">
@@ -45,7 +45,8 @@
 		</div>
 	</div>
 	<div th:include="include::footer"></div>
-	<script src="/js/appjs/sys/role/edit.js"></script>
+	<script th:inline="javascript"> var ctx = [[@{/}]] ; </script>
+	<script th:src="@{/js/appjs/sys/role/edit.js}"></script>
 </body>
 
 </html>

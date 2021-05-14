@@ -43,7 +43,8 @@
 
 	</div>
 	<div th:include="include::footer"></div>
-	<script type="text/javascript" src="/js/appjs/sys/role/role.js">
+	<script th:inline="javascript"> var ctx = [[@{/}]] ; </script>
+	<script type="text/javascript" th:src="@{/js/appjs/sys/role/role.js}">
 		
 	</script>
 </body>

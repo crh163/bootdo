@@ -1,31 +1,12 @@
 
-var prefix = "/common/dict"
+var prefix = ctx + "common/dict";
 $(function() {
-	
-	//	var config = {
-	//		'.chosen-select' : {},
-	//		'.chosen-select-deselect' : {
-	//			allow_single_deselect : true
-	//		},
-	//		'.chosen-select-no-single' : {
-	//			disable_search_threshold : 10
-	//		},
-	//		'.chosen-select-no-results' : {
-	//			no_results_text : '没有数据'
-	//		},
-	//		'.chosen-select-width' : {
-	//			width : "95%"
-	//		}
-	//	}
-	//	for (var selector in config) {
-	//		$(selector).chosen(config[selector]);
-	//	}
 	load();
 });
 function selectLoad() {
 	var html = "";
 	$.ajax({
-		url : '/common/dict/type',
+		url : prefix + '/type',
 		success : function(data) {
 			//加载数据
 			for (var i = 0; i < data.length; i++) {
@@ -50,9 +31,7 @@ function selectLoad() {
 }
 function load() {
 	selectLoad();
-	$('#exampleTable')
-		.bootstrapTable(
-			{
+	$('#exampleTable').bootstrapTable({
 				method : 'get', // 服务器数据的请求方式 get or post
 				url : prefix + "/list", // 服务器数据的加载地址
 				//	showRefresh : true,
@@ -235,10 +214,10 @@ function addD(type,description) {
 function batchRemove() {
 	var rows = $('#exampleTable').bootstrapTable('getSelections'); // 返回所有选择的行，当没有选择的记录时，返回一个空数组
 	if (rows.length == 0) {
-		layer.msg("请选择要删除的数据");
+		layer.msg("请选择要删除的数据!");
 		return;
 	}
-	layer.confirm("确认要删除选中的'" + rows.length + "'条数据吗?", {
+	layer.confirm("确认要删除选中的 " + rows.length + " 条数据吗?", {
 		btn : [ '确定', '取消' ]
 	// 按钮
 	}, function() {

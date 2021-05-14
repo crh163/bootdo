@@ -1,3 +1,5 @@
+var prefix = ctx + "common/dict";
+
 $().ready(function() {
 	validateRule();
 });
@@ -11,7 +13,7 @@ function save() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url : "/common/dict/save",
+		url : prefix + "/save",
 		data : $('#signupForm').serialize(), // 你的formid
 		async : false,
 		error : function(request) {

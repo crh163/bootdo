@@ -170,11 +170,10 @@ public class UserServiceImpl implements UserService {
         if ("admin".equals(userDO.getUsername())) {
             throw new Exception("超级管理员的账号不允许直接重置！");
         }
-        userDO.setPassword(MD5Utils.encrypt(userDO.getUsername(), userVO.getPwdNew()));
-        int update = userMapper.update(userDO);
-        //更新shiro user
-        UserDO sessionUser = (UserDO) SecurityUtils.getSubject().getPrincipals().getPrimaryPrincipal();
-        sessionUser.setPassword(userDO.getPassword());
+        UserDO newUser = new UserDO();
+        newUser.setUserId(userDO.getUserId());
+        newUser.setPassword(MD5Utils.encrypt(userDO.getUsername(), userVO.getPwdNew()));
+        int update = userMapper.update(newUser);
         return update;
     }
 
