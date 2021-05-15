@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
 <meta charset="utf-8">
 <head th:include="include :: header"></head>
 <body class="gray-bg">
@@ -40,7 +40,7 @@
 								<div class="col-sm-4">
 									<input id="isConcurrent" name="isConcurrent"
 										class="radio-inline" value="1" type="radio">是
-									<input id="isConcurrent" name="isConcurrent"
+									<input id="isConcurrent2" name="isConcurrent"
 										class="radio-inline" value="0" type="radio">否
 								</div>
 							</div>
@@ -73,8 +73,9 @@
 		</div>
 	</div>
 	<div th:include="include::footer"></div>
+	<script th:inline="javascript"> var ctx = [[@{/}]] ; </script>
 	<script type="text/javascript"
-		src="/js/appjs/common/job/edit.js">
+		th:src="@{/js/appjs/common/job/edit.js}">
 		
 	</script>
 </body>

@@ -30,8 +30,8 @@ public class SessionController {
 
 	@ResponseBody
 	@RequestMapping("/list")
-	public List<UserOnline> list() {
-		return sessionService.list();
+	public List<UserOnline> list(String name) {
+		return sessionService.list(name);
 	}
 
 	@ResponseBody

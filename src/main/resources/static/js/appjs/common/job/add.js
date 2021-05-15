@@ -11,7 +11,7 @@ function save() {
 	$.ajax({
 		cache : true,
 		type : "POST",
-		url :"/common/job/save",
+		url : ctx + "common/job/save",
 		data : $('#signupForm').serialize(),
 		async : false,
 		error : function(request) {

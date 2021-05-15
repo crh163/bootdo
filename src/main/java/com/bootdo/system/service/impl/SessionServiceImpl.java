@@ -1,5 +1,6 @@
 package com.bootdo.system.service.impl;
 
+import com.bootdo.common.utils.StringUtils;
 import com.bootdo.system.domain.UserDO;
 import com.bootdo.system.domain.UserOnline;
 import com.bootdo.system.domain.UserToken;
@@ -31,19 +32,21 @@ public class SessionServiceImpl implements SessionService {
     }
 
     @Override
-    public List<UserOnline> list() {
+    public List<UserOnline> list(String name) {
         List<UserOnline> list = new ArrayList<>();
         Collection<Session> sessions = sessionDAO.getActiveSessions();
         for (Session session : sessions) {
             UserOnline userOnline = new UserOnline();
             if (session.getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY) == null) {
                 continue;
-            } else {
-                SimplePrincipalCollection principalCollection = (SimplePrincipalCollection) session
-                        .getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
-                UserDO userDO = (UserDO) principalCollection.getPrimaryPrincipal();
-                userOnline.setUsername(userDO.getUsername());
             }
+            SimplePrincipalCollection principalCollection = (SimplePrincipalCollection) session
+                    .getAttribute(DefaultSubjectContext.PRINCIPALS_SESSION_KEY);
+            UserDO userDO = (UserDO) principalCollection.getPrimaryPrincipal();
+            if (StringUtils.isNotBlank(name) && !userDO.getUsername().contains(name)) {
+                 continue;
+            }
+            userOnline.setUsername(userDO.getUsername());
             userOnline.setId((String) session.getId());
             userOnline.setHost(session.getHost());
             userOnline.setStartTimestamp(session.getStartTimestamp());

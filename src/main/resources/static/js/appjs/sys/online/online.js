@@ -1,4 +1,4 @@
-var prefix = "/sys/online"
+var prefix = ctx + "sys/online"
 $(function() {
 	load();
 });
@@ -186,7 +186,7 @@ function batchRemove() {
 function getTreeData() {
 	$.ajax({
 		type : "GET",
-		url : "/system/sysDept/tree",
+		url : ctx + "system/sysDept/tree",
 		success : function(tree) {
 			loadTree(tree);
 		}

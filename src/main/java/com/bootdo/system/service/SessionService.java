@@ -13,7 +13,7 @@ import com.bootdo.system.domain.UserOnline;
 
 @Service
 public interface SessionService {
-	List<UserOnline> list();
+	List<UserOnline> list(String name);
 
 	List<UserDO> listOnlineUser();
 
