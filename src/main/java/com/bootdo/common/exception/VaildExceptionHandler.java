@@ -20,8 +20,8 @@ public class VaildExceptionHandler {
      * @param e
      * @return
      */
-    @ExceptionHandler(WxbaseException.class)
-    public Response handleWxbaseException(WxbaseException e) {
+    @ExceptionHandler(BasicException.class)
+    public Response handleWxbaseException(BasicException e) {
         return ResponseUtil.getResult(e.getErrorCode(), e.getErrorMsg());
     }
 

@@ -4,19 +4,19 @@ import com.bootdo.common.constant.ResponseCodeEnum;
 import lombok.Data;
 
 @Data
-public class WxbaseException extends Exception {
+public class BasicException extends Exception {
 
     protected Integer errorCode;
 
     protected String errorMsg;
 
-    public WxbaseException(Integer errorCode, String errorMsg) {
+    public BasicException(Integer errorCode, String errorMsg) {
         super(errorCode + "_" + errorMsg);
         this.errorCode = errorCode;
         this.errorMsg = errorMsg;
     }
 
-    public WxbaseException(ResponseCodeEnum codeEnum) {
+    public BasicException(ResponseCodeEnum codeEnum) {
         this(codeEnum.getCode(), codeEnum.getMsg());
     }
 

@@ -21,7 +21,7 @@ spring:
     restart:
       enabled: true
   cache:
-    type: ehcache
+    type: redis
     ehcache:
       config: classpath:config/ehcache.xml
 
