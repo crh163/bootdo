@@ -1,7 +1,7 @@
 package com.bootdo.system.service.impl;
 
 import com.bootdo.common.constant.AdminEnum;
-import com.bootdo.common.domain.Tree;
+import com.bootdo.common.domain.sys.Tree;
 import com.bootdo.common.utils.BuildTree;
 import com.bootdo.system.dao.MenuDao;
 import com.bootdo.system.dao.RoleMenuDao;

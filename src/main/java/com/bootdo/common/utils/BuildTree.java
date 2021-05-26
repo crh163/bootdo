@@ -1,6 +1,6 @@
 package com.bootdo.common.utils;
 
-import com.bootdo.common.domain.Tree;
+import com.bootdo.common.domain.sys.Tree;
 
 import java.util.ArrayList;
 import java.util.HashMap;

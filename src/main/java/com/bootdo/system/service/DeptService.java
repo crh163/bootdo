@@ -1,6 +1,6 @@
 package com.bootdo.system.service;
 
-import com.bootdo.common.domain.Tree;
+import com.bootdo.common.domain.sys.Tree;
 import com.bootdo.system.domain.DeptDO;
 
 import java.util.List;

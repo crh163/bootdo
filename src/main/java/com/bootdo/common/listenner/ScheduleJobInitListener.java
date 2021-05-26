@@ -6,7 +6,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import com.bootdo.common.quartz.utils.QuartzManager;
-import com.bootdo.common.service.JobService;
+import com.bootdo.system.service.JobService;
 
 @Component
 @Order(value = 1)

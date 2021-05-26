@@ -6,7 +6,7 @@ import java.util.Set;
 
 import org.springframework.stereotype.Service;
 
-import com.bootdo.common.domain.Tree;
+import com.bootdo.common.domain.sys.Tree;
 import com.bootdo.system.domain.MenuDO;
 
 @Service

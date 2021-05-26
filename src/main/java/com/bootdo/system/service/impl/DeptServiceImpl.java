@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.bootdo.common.domain.Tree;
+import com.bootdo.common.domain.sys.Tree;
 import com.bootdo.common.utils.BuildTree;
 import com.bootdo.system.dao.DeptDao;
 import com.bootdo.system.domain.DeptDO;

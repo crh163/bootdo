@@ -1,9 +1,9 @@
 package com.bootdo.oa.controller;
 
 import com.bootdo.common.config.Constant;
-import com.bootdo.common.controller.BaseController;
-import com.bootdo.common.domain.DictDO;
-import com.bootdo.common.service.DictService;
+import com.bootdo.system.controller.BaseController;
+import com.bootdo.common.domain.sys.DictDO;
+import com.bootdo.system.service.DictService;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
@@ -17,7 +17,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;

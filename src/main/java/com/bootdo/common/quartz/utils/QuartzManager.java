@@ -1,6 +1,6 @@
 package com.bootdo.common.quartz.utils;
 
-import com.bootdo.common.domain.ScheduleJob;
+import com.bootdo.common.domain.sys.ScheduleJob;
 import org.quartz.*;
 import org.quartz.DateBuilder.IntervalUnit;
 import org.quartz.impl.matchers.GroupMatcher;

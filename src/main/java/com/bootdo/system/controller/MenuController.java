@@ -2,19 +2,16 @@ package com.bootdo.system.controller;
 
 import com.bootdo.common.annotation.Log;
 import com.bootdo.common.config.Constant;
-import com.bootdo.common.controller.BaseController;
-import com.bootdo.common.domain.Tree;
+import com.bootdo.common.domain.sys.Tree;
 import com.bootdo.common.utils.R;
 import com.bootdo.system.domain.MenuDO;
 import com.bootdo.system.service.MenuService;
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 

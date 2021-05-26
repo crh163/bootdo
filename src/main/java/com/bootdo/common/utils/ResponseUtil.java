@@ -1,7 +1,7 @@
 package com.bootdo.common.utils;
 
 import com.bootdo.common.constant.ResponseCodeEnum;
-import com.bootdo.entity.Response;
+import com.bootdo.api.entity.res.Response;
 
 import java.util.Map;
 

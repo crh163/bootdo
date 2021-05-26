@@ -1,12 +1,9 @@
 package com.bootdo.system.service.impl;
 
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.util.*;
 
 import com.bootdo.common.config.BootdoConfig;
-import com.bootdo.common.domain.FileDO;
-import com.bootdo.common.service.FileService;
+import com.bootdo.system.service.FileService;
 import com.bootdo.common.utils.*;
 import com.bootdo.system.service.DeptService;
 import com.bootdo.system.vo.UserVO;
@@ -15,13 +12,10 @@ import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.CacheConfig;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.bootdo.common.domain.Tree;
+import com.bootdo.common.domain.sys.Tree;
 import com.bootdo.system.dao.DeptDao;
 import com.bootdo.system.dao.UserDao;
 import com.bootdo.system.dao.UserRoleDao;
@@ -29,9 +23,6 @@ import com.bootdo.system.domain.DeptDO;
 import com.bootdo.system.domain.UserDO;
 import com.bootdo.system.domain.UserRoleDO;
 import com.bootdo.system.service.UserService;
-import org.springframework.web.multipart.MultipartFile;
-
-import javax.imageio.ImageIO;
 
 @Transactional
 @Service

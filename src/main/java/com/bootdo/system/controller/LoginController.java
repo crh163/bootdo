@@ -2,14 +2,11 @@ package com.bootdo.system.controller;
 
 import com.bootdo.common.annotation.Log;
 import com.bootdo.common.config.BootdoConfig;
-import com.bootdo.common.controller.BaseController;
-import com.bootdo.common.domain.FileDO;
-import com.bootdo.common.domain.Tree;
-import com.bootdo.common.service.FileService;
+import com.bootdo.common.domain.sys.Tree;
+import com.bootdo.system.service.FileService;
 import com.bootdo.common.utils.*;
 import com.bootdo.system.domain.MenuDO;
 import com.bootdo.system.service.MenuService;
-import io.swagger.models.auth.In;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -21,7 +18,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
