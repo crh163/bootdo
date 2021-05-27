@@ -23,7 +23,7 @@ public class CommonConsts {
 
     public static final String X_ACCESS_TOKEN = "x-access-token";
 
-    public static final String USERINFO = "userInfo";
+    public static final String WX_API_USER_INFO = "wx-api-user-info";
 
     public static final String OPENID = "openid";
 

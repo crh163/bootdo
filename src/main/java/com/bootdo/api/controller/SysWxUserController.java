@@ -64,7 +64,7 @@ public class SysWxUserController {
         //更新时忽略客户端上传的session
         sysWxUser.setSessionKey(null);
         sysWxUser.setToken(null);
-        SysWxUser userInfo = (SysWxUser) request.getAttribute(CommonConsts.USERINFO);
+        SysWxUser userInfo = (SysWxUser) request.getAttribute(CommonConsts.WX_API_USER_INFO);
         sysWxUserService.update(sysWxUser, new QueryWrapper<SysWxUser>()
                 .eq(ColumnConsts.OPENID, userInfo.getOpenId()));
         return ResponseUtil.getSuccess();
