@@ -1,4 +1,4 @@
-package com.bootdo.oa.domain;
+package com.bootdo.system.domain.oa;
 
 public class Response {
 	public void setResponseMessage(String responseMessage) {

@@ -1,4 +1,4 @@
-package com.bootdo.oa.service.impl;
+package com.bootdo.system.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -6,9 +6,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
-import com.bootdo.oa.dao.NotifyRecordDao;
-import com.bootdo.oa.domain.NotifyRecordDO;
-import com.bootdo.oa.service.NotifyRecordService;
+import com.bootdo.system.dao.NotifyRecordDao;
+import com.bootdo.system.domain.oa.NotifyRecordDO;
+import com.bootdo.system.service.NotifyRecordService;
 
 
 

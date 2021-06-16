@@ -1,16 +1,15 @@
-package com.bootdo.oa.controller;
+package com.bootdo.system.controller;
 
 import com.bootdo.common.config.Constant;
-import com.bootdo.system.controller.BaseController;
 import com.bootdo.common.domain.sys.DictDO;
 import com.bootdo.system.service.DictService;
 import com.bootdo.common.utils.PageUtils;
 import com.bootdo.common.utils.Query;
 import com.bootdo.common.utils.R;
-import com.bootdo.oa.domain.NotifyDO;
-import com.bootdo.oa.domain.NotifyRecordDO;
-import com.bootdo.oa.service.NotifyRecordService;
-import com.bootdo.oa.service.NotifyService;
+import com.bootdo.system.domain.oa.NotifyDO;
+import com.bootdo.system.domain.oa.NotifyRecordDO;
+import com.bootdo.system.service.NotifyRecordService;
+import com.bootdo.system.service.NotifyService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

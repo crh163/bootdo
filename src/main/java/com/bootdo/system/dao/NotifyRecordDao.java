@@ -1,6 +1,6 @@
-package com.bootdo.oa.dao;
+package com.bootdo.system.dao;
 
-import com.bootdo.oa.domain.NotifyRecordDO;
+import com.bootdo.system.domain.oa.NotifyRecordDO;
 
 import java.util.List;
 import java.util.Map;

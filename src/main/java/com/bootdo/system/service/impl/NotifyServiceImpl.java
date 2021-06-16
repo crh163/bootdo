@@ -1,4 +1,4 @@
-package com.bootdo.oa.service.impl;
+package com.bootdo.system.service.impl;
 
 import com.bootdo.system.domain.UserDO;
 import com.bootdo.system.service.SessionService;
@@ -15,12 +15,12 @@ import java.util.concurrent.TimeUnit;
 import com.bootdo.system.service.DictService;
 import com.bootdo.common.utils.DateUtils;
 import com.bootdo.common.utils.PageUtils;
-import com.bootdo.oa.dao.NotifyDao;
-import com.bootdo.oa.dao.NotifyRecordDao;
-import com.bootdo.oa.domain.NotifyDO;
-import com.bootdo.oa.domain.NotifyDTO;
-import com.bootdo.oa.domain.NotifyRecordDO;
-import com.bootdo.oa.service.NotifyService;
+import com.bootdo.system.dao.NotifyDao;
+import com.bootdo.system.dao.NotifyRecordDao;
+import com.bootdo.system.domain.oa.NotifyDO;
+import com.bootdo.system.domain.oa.NotifyDTO;
+import com.bootdo.system.domain.oa.NotifyRecordDO;
+import com.bootdo.system.service.NotifyService;
 import com.bootdo.system.dao.UserDao;
 
 @Service

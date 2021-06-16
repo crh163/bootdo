@@ -1,7 +1,7 @@
-package com.bootdo.oa.dao;
+package com.bootdo.system.dao;
 
-import com.bootdo.oa.domain.NotifyDO;
-import com.bootdo.oa.domain.NotifyDTO;
+import com.bootdo.system.domain.oa.NotifyDO;
+import com.bootdo.system.domain.oa.NotifyDTO;
 
 import java.util.List;
 import java.util.Map;

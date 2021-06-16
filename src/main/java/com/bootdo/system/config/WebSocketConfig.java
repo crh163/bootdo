@@ -1,4 +1,4 @@
-package com.bootdo.oa.config;
+package com.bootdo.system.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.messaging.simp.config.MessageBrokerRegistry;

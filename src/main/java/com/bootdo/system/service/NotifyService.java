@@ -1,7 +1,7 @@
-package com.bootdo.oa.service;
+package com.bootdo.system.service;
 
 import com.bootdo.common.utils.PageUtils;
-import com.bootdo.oa.domain.NotifyDO;
+import com.bootdo.system.domain.oa.NotifyDO;
 
 import java.util.List;
 import java.util.Map;

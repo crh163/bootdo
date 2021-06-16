@@ -1,4 +1,4 @@
-package com.bootdo.oa.domain;
+package com.bootdo.system.domain.oa;
 
 import java.io.Serializable;
 import java.util.Date;
