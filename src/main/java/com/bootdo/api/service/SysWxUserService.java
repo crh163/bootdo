@@ -54,7 +54,8 @@ public class SysWxUserService extends BaseService<SysWxUserMapper, SysWxUser> {
         }
         //token 登录信息保存
         ValueOperations<String, String> opsForValue = redisTemplate.opsForValue();
-        opsForValue.set(token, new Gson().toJson(sysWxUser), 30, TimeUnit.DAYS);
+        opsForValue.set(CommonConsts.WX_TOKEN_REDIS_PREFIX + token,
+                new Gson().toJson(sysWxUser), 30, TimeUnit.DAYS);
         return token;
     }
 

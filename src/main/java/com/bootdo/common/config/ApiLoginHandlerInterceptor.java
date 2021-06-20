@@ -28,7 +28,8 @@ public class ApiLoginHandlerInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token = request.getHeader(CommonConsts.X_ACCESS_TOKEN);
-        SysWxUser sysWxUser = RedisTemplateUtil.getRedisString(token, SysWxUser.class);
+        SysWxUser sysWxUser = RedisTemplateUtil.getRedisString(
+                CommonConsts.WX_TOKEN_REDIS_PREFIX + token, SysWxUser.class);
         if (sysWxUser != null) {
             request.setAttribute(CommonConsts.WX_API_USER_INFO, sysWxUser);
             return true;
