@@ -1,6 +1,6 @@
 package com.bootdo.common.utils;
 
-import com.bootdo.api.entity.req.CommonOpenIdReq;
+import com.bootdo.api.entity.req.common.CommonOpenIdReq;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;

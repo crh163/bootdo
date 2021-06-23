@@ -19,7 +19,7 @@ public class PsyQuestion extends BaseModel implements Serializable {
     @ApiModelProperty("问卷指导语")
     private String guide;
 
-    @ApiModelProperty("问卷提示语")
+    @ApiModelProperty("问卷评分方式（无区间判断）")
     private String remark;
 
 }

@@ -10,6 +10,7 @@ public enum ResponseCodeEnum {
     FAIL(500, "请求异常"),
 
     NOT_EXIST_USER(601, "用户不存在！"),
+    NOT_EXIST_QUESTION(701, "问卷不存在！"),
     DEPT_COMMON_PARENT_AND_NAME(601, "");
 
     private Integer code;

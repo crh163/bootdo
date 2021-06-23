@@ -3,7 +3,7 @@ package com.bootdo.api.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.bootdo.api.entity.db.SysWxUser;
 import com.bootdo.api.entity.db.SysWxUserInfo;
-import com.bootdo.api.entity.req.CommonOpenIdReq;
+import com.bootdo.api.entity.req.common.CommonOpenIdReq;
 import com.bootdo.api.entity.res.Response;
 import com.bootdo.api.service.SysWxUserInfoService;
 import com.bootdo.api.service.SysWxUserService;

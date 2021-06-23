@@ -32,4 +32,8 @@ public class ColumnConsts {
 
     public static final String HAS_FOLDER = "has_folder";
 
+    public static final String QUESTION_ID = "question_id";
+
+    public static final String QUESTION_TOPIC_ID = "question_topic_id";
+
 }

@@ -21,5 +21,4 @@ public class TestDemo {
         System.out.println(redisTemplate.opsForValue().get("a"));
     }
 
-    ;
 }
