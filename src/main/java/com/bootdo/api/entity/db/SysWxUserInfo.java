@@ -25,11 +25,9 @@ public class SysWxUserInfo extends BaseModel implements Serializable {
     private String name;
 
     @ApiModelProperty("个人信息-手机号")
-    @NotBlank(message = "手机号不能为空")
     private String phone;
 
     @ApiModelProperty("个人信息-身份证号码")
-    @NotBlank(message = "身份证号码不能为空")
     private String idCard;
 
     @ApiModelProperty("人员类型 1 学生 2 政府机关 3 教师 4 运动员")
@@ -41,11 +39,11 @@ public class SysWxUserInfo extends BaseModel implements Serializable {
     @ApiModelProperty("诊断信息-是否在服药")
     private String diagMedicine;
 
-    @ApiModelProperty("诊断信息-服药名称")
-    private String diagMedicineName;
+    @ApiModelProperty("诊断信息-服药名称和剂量")
+    private String diagMedicineInfo;
 
-    @ApiModelProperty("诊断信息-服药剂量")
-    private String diagMedicineNumber;
+    @ApiModelProperty("诊断信息-年龄（周岁）")
+    private String diagAge;
 
     @ApiModelProperty("诊断信息-性别")
     private String diagSex;

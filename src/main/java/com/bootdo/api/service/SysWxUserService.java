@@ -10,10 +10,11 @@ import com.bootdo.common.utils.ArithmeticUtil;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.TimeUnit;
@@ -27,7 +28,7 @@ import java.util.concurrent.TimeUnit;
 public class SysWxUserService extends BaseService<SysWxUserMapper, SysWxUser> {
 
     @Autowired
-    private RedisTemplate<String, String> redisTemplate;
+    private StringRedisTemplate stringRedisTemplate;
 
     /**
      * 处理微信登录信息
@@ -35,7 +36,8 @@ public class SysWxUserService extends BaseService<SysWxUserMapper, SysWxUser> {
      * @param sessionMap
      * @return token
      */
-    public String handleWxSessionInfo(Map<String, String> sessionMap) {
+    public String handleWxSessionInfo(Map<String, String> sessionMap, HttpServletRequest request) {
+        ValueOperations<String, String> opsForValue = stringRedisTemplate.opsForValue();
         String openId = sessionMap.get(CommonConsts.OPENID);
         String sessionKey = sessionMap.get(CommonConsts.SESSION_KEY);
         String token = ArithmeticUtil.encryptAes(openId + sessionKey,
@@ -43,19 +45,26 @@ public class SysWxUserService extends BaseService<SysWxUserMapper, SysWxUser> {
         //查询是否第一次登录
         QueryWrapper<SysWxUser> wrapper = new QueryWrapper<SysWxUser>().eq(ColumnConsts.OPENID, openId);
         SysWxUser wxUser = getOne(wrapper);
-        SysWxUser sysWxUser = new SysWxUser();
-        sysWxUser.setSessionKey(sessionKey);
-        sysWxUser.setToken(token);
-        sysWxUser.setOpenId(openId);
-        if (Objects.isNull(wxUser)){
+        if (Objects.isNull(wxUser)) {
+            SysWxUser sysWxUser = new SysWxUser();
+            sysWxUser.setSessionKey(sessionKey);
+            sysWxUser.setToken(token);
+            sysWxUser.setOpenId(openId);
             save(sysWxUser);
+            //token 登录信息保存
+            opsForValue.set(CommonConsts.WX_TOKEN_REDIS_PREFIX + token,
+                    new Gson().toJson(sysWxUser), 30, TimeUnit.DAYS);
         } else {
-            update(sysWxUser, wrapper);
+            //删除以前的redis数据
+            stringRedisTemplate.delete(CommonConsts.WX_TOKEN_REDIS_PREFIX + wxUser.getToken());
+            wxUser.setSessionKey(sessionKey);
+            wxUser.setToken(token);
+            wxUser.setOpenId(openId);
+            updateById(wxUser);
+            //token 登录信息保存
+            opsForValue.set(CommonConsts.WX_TOKEN_REDIS_PREFIX + token,
+                    new Gson().toJson(wxUser), 30, TimeUnit.DAYS);
         }
-        //token 登录信息保存
-        ValueOperations<String, String> opsForValue = redisTemplate.opsForValue();
-        opsForValue.set(CommonConsts.WX_TOKEN_REDIS_PREFIX + token,
-                new Gson().toJson(sysWxUser), 30, TimeUnit.DAYS);
         return token;
     }
 

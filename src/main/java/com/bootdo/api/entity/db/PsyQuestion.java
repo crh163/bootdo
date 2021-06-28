@@ -22,4 +22,7 @@ public class PsyQuestion extends BaseModel implements Serializable {
     @ApiModelProperty("问卷评分方式（无区间判断）")
     private String remark;
 
+    @ApiModelProperty("问卷总分")
+    private String sumScore;
+
 }

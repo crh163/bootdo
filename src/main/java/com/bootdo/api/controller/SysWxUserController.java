@@ -3,12 +3,12 @@ package com.bootdo.api.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.bootdo.api.entity.db.SysWxUser;
 import com.bootdo.api.entity.req.common.CommonCodeReq;
+import com.bootdo.api.entity.res.Response;
 import com.bootdo.api.service.SysWxUserService;
 import com.bootdo.common.constant.ColumnConsts;
 import com.bootdo.common.constant.CommonConsts;
 import com.bootdo.common.domain.properties.WechatAuthProperties;
 import com.bootdo.common.utils.ResponseUtil;
-import com.bootdo.api.entity.res.Response;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import io.swagger.annotations.Api;
@@ -21,6 +21,8 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.util.EntityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,6 +32,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 @Slf4j
 @RestController
@@ -46,6 +49,9 @@ public class SysWxUserController {
     @Autowired
     private HttpServletRequest request;
 
+    @Autowired
+    private RedisTemplate<String, String> redisTemplate;
+
     @ApiOperation("微信用户登录")
     @PostMapping("/login")
     public Response login(@RequestBody CommonCodeReq commonCodeReq) {
@@ -54,7 +60,7 @@ public class SysWxUserController {
         if(Objects.isNull(sessionMap) || Objects.isNull(sessionMap.get(CommonConsts.OPENID))){
             return ResponseUtil.getFail(sessionMap.get(CommonConsts.ERRMSG));
         }
-        String token = sysWxUserService.handleWxSessionInfo(sessionMap);
+        String token = sysWxUserService.handleWxSessionInfo(sessionMap, request);
         return ResponseUtil.getSuccess(token);
     }
 
@@ -65,8 +71,18 @@ public class SysWxUserController {
         sysWxUser.setSessionKey(null);
         sysWxUser.setToken(null);
         SysWxUser userInfo = (SysWxUser) request.getAttribute(CommonConsts.WX_API_USER_INFO);
-        sysWxUserService.update(sysWxUser, new QueryWrapper<SysWxUser>()
+        boolean update = sysWxUserService.update(sysWxUser, new QueryWrapper<SysWxUser>()
                 .eq(ColumnConsts.OPENID, userInfo.getOpenId()));
+        if (!update) {
+            return ResponseUtil.getFail();
+        }
+        sysWxUser.setSessionKey(userInfo.getSessionKey());
+        sysWxUser.setToken(userInfo.getToken());
+        sysWxUser.setOpenId(userInfo.getOpenId());
+        sysWxUser.setId(userInfo.getId());
+        ValueOperations<String, String> opsForValue = redisTemplate.opsForValue();
+        opsForValue.set(CommonConsts.WX_TOKEN_REDIS_PREFIX + userInfo.getToken(),
+                new Gson().toJson(sysWxUser), 30, TimeUnit.DAYS);
         return ResponseUtil.getSuccess();
     }
 

@@ -52,8 +52,3 @@ spring:
         max-active: 100
         # 连接池最大阻塞等待时间（使用负值表示没有限制）
         max-wait: -1
-wechat:
-  loginUrl: https://api.weixin.qq.com/sns/jscode2session
-  appid: wxad5128056ba6d81f
-  secret: b054c08e8741b970c798310651ae722c
-  grantType: authorization_code

@@ -28,16 +28,18 @@ public class RedisTemplateUtil {
     public static <T> T getRedisString(String key, Class<T> clazz){
         RedisTemplate<String, String> redisTemplate = SpringContextUtil.getBean("redisTemplate", RedisTemplate.class);
         ValueOperations<String, String> opsForValue = redisTemplate.opsForValue();
+        String value = opsForValue.get(key);
+        if (value == null) {
+            return null;
+        }
         Gson gson = new Gson();
-        String value = gson.toJson(opsForValue.get(key));
         return gson.fromJson(value, clazz);
     }
 
     public static String getRedisString(String key){
         RedisTemplate<String, String> redisTemplate = SpringContextUtil.getBean("redisTemplate", RedisTemplate.class);
         ValueOperations<String, String> opsForValue = redisTemplate.opsForValue();
-        Gson gson = new Gson();
-        return gson.toJson(opsForValue.get(key));
+        return opsForValue.get(key);
     }
 
 }

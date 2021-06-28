@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.api.mapper.PsyQuestionTopicOptionsMapper">
+
+    <select id="selectSumScoreByIds" resultType="Integer">
+        select sum(option_score)
+        from psy_question_topic_options
+        where question_id = #{questionId} and id in
+        <foreach item="item" collection="optionIds" separator="," open="(" close=")" index="">
+            #{item}
+        </foreach>
+	</select>
+</mapper>

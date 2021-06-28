@@ -27,6 +27,8 @@ public class CommonConsts {
 
     public static final String WX_TOKEN_REDIS_PREFIX = "wx-api-token:";
 
+    public static final String API_REDIS_IMP_IDEMPOTENT = "api-idempotent-imp:";
+
     public static final String OPENID = "openid";
 
     public static final String ERRMSG = "errmsg";

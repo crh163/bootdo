@@ -5,7 +5,6 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @author rory.chen
@@ -24,15 +23,21 @@ public class PsyQuestionRecord extends BaseModel implements Serializable {
     private Long questionId;
 
     @ApiModelProperty("提交时间(年月日)")
-    private Date submitDate;
+    private String submitDate;
 
     @ApiModelProperty("提交时间(年月日-时分秒)")
-    private Date submitDateFull;
+    private String submitDateFull;
 
     @ApiModelProperty("问卷提交得分")
     private String submitScore;
 
     @ApiModelProperty("问卷总分")
     private String sumScore;
+
+    @ApiModelProperty("请求json数据")
+    private String requestJson;
+
+    @ApiModelProperty("响应json数据")
+    private String responseJson;
 
 }

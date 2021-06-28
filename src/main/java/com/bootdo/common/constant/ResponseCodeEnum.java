@@ -8,9 +8,12 @@ public enum ResponseCodeEnum {
      */
     SUCCESS(200, "请求成功"),
     FAIL(500, "请求异常"),
+    FAIL_NO_LOGIN(501, "请先登录账号！"),
+    FAIL_IDEMPOTENT(502, "请勿重复发起请求！"),
 
     NOT_EXIST_USER(601, "用户不存在！"),
     NOT_EXIST_QUESTION(701, "问卷不存在！"),
+    FAIL_SUBMIT_QUESTION(702, "提交的问卷信息参数有误！"),
     DEPT_COMMON_PARENT_AND_NAME(601, "");
 
     private Integer code;

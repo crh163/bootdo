@@ -21,6 +21,9 @@ public class GetQuestion {
     @ApiModelProperty("问卷评分方式（无区间判断）")
     private String questionRemark;
 
+    @ApiModelProperty("问卷总分")
+    private String questionSumScore;
+
     @ApiModelProperty("问卷问题")
     private List<GetQuestionTopic> topics;
 

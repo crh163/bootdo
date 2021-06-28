@@ -1,13 +1,16 @@
 package com.bootdo.api.service;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.bootdo.api.entity.db.SysWxUser;
 import com.bootdo.common.constant.ColumnConsts;
+import com.bootdo.common.constant.CommonConsts;
+import com.bootdo.common.constant.ResponseCodeEnum;
 import com.bootdo.common.domain.model.BaseModel;
 import com.bootdo.common.domain.model.QueryModel;
-import com.bootdo.common.constant.ResponseCodeEnum;
 import com.bootdo.common.domain.page.PageDto;
 import com.bootdo.common.domain.page.PageableItemsDto;
 import org.apache.commons.collections.CollectionUtils;
@@ -16,6 +19,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -101,4 +105,33 @@ public class BaseService<M extends BaseMapper<T>, T extends BaseModel> extends S
         return itemsDto;
     }
 
+    @Override
+    public boolean save(T entity) {
+        SysWxUser userInfo = (SysWxUser) request.getAttribute(CommonConsts.WX_API_USER_INFO);
+        if (userInfo != null) {
+            entity.setCreateId(userInfo.getId());
+        }
+        entity.setCreateDate(new Date());
+        return super.save(entity);
+    }
+
+    @Override
+    public boolean update(T entity, Wrapper<T> updateWrapper) {
+        SysWxUser userInfo = (SysWxUser) request.getAttribute(CommonConsts.WX_API_USER_INFO);
+        if (userInfo != null) {
+            entity.setUpdateId(userInfo.getId());
+        }
+        entity.setUpdateDate(new Date());
+        return super.update(entity, updateWrapper);
+    }
+
+    @Override
+    public boolean updateById(T entity) {
+        SysWxUser userInfo = (SysWxUser) request.getAttribute(CommonConsts.WX_API_USER_INFO);
+        if (userInfo != null) {
+            entity.setUpdateId(userInfo.getId());
+        }
+        entity.setUpdateDate(new Date());
+        return super.updateById(entity);
+    }
 }

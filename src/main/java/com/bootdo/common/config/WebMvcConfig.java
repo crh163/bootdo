@@ -1,5 +1,6 @@
 package com.bootdo.common.config;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -18,9 +19,14 @@ public class WebMvcConfig implements WebMvcConfigurer {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //小程序拦截器
-        registry.addInterceptor(new ApiLoginHandlerInterceptor())
+        registry.addInterceptor(getLoginHandlerInterceptor())
                 .addPathPatterns("/api/**")
                 .excludePathPatterns("/api/syswxuser/login");
+    }
+
+    @Bean
+    public ApiLoginHandlerInterceptor getLoginHandlerInterceptor(){
+        return new ApiLoginHandlerInterceptor();
     }
 
 }

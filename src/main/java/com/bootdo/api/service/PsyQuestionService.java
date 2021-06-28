@@ -85,6 +85,7 @@ public class PsyQuestionService extends BaseService<PsyQuestionMapper, PsyQuesti
         question.setQuestionId(id);
         question.setQuestionGuide(psyQuestion.getGuide());
         question.setQuestionRemark(psyQuestion.getRemark());
+        question.setQuestionSumScore(psyQuestion.getSumScore());
         question.setTopics(topics);
         return question;
     }

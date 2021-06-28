@@ -54,7 +54,7 @@ public class SysWxUserInfoController {
 
     @ApiOperation("查询个人信息完善状态")
     @PostMapping("/getUserInfoStatus")
-    public Response getUserInfoStatus(CommonOpenIdReq commonOpenIdReq){
+    public Response getUserInfoStatus(@RequestBody CommonOpenIdReq commonOpenIdReq){
         QueryWrapper<SysWxUserInfo> wrapper = new QueryWrapper<SysWxUserInfo>()
                 .eq(ColumnConsts.OPENID, commonOpenIdReq.getOpenId());
         SysWxUserInfo userInfo = sysWxUserInfoService.getOne(wrapper);
