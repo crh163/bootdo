@@ -1,6 +1,7 @@
-package com.bootdo.common.exception;
+package com.bootdo.common.config;
 
 import com.bootdo.api.entity.res.Response;
+import com.bootdo.common.exception.BasicException;
 import com.bootdo.common.utils.ResponseUtil;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  * @author rory.chen
  * @date 2021-02-25 18:30
  */
-@ControllerAdvice
+@ControllerAdvice(basePackages = "com.bootdo.api.controller")
 @ResponseBody
 public class VaildExceptionHandler {
 

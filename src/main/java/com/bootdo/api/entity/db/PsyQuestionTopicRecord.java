@@ -22,10 +22,22 @@ public class PsyQuestionTopicRecord extends BaseModel implements Serializable {
     @ApiModelProperty("题目内容")
     private String questionTopicText;
 
+    @ApiModelProperty("题目类型 1 选择题 2 填空题")
+    private String questionTopicType;
+
     @ApiModelProperty("选项id")
     private Long questionOptionId;
 
     @ApiModelProperty("选项内容")
     private String questionOptionText;
+
+    @ApiModelProperty("选项对应的分数")
+    private String questionOptionScore;
+
+    @ApiModelProperty("填空题内容")
+    private String questionGapFillText;
+
+    @ApiModelProperty("排序")
+    private Integer orderNum;
 
 }

@@ -3,6 +3,7 @@ package com.bootdo.api.service;
 import com.bootdo.api.entity.db.PsyQuestionRecord;
 import com.bootdo.api.entity.db.SysWxUser;
 import com.bootdo.api.entity.req.question.SubmitQuestionReq;
+import com.bootdo.api.entity.req.question.TopicGapFill;
 import com.bootdo.api.entity.req.question.TopicSelect;
 import com.bootdo.api.entity.res.SubmitQuestionRes;
 import com.bootdo.api.mapper.PsyQuestionRecordMapper;
@@ -34,7 +35,7 @@ public class PsyQuestionRecordService extends BaseService<PsyQuestionRecordMappe
     @Autowired
     private Gson gson;
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     public void insertRecord(HttpServletRequest request,
                              SubmitQuestionReq questionReq,
                              SubmitQuestionRes submitQuestionRes) {
@@ -45,15 +46,24 @@ public class PsyQuestionRecordService extends BaseService<PsyQuestionRecordMappe
         questionRecord.setQuestionId(questionReq.getQuestionId());
         questionRecord.setSubmitScore(submitQuestionRes.getSelectedScore() + "");
         questionRecord.setSumScore(submitQuestionRes.getSumScore());
-        questionRecord.setSubmitDate(LocalDate.now().toString());
-        questionRecord.setSubmitDateFull(LocalDateTime.now().toString());
+        questionRecord.setSubmitDate(LocalDate.now().format(CommonConsts.DTF_DAY));
+        questionRecord.setSubmitDateFull(LocalDateTime.now().format(CommonConsts.DTF_SECONDS));
         questionRecord.setRequestJson(gson.toJson(questionReq));
         questionRecord.setResponseJson(gson.toJson(submitQuestionRes));
         save(questionRecord);
         //新增详细选项数据
         List<Long> selectedOptionId = questionReq.getTopicSelects().stream()
                 .map(TopicSelect::getOptionId).collect(Collectors.toList());
+        //选择题插入
         psyQuestionTopicRecordMapper.insertBatchRecord(questionRecord.getId(),
                 userInfo.getId(), questionReq.getQuestionId(), selectedOptionId);
+        //填空题插入
+        if (questionReq.getTopicGapFills() != null) {
+            for (TopicGapFill gapFill : questionReq.getTopicGapFills()) {
+                psyQuestionTopicRecordMapper.insertGapFill(questionRecord.getId(),
+                        userInfo.getId(), questionReq.getQuestionId(),
+                        gapFill.getTopicId(), gapFill.getGapFillText());
+            }
+        }
     }
 }

@@ -5,14 +5,25 @@
 
     <insert id="insertBatchRecord">
         insert into psy_question_topic_record (question_record_id,
-        question_topic_id,question_topic_text,question_option_id,
-        question_option_text,create_id,create_date)
-        select #{questionRecordId}, a.id, a.topic, b.id, b.option_name,#{userId},now() from
+        question_topic_id,question_topic_text,question_topic_type,question_option_id,
+        question_option_text,question_option_score,order_num,create_id,create_date)
+        select #{questionRecordId}, a.id, a.topic, '1', b.id, b.option_name, b.option_score,
+               a.order_num, #{userId}, now() from
         psy_question_topic a
         join psy_question_topic_options b on a.id = b.question_topic_id
         where b.question_id = #{questionId} and b.id in
-        <foreach item="item" collection="optionIds" separator="," open="(" close=")" index="">
+        <foreach item="item" collection="selectedOptionId" separator="," open="(" close=")" index="">
             #{item}
         </foreach>
-	</insert>
+    </insert>
+
+    <insert id="insertGapFill">
+        insert into psy_question_topic_record (question_record_id,
+        question_topic_id,question_topic_text,question_topic_type,
+        question_gap_fill_text,order_num,create_id,create_date)
+        select #{questionRecordId}, a.id, a.topic, '2', #{gapFillText}, a.order_num, #{userId}, now() from
+        psy_question_topic a
+        where a.question_id = #{questionId} and a.id = #{topicId}
+    </insert>
+
 </mapper>

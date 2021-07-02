@@ -22,7 +22,7 @@ public class PsyQuestionTopic extends BaseModel implements Serializable {
     @ApiModelProperty("题目类型 1 选择题 2 填空题")
     private Integer topicType;
 
-    @ApiModelProperty("填空题答案 json数据 [xx,xx]")
-    private String gapFillJson;
+    @ApiModelProperty("排序")
+    private Integer orderNum;
 
 }

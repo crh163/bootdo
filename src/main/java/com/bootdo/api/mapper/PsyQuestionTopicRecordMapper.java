@@ -12,9 +12,30 @@ import java.util.List;
  */
 public interface PsyQuestionTopicRecordMapper extends BaseMapper<PsyQuestionTopicRecord> {
 
+    /**
+     * 批量插入选择题结果
+     *
+     * @param questionRecordId
+     * @param userId
+     * @param questionId
+     * @param selectedOptionId
+     */
     void insertBatchRecord(@Param("questionRecordId") Long questionRecordId,
                            @Param("userId") Long userId,
                            @Param("questionId") Long questionId,
                            @Param("selectedOptionId") List<Long> selectedOptionId);
 
+    /**
+     * 插入填空题结果
+     *
+     * @param questionRecordId
+     * @param userId
+     * @param topicId
+     * @param gapFillText
+     */
+    void insertGapFill(@Param("questionRecordId") Long questionRecordId,
+                       @Param("userId") Long userId,
+                       @Param("questionId") Long questionId,
+                       @Param("topicId") Long topicId,
+                       @Param("gapFillText") String gapFillText);
 }

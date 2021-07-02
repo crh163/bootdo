@@ -76,7 +76,7 @@ public class PsyQuestionController {
         //2.获取问卷的评分标准
         List<PsyQuestionScoreRange> scoreRanges = psyQuestionScoreRangeService.list(
                 new QueryWrapper<PsyQuestionScoreRange>().eq(ColumnConsts.QUESTION_ID, questionReq.getQuestionId()));
-        //3.计算用户总得分，封装页面显示结果
+        //3.计算用户总得分（选择题得分），封装页面显示结果
         SubmitQuestionRes submitQuestionRes = buildSubmitQuestionRes(question, questionReq, scoreRanges);
         //4.提交记录写入记录表中（重要）
         psyQuestionRecordService.insertRecord(request, questionReq, submitQuestionRes);
@@ -128,13 +128,14 @@ public class PsyQuestionController {
         if (question == null) {
             throw new BasicException(ResponseCodeEnum.NOT_EXIST_QUESTION);
         }
-        //判断该问卷的答案是否全部提交
-        List<Long> topicIds = psyQuestionTopicService.selectTopicIdsByQuestionId(questionReq.getQuestionId());
+        //选择题肯定不会为空，填空题绝大多数问卷都为空
         if (CollectionUtils.isEmpty(questionReq.getTopicSelects())) {
             throw new BasicException(ResponseCodeEnum.FAIL_SUBMIT_QUESTION);
         }
-        List<Long> selectsTopicList = questionReq.getTopicSelects().stream().sorted()
-                .map(TopicSelect::getTopicId).collect(Collectors.toList());
+        //判断该问卷的选择题答案是否全部提交
+        List<Long> topicIds = psyQuestionTopicService.selectTopicIdsByQuestionId(questionReq.getQuestionId());
+        List<Long> selectsTopicList = questionReq.getTopicSelects().stream()
+                .map(TopicSelect::getTopicId).sorted().collect(Collectors.toList());
         if (!gson.toJson(topicIds).equals(gson.toJson(selectsTopicList))) {
             throw new BasicException(ResponseCodeEnum.FAIL_SUBMIT_QUESTION);
         }

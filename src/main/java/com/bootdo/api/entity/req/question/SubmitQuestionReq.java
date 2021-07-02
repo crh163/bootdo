@@ -15,7 +15,10 @@ public class SubmitQuestionReq {
     @ApiModelProperty("问卷id")
     private Long questionId;
 
-    @ApiModelProperty("题目选择结果")
+    @ApiModelProperty("选择题选项")
     private List<TopicSelect> topicSelects;
+
+    @ApiModelProperty("填空题内容")
+    private List<TopicGapFill> topicGapFills;
 
 }

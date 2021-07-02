@@ -7,6 +7,7 @@
         SELECT id
         FROM psy_question_topic
         where question_id = #{questionId}
+        and topic_type = '1'
         Order by id asc
 	</select>
 </mapper>
