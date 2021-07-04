@@ -1,4 +1,4 @@
-package com.bootdo.api.entity.res;
+package com.bootdo.api.entity.res.common;
 
 import lombok.Data;
 

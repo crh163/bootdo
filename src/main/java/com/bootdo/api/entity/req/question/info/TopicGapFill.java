@@ -1,4 +1,4 @@
-package com.bootdo.api.entity.req.question;
+package com.bootdo.api.entity.req.question.info;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

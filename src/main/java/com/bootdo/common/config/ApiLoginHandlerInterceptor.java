@@ -1,7 +1,7 @@
 package com.bootdo.common.config;
 
 import com.bootdo.api.entity.db.SysWxUser;
-import com.bootdo.api.entity.res.Response;
+import com.bootdo.api.entity.res.common.Response;
 import com.bootdo.common.constant.CommonConsts;
 import com.bootdo.common.constant.ResponseCodeEnum;
 import com.bootdo.common.utils.RedisTemplateUtil;

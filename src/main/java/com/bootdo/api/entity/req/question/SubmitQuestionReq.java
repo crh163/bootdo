@@ -1,5 +1,7 @@
 package com.bootdo.api.entity.req.question;
 
+import com.bootdo.api.entity.req.question.info.TopicGapFill;
+import com.bootdo.api.entity.req.question.info.TopicSelect;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 

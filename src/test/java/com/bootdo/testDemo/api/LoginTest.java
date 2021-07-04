@@ -1,8 +1,8 @@
 package com.bootdo.testDemo.api;
 
-import com.bootdo.api.controller.SysWxUserController;
+import com.bootdo.api.controller.app.SysWxUserController;
 import com.bootdo.api.entity.req.common.CommonCodeReq;
-import com.bootdo.api.entity.res.Response;
+import com.bootdo.api.entity.res.common.Response;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

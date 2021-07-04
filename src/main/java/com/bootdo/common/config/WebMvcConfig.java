@@ -21,7 +21,8 @@ public class WebMvcConfig implements WebMvcConfigurer {
         //小程序拦截器
         registry.addInterceptor(getLoginHandlerInterceptor())
                 .addPathPatterns("/api/**")
-                .excludePathPatterns("/api/syswxuser/login");
+                .excludePathPatterns("/api/syswxuser/login")
+                .excludePathPatterns("/api/index/getIndexInfo");
     }
 
     @Bean

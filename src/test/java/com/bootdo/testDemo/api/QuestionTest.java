@@ -1,8 +1,8 @@
 package com.bootdo.testDemo.api;
 
-import com.bootdo.api.controller.PsyQuestionController;
+import com.bootdo.api.controller.app.PsyQuestionController;
 import com.bootdo.api.entity.req.common.CommonIdReq;
-import com.bootdo.api.entity.res.Response;
+import com.bootdo.api.entity.res.common.Response;
 import com.bootdo.common.exception.BasicException;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,6 +1,6 @@
 package com.bootdo.common.config;
 
-import com.bootdo.api.entity.res.Response;
+import com.bootdo.api.entity.res.common.Response;
 import com.bootdo.common.exception.BasicException;
 import com.bootdo.common.utils.ResponseUtil;
 import org.springframework.web.bind.annotation.ControllerAdvice;

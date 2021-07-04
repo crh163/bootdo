@@ -1,9 +1,9 @@
-package com.bootdo.api.controller;
+package com.bootdo.api.controller.app;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.bootdo.api.entity.db.SysWxUser;
 import com.bootdo.api.entity.req.common.CommonCodeReq;
-import com.bootdo.api.entity.res.Response;
+import com.bootdo.api.entity.res.common.Response;
 import com.bootdo.api.service.SysWxUserService;
 import com.bootdo.common.constant.ColumnConsts;
 import com.bootdo.common.constant.CommonConsts;

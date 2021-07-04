@@ -3,7 +3,7 @@
 
 <mapper namespace="com.bootdo.api.mapper.PsyQuestionMapper">
 
-    <select id="selectQuestionList" resultType="com.bootdo.api.entity.res.GetQuestionRes">
+    <select id="selectQuestionList" resultType="com.bootdo.api.entity.res.question.GetQuestionRes">
         SELECT a.id,a.title,(
             SELECT count(*) FROM psy_question_topic WHERE question_id = a.id
         ) topicNumber

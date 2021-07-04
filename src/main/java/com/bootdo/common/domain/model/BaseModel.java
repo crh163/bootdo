@@ -18,6 +18,7 @@ public class BaseModel {
     /**
      * 主键id
      */
+    @JsonIgnore
     private Long id;
 
     /**

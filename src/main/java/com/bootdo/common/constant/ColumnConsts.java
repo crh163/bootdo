@@ -36,4 +36,14 @@ public class ColumnConsts {
 
     public static final String QUESTION_TOPIC_ID = "question_topic_id";
 
+    public static final String AUDIO_NAME = "audio_name";
+
+    public static final String AUDIO_AUTHOR = "audio_author";
+
+    public static final String AUDIO_AVATAR_URL = "audio_avatar_url";
+
+    public static final String AUDIO_URL = "audio_url";
+
+    public static final String SUBMIT_DATE_FULL = "submit_date_full";
+
 }

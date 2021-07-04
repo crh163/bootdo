@@ -1,10 +1,19 @@
-package com.bootdo.api.entity.res;
+package com.bootdo.api.entity.res.question;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
 public class SubmitQuestionRes {
+
+    @ApiModelProperty("用户头像url")
+    private String userAvatarUrl;
+
+    @ApiModelProperty("用户名称")
+    private String userName;
+
+    @ApiModelProperty("提交时间")
+    private String submitDate;
 
     @ApiModelProperty("试卷得分")
     private Integer selectedScore;

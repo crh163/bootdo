@@ -1,7 +1,5 @@
 package com.bootdo.common.utils;
 
-import com.bootdo.api.entity.req.common.CommonOpenIdReq;
-
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
@@ -14,11 +12,12 @@ public class FieldUtil {
      * @param obj
      * @return
      */
-    public static boolean judgeClassHasNull(Object obj) {
+    public static String judgeClassHasNull(Object obj) {
         if (obj == null) {
-            return true;
+            return "未填写";
         }
-        List<String> ignoreFields = Arrays.asList("id", "createId", "createDate", "updateId", "updateDate");
+        List<String> ignoreFields = Arrays.asList("id", "createId", "createDate", "updateId",
+                "updateDate", "diagMedicineInfo", "diagEducationYear", "diagChildRank");
         Field[] fields = obj.getClass().getDeclaredFields();
         try {
             for (Field field : fields) {
@@ -27,18 +26,13 @@ public class FieldUtil {
                 }
                 field.setAccessible(true);
                 if (field.get(obj) == null) {
-                    return true;
+                    return "待完善";
                 }
             }
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-        return false;
-    }
-
-    public static void main(String[] args) {
-        CommonOpenIdReq req = new CommonOpenIdReq();
-        System.out.println(judgeClassHasNull(req));
+        return "已完善";
     }
 
 }

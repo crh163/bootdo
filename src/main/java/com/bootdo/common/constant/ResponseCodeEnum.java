@@ -14,6 +14,7 @@ public enum ResponseCodeEnum {
     NOT_EXIST_USER(601, "用户不存在！"),
     NOT_EXIST_QUESTION(701, "问卷不存在！"),
     FAIL_SUBMIT_QUESTION(702, "提交的问卷信息参数有误！"),
+    NOT_EXIST_AUDIO(703, "音频不存在！"),
     DEPT_COMMON_PARENT_AND_NAME(601, "");
 
     private Integer code;

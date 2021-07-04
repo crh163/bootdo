@@ -1,13 +1,15 @@
 package com.bootdo.api.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.bootdo.api.entity.db.PsyQuestionRecord;
 import com.bootdo.api.entity.db.SysWxUser;
 import com.bootdo.api.entity.req.question.SubmitQuestionReq;
-import com.bootdo.api.entity.req.question.TopicGapFill;
-import com.bootdo.api.entity.req.question.TopicSelect;
-import com.bootdo.api.entity.res.SubmitQuestionRes;
+import com.bootdo.api.entity.req.question.info.TopicGapFill;
+import com.bootdo.api.entity.req.question.info.TopicSelect;
+import com.bootdo.api.entity.res.question.SubmitQuestionRes;
 import com.bootdo.api.mapper.PsyQuestionRecordMapper;
 import com.bootdo.api.mapper.PsyQuestionTopicRecordMapper;
+import com.bootdo.common.constant.ColumnConsts;
 import com.bootdo.common.constant.CommonConsts;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
@@ -15,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -36,10 +37,9 @@ public class PsyQuestionRecordService extends BaseService<PsyQuestionRecordMappe
     private Gson gson;
 
     @Transactional(rollbackFor = Exception.class)
-    public void insertRecord(HttpServletRequest request,
+    public void insertRecord(SysWxUser userInfo,
                              SubmitQuestionReq questionReq,
                              SubmitQuestionRes submitQuestionRes) {
-        SysWxUser userInfo = (SysWxUser) request.getAttribute(CommonConsts.WX_API_USER_INFO);
         PsyQuestionRecord questionRecord = new PsyQuestionRecord();
         questionRecord.setUserId(userInfo.getId());
         questionRecord.setOpenId(userInfo.getOpenId());
@@ -66,4 +66,20 @@ public class PsyQuestionRecordService extends BaseService<PsyQuestionRecordMappe
             }
         }
     }
+
+    /**
+     * 获取用户最近一次提交记录时间
+     *
+     * @param openId
+     * @return
+     */
+    public String selectQuestionSubmitNewTime(String openId) {
+        QueryWrapper<PsyQuestionRecord> wrapper = new QueryWrapper<PsyQuestionRecord>()
+                .eq(ColumnConsts.OPENID, openId)
+                .orderByDesc(ColumnConsts.SUBMIT_DATE_FULL)
+                .last("LIMIT 0,1");
+        PsyQuestionRecord record = getOne(wrapper);
+        return record == null ? null : record.getSubmitDateFull();
+    }
+
 }
