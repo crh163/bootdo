@@ -11,11 +11,15 @@
   "use strict";
 
   var isLayui = window.layui && layui.define, ready = {
-    getPath: function(){
-      var js = document.scripts, script = js[js.length - 1], jsPath = script.src;
-      if(script.getAttribute('merge')) return;
-      return jsPath.substring(0, jsPath.lastIndexOf('/') + 1);
-    }()
+        getPath:function(){
+          var e=document.scripts, n;
+          for(var i=e.length;i>0;i--){
+            if(e[i-1].src.indexOf("laydate.js")>-1){
+              n=e[i-1].src.substring(0,e[i-1].src.lastIndexOf("/")+1);
+            }
+          }
+          return n;
+        }()
     
     //获取节点的style属性值
     ,getStyle: function(node, name){

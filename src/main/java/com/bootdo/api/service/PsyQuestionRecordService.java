@@ -3,14 +3,17 @@ package com.bootdo.api.service;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.bootdo.api.entity.db.PsyQuestionRecord;
 import com.bootdo.api.entity.db.SysWxUser;
+import com.bootdo.api.entity.req.question.ManagerQueryListReq;
 import com.bootdo.api.entity.req.question.SubmitQuestionReq;
 import com.bootdo.api.entity.req.question.info.TopicGapFill;
 import com.bootdo.api.entity.req.question.info.TopicSelect;
 import com.bootdo.api.entity.res.question.SubmitQuestionRes;
+import com.bootdo.api.entity.vo.question.QueryQuestion;
 import com.bootdo.api.mapper.PsyQuestionRecordMapper;
 import com.bootdo.api.mapper.PsyQuestionTopicRecordMapper;
 import com.bootdo.common.constant.ColumnConsts;
 import com.bootdo.common.constant.CommonConsts;
+import com.bootdo.common.domain.page.ManPage;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,6 +83,24 @@ public class PsyQuestionRecordService extends BaseService<PsyQuestionRecordMappe
                 .last("LIMIT 0,1");
         PsyQuestionRecord record = getOne(wrapper);
         return record == null ? null : record.getSubmitDateFull();
+    }
+
+    /**
+     * manager - 问卷列表
+     *
+     * @param queryListReq
+     * @return
+     */
+    public ManPage selectListBySearchKey(ManagerQueryListReq queryListReq) {
+        if (queryListReq.getPage() != null && queryListReq.getPage() != 0) {
+            queryListReq.setPage(queryListReq.getPage() - 1);
+        }
+        Integer count = psyQuestionTopicRecordMapper.selectListBySearchKeyCount(queryListReq);
+        List<QueryQuestion> queryQuestions = psyQuestionTopicRecordMapper.selectListBySearchKey(queryListReq);
+        ManPage page = new ManPage();
+        page.setRows(queryQuestions);
+        page.setTotal(count);
+        return page;
     }
 
 }

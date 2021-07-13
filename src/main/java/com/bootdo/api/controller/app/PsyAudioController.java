@@ -6,6 +6,7 @@ import com.bootdo.api.entity.db.PsyAudioRecord;
 import com.bootdo.api.entity.db.PsyClockRecord;
 import com.bootdo.api.entity.db.SysWxUser;
 import com.bootdo.api.entity.req.common.CommonIdReq;
+import com.bootdo.api.entity.res.audio.GetAudioListRes;
 import com.bootdo.api.entity.res.common.Response;
 import com.bootdo.api.service.PsyAudioRecordService;
 import com.bootdo.api.service.PsyAudioService;
@@ -14,6 +15,7 @@ import com.bootdo.common.constant.ColumnConsts;
 import com.bootdo.common.constant.CommonConsts;
 import com.bootdo.common.constant.ResponseCodeEnum;
 import com.bootdo.common.exception.BasicException;
+import com.bootdo.common.utils.DataUtils;
 import com.bootdo.common.utils.ResponseUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -27,6 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -53,7 +56,8 @@ public class PsyAudioController {
         QueryWrapper<PsyAudio> wrapper = new QueryWrapper<PsyAudio>()
                 .select(ColumnConsts.ID, ColumnConsts.AUDIO_NAME, ColumnConsts.AUDIO_AUTHOR,
                         ColumnConsts.AUDIO_AVATAR_URL, ColumnConsts.AUDIO_URL);
-        return ResponseUtil.getSuccess(psyAudioService.list(wrapper));
+        List<PsyAudio> list = psyAudioService.list(wrapper);
+        return ResponseUtil.getSuccess(DataUtils.coverList(list, GetAudioListRes.class));
     }
 
     @ApiOperation("获取音频详情信息")

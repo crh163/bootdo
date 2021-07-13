@@ -56,9 +56,9 @@ public class BaseService<M extends BaseMapper<T>, T extends BaseModel> extends S
         if (StringUtils.isNotBlank(queryModel.getOrderField())) {
             queryWrapper.orderBy(true, queryModel.isAsc(),
                     com.baomidou.mybatisplus.core.toolkit.StringUtils.camelToUnderline(queryModel.getOrderField()));
+        } else {
+            queryWrapper.orderByDesc(ColumnConsts.ID);
         }
-        // 统一主键ID倒排
-        queryWrapper.orderByDesc(ColumnConsts.ID);
         if (StringUtils.isNotBlank(queryModel.getSearchValue())) {
             String[] searchKeyArray = queryModel.getSearchKey().split(",");
             queryWrapper.and(query -> {

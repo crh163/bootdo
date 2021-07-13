@@ -2,6 +2,8 @@ package com.bootdo.api.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.bootdo.api.entity.db.PsyQuestionTopicRecord;
+import com.bootdo.api.entity.req.question.ManagerQueryListReq;
+import com.bootdo.api.entity.vo.question.QueryQuestion;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -38,4 +40,9 @@ public interface PsyQuestionTopicRecordMapper extends BaseMapper<PsyQuestionTopi
                        @Param("questionId") Long questionId,
                        @Param("topicId") Long topicId,
                        @Param("gapFillText") String gapFillText);
+
+    Integer selectListBySearchKeyCount(ManagerQueryListReq queryListReq);
+
+    List<QueryQuestion> selectListBySearchKey(ManagerQueryListReq queryListReq);
+
 }
