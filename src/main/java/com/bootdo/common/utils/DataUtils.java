@@ -18,4 +18,12 @@ public class DataUtils {
         }
         return datas;
     }
+
+    public static <T> T coverData(Object object, Class<T> clazz) {
+        if (object == null) {
+            return null;
+        }
+        Gson gson = new Gson();
+        return gson.fromJson(gson.toJson(object), clazz);
+    }
 }

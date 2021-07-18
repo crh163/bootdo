@@ -46,4 +46,10 @@ public class ColumnConsts {
 
     public static final String SUBMIT_DATE_FULL = "submit_date_full";
 
+    public static final String ORDER_NUM = "order_num";
+
+    public static final String INDEX_ID = "index_id";
+
+    public static final String QUESTION_RECORD_ID = "question_record_id";
+
 }

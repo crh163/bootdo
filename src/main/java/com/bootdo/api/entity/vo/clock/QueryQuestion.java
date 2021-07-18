@@ -1,4 +1,4 @@
-package com.bootdo.api.entity.vo.question;
+package com.bootdo.api.entity.vo.clock;
 
 import lombok.Data;
 
@@ -7,17 +7,11 @@ public class QueryQuestion {
 
     private Long id;
 
-    private String title;
-
-    private String indexTitle;
-
     private String nickName;
 
     private String name;
 
-    private String submitScore;
-
-    private String sumScore;
+    private String phone;
 
     private String submitDateFull;
 

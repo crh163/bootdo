@@ -3,6 +3,7 @@ package com.bootdo.api.mapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.bootdo.api.entity.db.PsyQuestion;
 import com.bootdo.api.entity.res.question.GetQuestionRes;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -12,6 +13,6 @@ import java.util.List;
  */
 public interface PsyQuestionMapper extends BaseMapper<PsyQuestion> {
 
-    List<GetQuestionRes> selectQuestionList();
+    List<GetQuestionRes> selectQuestionListByIndexId(@Param("indexId") Long indexId);
 
 }

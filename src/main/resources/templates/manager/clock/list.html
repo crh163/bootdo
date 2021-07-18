@@ -37,19 +37,7 @@
                         <input id="nickName" type="text" class="form-control"
                                placeholder="请输入微信名称">
                     </div>
-                    <label for="questionId" class="pull-left manager_toolbar_label">问卷名称 : </label>
-                    <div class="columns pull-left col-md-2 nopadding">
-                        <select id="questionId" class="form-control chosen-select" tabindex="2" style="width: 100%">
-                            <option value="">==请选择==</option>
-                            <option th:each="m : ${questions}" th:value="${m.id}" th:text="${m.title}">
-                        </select>
-                    </div>
-                    <label for="submitScore" class="pull-left manager_toolbar_label">问卷得分 : </label>
-                    <div class="columns pull-left col-md-2 nopadding manager_toolbar_last_input">
-                        <input id="submitScore" type="text" class="form-control"
-                               placeholder="请输入问卷得分">
-                    </div>
-                    <label for="submitDate" class="pull-left manager_toolbar_label">提交时间 : </label>
+                    <label for="submitDate" class="pull-left manager_toolbar_label">打卡时间 : </label>
                     <div class="columns pull-left col-md-2 nopadding layui-input-inline">
                         <input id="submitDate" type="text" class="layui-input form-control" placeholder="yyyy-MM-dd">
                     </div>
@@ -71,6 +59,6 @@
 <div th:include="include :: footer"></div>
 <script th:inline="javascript"> var ctx = [[@{/}]] ; </script>
 <script th:src="@{/js/laydate/laydate.js}" charset="utf-8"></script>
-<script type="text/javascript" th:src="@{/js/appjs/manager/question/list.js}"></script>
+<script type="text/javascript" th:src="@{/js/appjs/manager/clock/list.js}"></script>
 </body>
 </html>

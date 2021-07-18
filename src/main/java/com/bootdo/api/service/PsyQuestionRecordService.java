@@ -103,4 +103,8 @@ public class PsyQuestionRecordService extends BaseService<PsyQuestionRecordMappe
         return page;
     }
 
+    public List<QueryQuestion> selectExcelOutList(ManagerQueryListReq queryListReq){
+        return psyQuestionTopicRecordMapper.selectListBySearchKey(queryListReq);
+    }
+
 }

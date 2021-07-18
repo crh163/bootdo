@@ -1,5 +1,5 @@
 
-var prefix = ctx + "manager/question";
+var prefix = ctx + "manager/clock";
 $(function() {
 	load();
 	laydate.render({
@@ -29,10 +29,8 @@ function load() {
 					return {
 						pageSize : params.limit,
 						page : 1,
-						questionId : $("#questionId option:selected").val(),
 						nickName : $('#nickName').val(),
 						name : $('#name').val(),
-						submitScore : $('#submitScore').val(),
 						submitDate : $('#submitDate').val(),
 					};
 				},
@@ -40,14 +38,6 @@ function load() {
 					{
 						field : 'idCheck',
 						checkbox : true
-					},
-					{
-						field : 'title',
-						title : '问卷名称'
-					},
-					{
-						field : 'indexTitle',
-						title : '所属栏目'
 					},
                     {
                         field : 'name',
@@ -57,35 +47,18 @@ function load() {
                         field : 'nickName',
                         title : '微信名称'
                     },
+					{
+						field : 'phone',
+						title : '用户手机号'
+					},
                     {
                         field : 'submitDateFull',
-                        title : '提交时间'
-                    },
-					{
-						field : 'submitScore',
-						title : '问卷得分'
-					},
-					{
-						field : 'sumScore',
-						title : '问卷总分'
-					},
-					{
-						title : '操作',
-						field : 'sumScore',
-						align : 'center',
-						formatter : function(value, row, index) {
-							return '<a class="btn btn-primary btn-sm" href="#" title="导出" onclick="excelOut('+row.id
-								+')"><i class="fa fa-download manager_btn_i"></i> 导出</a> ';
-						}
-					} ]
+                        title : '打卡时间'
+                    }]
 			});
 }
 function reLoad() {
 	$('#exampleTable').bootstrapTable('refresh');
-}
-
-function excelOut(id) {
-	window.location.href = prefix + '/excelOut?id='+id;
 }
 
 function excelOutBatch() {

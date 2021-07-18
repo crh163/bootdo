@@ -12,6 +12,7 @@ public class GetAudioListRes {
 
     @ApiModelProperty("音频id")
     private Long id;
+
     @ApiModelProperty("音频名称")
     private String audioName;
 

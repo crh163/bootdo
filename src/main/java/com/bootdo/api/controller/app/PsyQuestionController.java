@@ -61,15 +61,24 @@ public class PsyQuestionController {
     private SysWxUserInfoService sysWxUserInfoService;
 
     @Autowired
+    private PsyQuestionIndexService psyQuestionIndexService;
+
+    @Autowired
     private HttpServletRequest request;
 
     @Autowired
     private Gson gson;
 
+    @ApiOperation("获取问卷栏目列表")
+    @PostMapping("/getQuestionIndexList")
+    public Response getQuestionIndexList() {
+        return ResponseUtil.getSuccess(psyQuestionIndexService.selectQuestionIndexList());
+    }
+
     @ApiOperation("获取问卷列表")
     @PostMapping("/getQuestionList")
-    public Response getQuestionList() {
-        return ResponseUtil.getSuccess(psyQuestionService.selectQuestionList());
+    public Response getQuestionList(CommonIdReq commonIdReq) {
+        return ResponseUtil.getSuccess(psyQuestionService.selectQuestionListByIndexId(commonIdReq.getId()));
     }
 
     @ApiOperation("根据问卷id获取问卷详细信息")
@@ -145,6 +154,13 @@ public class PsyQuestionController {
                     submitQuestionRes.setAdvice(scoreRange.getAdvice());
                 }
             }
+        }
+        //查询下一个问卷的id
+        PsyQuestion nextQuestion = psyQuestionService.getOne(new QueryWrapper<PsyQuestion>()
+                .eq(ColumnConsts.INDEX_ID, question.getIndexId())
+                .eq(ColumnConsts.ORDER_NUM, question.getOrderNum() + 1));
+        if (nextQuestion != null) {
+            submitQuestionRes.setNextQuestionId(nextQuestion.getId());
         }
         return submitQuestionRes;
     }

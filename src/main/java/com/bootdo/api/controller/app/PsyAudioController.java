@@ -1,13 +1,12 @@
 package com.bootdo.api.controller.app;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.bootdo.api.entity.db.PsyAudio;
-import com.bootdo.api.entity.db.PsyAudioRecord;
-import com.bootdo.api.entity.db.PsyClockRecord;
-import com.bootdo.api.entity.db.SysWxUser;
+import com.bootdo.api.entity.db.*;
 import com.bootdo.api.entity.req.common.CommonIdReq;
+import com.bootdo.api.entity.res.audio.GetAudioIndexListRes;
 import com.bootdo.api.entity.res.audio.GetAudioListRes;
 import com.bootdo.api.entity.res.common.Response;
+import com.bootdo.api.service.PsyAudioIndexService;
 import com.bootdo.api.service.PsyAudioRecordService;
 import com.bootdo.api.service.PsyAudioService;
 import com.bootdo.api.service.PsyClockRecordService;
@@ -47,13 +46,26 @@ public class PsyAudioController {
     private PsyAudioRecordService psyAudioRecordService;
 
     @Autowired
+    private PsyAudioIndexService psyAudioIndexService;
+
+    @Autowired
     private HttpServletRequest request;
+
+    @ApiOperation("获取音频栏目列表")
+    @PostMapping("/getAudioIndexList")
+    public Response getAudioIndexList() {
+        clock();
+        List<PsyAudioIndex> list = psyAudioIndexService.list(new QueryWrapper<PsyAudioIndex>()
+                .orderByAsc(ColumnConsts.ORDER_NUM));
+        return ResponseUtil.getSuccess(DataUtils.coverList(list, GetAudioIndexListRes.class));
+    }
 
     @ApiOperation("获取音频列表")
     @PostMapping("/getAudioList")
-    public Response getAudioList() {
-        clock();
+    public Response getAudioList(@RequestBody CommonIdReq commonIdReq) {
         QueryWrapper<PsyAudio> wrapper = new QueryWrapper<PsyAudio>()
+                .eq(ColumnConsts.INDEX_ID, commonIdReq.getId())
+                .orderByAsc(ColumnConsts.ORDER_NUM)
                 .select(ColumnConsts.ID, ColumnConsts.AUDIO_NAME, ColumnConsts.AUDIO_AUTHOR,
                         ColumnConsts.AUDIO_AVATAR_URL, ColumnConsts.AUDIO_URL);
         List<PsyAudio> list = psyAudioService.list(wrapper);

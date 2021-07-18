@@ -3,10 +3,12 @@
 
 <mapper namespace="com.bootdo.api.mapper.PsyQuestionMapper">
 
-    <select id="selectQuestionList" resultType="com.bootdo.api.entity.res.question.GetQuestionRes">
+    <select id="selectQuestionListByIndexId" resultType="com.bootdo.api.entity.res.question.GetQuestionRes">
         SELECT a.id,a.title,(
             SELECT count(*) FROM psy_question_topic WHERE question_id = a.id
         ) topicNumber
         FROM psy_question a
+        where index_id = #{indexId}
+        order by order_num
 	</select>
 </mapper>

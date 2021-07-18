@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bootdo.api.mapper.PsyClockRecordMapper">
+
+    <select id="selectListBySearchKey" resultType="com.bootdo.api.entity.vo.clock.QueryQuestion">
+        select a.id,c.nick_name,d.name,d.phone,a.submit_date_full
+        from psy_clock_record a
+        left join sys_wx_user c on a.open_id = c.open_id
+        left join sys_wx_user_info d on a.open_id = d.open_id
+        where 1=1
+        <if test="recordIds != null and recordIds != ''"> and a.id in (${recordIds}) </if>
+        <if test="nickName != null and nickName != ''"> and c.nick_name like CONCAT('%', #{nickName}, '%') </if>
+        <if test="name != null and name != ''"> and d.name like CONCAT('%', #{name}, '%') </if>
+        <if test="submitDate != null and submitDate != ''"> and a.submit_date = #{submitDate} </if>
+        <if test="page != null and pageSize != null">
+            LIMIT #{page}, #{pageSize}
+        </if>
+    </select>
+
+    <select id="selectListBySearchKeyCount" resultType="Integer">
+        select count(*)
+        from psy_clock_record a
+        left join sys_wx_user c on a.open_id = c.open_id
+        left join sys_wx_user_info d on a.open_id = d.open_id
+        where 1=1
+        <if test="recordIds != null and recordIds != ''"> and a.id in (${recordIds}) </if>
+        <if test="nickName != null and nickName != ''"> and c.nick_name like CONCAT('%', #{nickName}, '%') </if>
+        <if test="name != null and name != ''"> and d.name like CONCAT('%', #{name}, '%') </if>
+        <if test="submitDate != null and submitDate != ''"> and a.submit_date = #{submitDate} </if>
+    </select>
+
+</mapper>

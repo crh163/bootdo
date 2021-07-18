@@ -21,7 +21,7 @@ public class QuestionTest {
 
     @Test
     public void getQuestionList() {
-        Response response = psyQuestionController.getQuestionList();
+        Response response = psyQuestionController.getQuestionList(null);
         System.out.println(response);
     }
 

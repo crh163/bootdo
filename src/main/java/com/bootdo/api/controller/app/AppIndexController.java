@@ -82,4 +82,11 @@ public class AppIndexController {
         return indexInfoRes;
     }
 
+    @ApiOperation("删除问卷信息redis数据")
+    @PostMapping("/deleteRedisQuestion")
+    public Response deleteRedisQuestion(){
+
+        return ResponseUtil.getSuccess();
+    }
+
 }

@@ -27,13 +27,15 @@
     </insert>
 
     <select id="selectListBySearchKey" resultType="com.bootdo.api.entity.vo.question.QueryQuestion">
-        select a.id,b.title,c.nick_name,d.name,
+        select a.id,b.title,i.index_title,c.nick_name,d.name,
         a.submit_date_full,a.submit_score,a.sum_score
         from psy_question_record a
         left join psy_question b on a.question_id = b.id
+        left join psy_question_index i on b.index_id = i.id
         left join sys_wx_user c on a.open_id = c.open_id
         left join sys_wx_user_info d on a.open_id = d.open_id
         where 1=1
+        <if test="recordIds != null and recordIds != ''"> and a.id in (${recordIds}) </if>
         <if test="questionId != null and questionId != ''"> and a.question_id = #{questionId} </if>
         <if test="nickName != null and nickName != ''"> and c.nick_name like CONCAT('%', #{nickName}, '%') </if>
         <if test="name != null and name != ''"> and d.name like CONCAT('%', #{name}, '%') </if>
@@ -41,7 +43,9 @@
         <if test="submitDate != null and submitDate != ''">
             and a.submit_date = #{submitDate}
         </if>
-        LIMIT #{page}, #{pageSize}
+        <if test="page != null and pageSize != null">
+            LIMIT #{page}, #{pageSize}
+        </if>
     </select>
 
     <select id="selectListBySearchKeyCount" resultType="Integer">

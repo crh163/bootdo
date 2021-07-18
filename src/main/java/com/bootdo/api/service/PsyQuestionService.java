@@ -41,9 +41,10 @@ public class PsyQuestionService extends BaseService<PsyQuestionMapper, PsyQuesti
      * 获取问卷列表
      *
      * @return
+     * @param indexId
      */
-    public List<GetQuestionRes> selectQuestionList() {
-        return psyQuestionMapper.selectQuestionList();
+    public List<GetQuestionRes> selectQuestionListByIndexId(Long indexId) {
+        return psyQuestionMapper.selectQuestionListByIndexId(indexId);
     }
 
     /**

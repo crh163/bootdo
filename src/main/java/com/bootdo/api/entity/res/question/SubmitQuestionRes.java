@@ -27,4 +27,7 @@ public class SubmitQuestionRes {
     @ApiModelProperty("建议(部分问卷返回该字段为空)")
     private String advice;
 
+    @ApiModelProperty("下一个问卷的id")
+    private Long nextQuestionId;
+
 }

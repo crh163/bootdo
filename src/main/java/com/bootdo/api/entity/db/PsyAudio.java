@@ -28,4 +28,10 @@ public class PsyAudio extends BaseModel implements Serializable {
     @ApiModelProperty("短文章")
     private String audioShortArticle;
 
+    @ApiModelProperty("问卷栏目id")
+    private Long indexId;
+
+    @ApiModelProperty("排序")
+    private Integer orderNum;
+
 }
