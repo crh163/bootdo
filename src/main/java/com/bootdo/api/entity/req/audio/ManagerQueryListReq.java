@@ -1,4 +1,4 @@
-package com.bootdo.api.entity.req.clock;
+package com.bootdo.api.entity.req.audio;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

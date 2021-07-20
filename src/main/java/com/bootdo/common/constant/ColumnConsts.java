@@ -52,4 +52,6 @@ public class ColumnConsts {
 
     public static final String QUESTION_RECORD_ID = "question_record_id";
 
+    public static final String TOKEN = "token";
+
 }

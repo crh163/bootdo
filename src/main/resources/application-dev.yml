@@ -38,7 +38,6 @@ spring:
   redis:
     host: 47.115.22.141
     port: 6379
-    database: 1
     password: chenrenhao
     # 连接超时时间（毫秒）
     timeout: 10000

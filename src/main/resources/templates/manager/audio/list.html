@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh_CN" xmlns:th="http://www.thymeleaf.org">
+<meta charset="utf-8">
+<head th:include="include :: header"></head>
+<style>
+    .manager_toolbar_label {
+        position: relative;
+        margin: 10px;
+        line-height: 34px;
+    }
+
+    .manager_toolbar_last_input {
+        margin-right: 10px;
+    }
+
+    .manager_btn_i {
+        margin-right: 2px;
+    }
+
+    .manager_btn_pl_dw {
+        margin-left: 10px;
+    }
+</style>
+<body class="gray-bg">
+<div class="wrapper wrapper-content ">
+    <div class="col-sm-12">
+        <div class="ibox">
+            <div class="ibox-body">
+                <div class="fixed-table-toolbar">
+                    <label for="name" class="pull-left manager_toolbar_label">用户名称 : </label>
+                    <div class="columns pull-left col-md-2 nopadding manager_toolbar_last_input">
+                        <input id="name" type="text" class="form-control"
+                               placeholder="请输入用户名称">
+                    </div>
+                    <label for="nickName" class="pull-left manager_toolbar_label">微信名称 : </label>
+                    <div class="columns pull-left col-md-2 nopadding manager_toolbar_last_input">
+                        <input id="nickName" type="text" class="form-control"
+                               placeholder="请输入微信名称">
+                    </div>
+                    <label for="submitDate" class="pull-left manager_toolbar_label">播放时间 : </label>
+                    <div class="columns pull-left col-md-2 nopadding layui-input-inline">
+                        <input id="submitDate" type="text" class="layui-input form-control" placeholder="yyyy-MM-dd">
+                    </div>
+                    <div class="columns pull-left">
+                        <button class="btn btn-success manager_btn_pl_dw" onclick="reLoad()">
+                            <i class="fa fa-search" aria-hidden="true"></i>查询
+                        </button>
+                        <button class="btn btn-primary manager_btn_pl_dw" onclick="excelOutBatch()">
+                            <i class="fa fa-download" aria-hidden="true"></i>批量导出
+                        </button>
+                    </div>
+                </div>
+                <table id="exampleTable" data-mobile-responsive="true">
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:include="include :: footer"></div>
+<script th:inline="javascript"> var ctx = [[@{/}]] ; </script>
+<script th:src="@{/js/laydate/laydate.js}" charset="utf-8"></script>
+<script type="text/javascript" th:src="@{/js/appjs/manager/audio/list.js}"></script>
+</body>
+</html>

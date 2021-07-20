@@ -1,7 +1,10 @@
 package com.bootdo.common.config;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.bootdo.api.entity.db.SysWxUser;
 import com.bootdo.api.entity.res.common.Response;
+import com.bootdo.api.service.SysWxUserService;
+import com.bootdo.common.constant.ColumnConsts;
 import com.bootdo.common.constant.CommonConsts;
 import com.bootdo.common.constant.ResponseCodeEnum;
 import com.bootdo.common.utils.RedisTemplateUtil;
@@ -33,6 +36,9 @@ public class ApiLoginHandlerInterceptor implements HandlerInterceptor {
     private RedisTemplate<String, String> redisTemplate;
 
     @Autowired
+    private SysWxUserService sysWxUserService;
+
+    @Autowired
     private Gson gson;
 
     /**
@@ -47,11 +53,19 @@ public class ApiLoginHandlerInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token = request.getHeader(CommonConsts.X_ACCESS_TOKEN);
+        ValueOperations<String, String> opsForValue = redisTemplate.opsForValue();
         SysWxUser sysWxUser = RedisTemplateUtil.getRedisString(
                 CommonConsts.WX_TOKEN_REDIS_PREFIX + token, SysWxUser.class);
         if (sysWxUser == null) {
-            sendResponseText(response, ResponseCodeEnum.FAIL_NO_LOGIN);
-            return false;
+            SysWxUser dbUserInfo = sysWxUserService.getOne(new QueryWrapper<SysWxUser>()
+                    .eq(ColumnConsts.TOKEN, token));
+            if (dbUserInfo != null) {
+                opsForValue.set(CommonConsts.WX_TOKEN_REDIS_PREFIX + token,
+                        gson.toJson(dbUserInfo), 30, TimeUnit.DAYS);
+            } else {
+                sendResponseText(response, ResponseCodeEnum.FAIL_NO_LOGIN);
+                return false;
+            }
         }
         // redis做接口幂等
         String idempotentKey = CommonConsts.API_REDIS_IMP_IDEMPOTENT + request.getRequestURI()
@@ -61,7 +75,6 @@ public class ApiLoginHandlerInterceptor implements HandlerInterceptor {
             return false;
         }
         // 请求写入redis做幂等 2秒内不允许重复请求 value为当前时间
-        ValueOperations<String, String> opsForValue = redisTemplate.opsForValue();
         opsForValue.set(idempotentKey, LocalDateTime.now().toString(), 2, TimeUnit.SECONDS);
         request.setAttribute(CommonConsts.WX_API_USER_INFO, sysWxUser);
         return true;
