@@ -1,27 +1,144 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>欢迎页</title>
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <link rel="stylesheet" th:href="@{css/bootstrap.min.css}">
+    <meta charset="UTF-8">
+    <link th:href="@{/css/layui.css}" rel="stylesheet">
+    <link th:href="@{/css/index.css}" rel="stylesheet">
+    <script th:src="@{/js/layui.js}"></script>
+    <script th:src="@{/js/jquery.min.js?v=2.1.4}"></script>
+    <style>
+        .layui-laydate-content th{
+            display: inline-block;
+        }
+    </style>
 </head>
-<body>
-<div class="panel panel-default">
-    <div class="panel-heading">了解项目</div>
-    <div style="padding: 10px 0 20px 10px;">
-        <h3>&nbsp;&nbsp;&nbsp;项目介绍</h3>
-        <ul>
-            <li>后端技术语言：Java</li>
-            <li>后台技术框架：Springboot 作为基础框架，MybatisPlus 作为持久层框架，Shiro 作为安全框架</li>
-            <li>前端技术框架：Layui 作为基础框架，参入 Bootstrap 系列组件，Thymeleaf 作为模板引擎</li>
-            <li>数据库：持久化数据库 Mysql，缓存数据库 Redis </li>
-            <li>首页设计待定：总共多少项目，已完成项目数，待完成项目数</li>
-        </ul>
+<body class="bs-position">
+<div class="wrap bs-flexCloumn">
+    <div class="zyl-top bs-backWhite">
+        <h1 class="zyl-data-tit bs-fs16">今日累计</h1>
+        <div class="zyl-data-box">
+            <ul class="bs-flexRow">
+                <li class="zyl-blue-bor">
+                    <h1 id="questionNumber">-</h1>
+                    <span>问卷提交数</span>
+                </li>
+                <li class="zyl-blue-bor">
+                    <h1 id="clockNumber">-</h1>
+                    <span>打卡数</span>
+                </li>
+                <li class="zyl-blue-bor">
+                    <h1 id="audioNumber">-</h1>
+                    <span>音频播放数</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="zyl-cen bs-flexRow">
+        <div class="zyl-cen-left bs-backWhite">
+            <h1 class="zyl-data-tit bs-fs16">最新问卷提交记录</h1>
+            <div class="zyl-data-table">
+                <table id="question_table">
+                    <thead>
+                    <tr><td width="10%">序号</td>
+                        <td width="40%">问卷名称</td>
+                        <td width="20%">用户名称</td>
+                        <td width="30%">提交时间</td></tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="right-tables">
+            <div class="zyl-cen-left bs-backWhite">
+                <h1 class="zyl-data-tit bs-fs16">全市主要经济指标</h1>
+                <div class="zyl-data-table">
+                    <table id="city_economic" class="right-table">
+                        <thead>
+                        <tr><td>指标</td><td>单位</td><td>1-2月</td><td>同比±%</td></tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>123</td>
+                            <td>123</td>
+                            <td>123</td>
+                            <td>123</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="zyl-cen-left bs-backWhite">
+                <h1 class="zyl-data-tit bs-fs16">全市主要经济指标</h1>
+                <div class="zyl-data-table">
+                    <table id="city_economic" class="right-table">
+                        <thead>
+                        <tr><td>指标</td><td>单位</td><td>1-2月</td><td>同比±%</td></tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>123</td>
+                            <td>123</td>
+                            <td>123</td>
+                            <td>123</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
+<script th:inline="javascript"> var ctx = [[@{/}]] ; </script>
+<script>
+    $(document).ready(function () {
+        var dataYear =1;
+        var dataMonth =1;
+        layui.use('laydate', function() {
+            var laydate = layui.laydate;
+            laydate.render({
+                elem: '#test13'
+                ,type: 'month'
+                ,btns: ['now']
+                ,value: dataYear + '-' + (dataMonth< 10 ? '0' + dataMonth : dataMonth)
+                ,change: function(value, date, endDate){
+                    selDate = value;
+                    $("#test13").val(value);
+                    var month = date.month;
+                    if((date.month)<10){
+                        month = "0"+date.month;
+                    }
+                }
+            });
+        });
+        //封装页面数据
+        $.ajax({
+            cache : true,
+            type : "POST",
+            url : ctx + "index/getIndexInfo",
+            error : function(request) {
+                parent.layer.alert("网络连接超时");
+            },
+            success : function(d) {
+                if (d.code != 200) {
+                    parent.layer.alert(d.msg);
+                }
+                var data = d.data;
+                $("#questionNumber").text(data.questionNumber);
+                $("#clockNumber").text(data.clockNumber);
+                $("#audioNumber").text(data.audioNumber);
+                for (var i=0;i<data.questionRecordList.length;i++) {
+                    var question = data.questionRecordList[i];
+                    var nicName = (question.name == null || question.name === '') ? question.nickName : question.name;
+                    $("#question_table").find("tbody").eq(0).append("<tr>" +
+                        "<td width=\"10%\">"+(i+1)+"</td><td width=\"40%\">"+question.title+"</td>" +
+                        "<td width=\"20%\">"+nicName+"</td><td width=\"30%\">"+
+                        question.submitDateFull+"</td></tr>");
+                }
+            }
+        });
+    });
+
+
+</script>
 </body>
-<script th:src="@{js/jquery.min.js}"></script>
-<script th:src="@{js/openTab.js}"></script>
 </html>

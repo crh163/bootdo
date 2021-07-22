@@ -44,6 +44,8 @@ public class ColumnConsts {
 
     public static final String AUDIO_URL = "audio_url";
 
+    public static final String SUBMIT_DATE = "submit_date";
+
     public static final String SUBMIT_DATE_FULL = "submit_date_full";
 
     public static final String ORDER_NUM = "order_num";

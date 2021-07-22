@@ -34,6 +34,9 @@ import java.util.stream.Collectors;
 public class PsyQuestionRecordService extends BaseService<PsyQuestionRecordMapper, PsyQuestionRecord> {
 
     @Autowired
+    private PsyQuestionRecordMapper psyQuestionRecordMapper;
+
+    @Autowired
     private PsyQuestionTopicRecordMapper psyQuestionTopicRecordMapper;
 
     @Autowired
@@ -107,4 +110,11 @@ public class PsyQuestionRecordService extends BaseService<PsyQuestionRecordMappe
         return psyQuestionTopicRecordMapper.selectListBySearchKey(queryListReq);
     }
 
+    public List<String> getAllTodayData(String today) {
+        return psyQuestionRecordMapper.getAllTodayData(today);
+    }
+
+    public List<QueryQuestion> getLastRecordList(String today) {
+        return psyQuestionRecordMapper.getLastRecordList(today);
+    }
 }
