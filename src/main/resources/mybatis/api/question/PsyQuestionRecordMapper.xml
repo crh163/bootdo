@@ -17,9 +17,8 @@
         left join psy_question b on a.question_id = b.id
         left join sys_wx_user c on a.open_id = c.open_id
         left join sys_wx_user_info d on a.open_id = d.open_id
-        where a.submit_date = #{today}
         order by a.submit_date_full desc
-        limit 0,6
+        limit 0,8
     </select>
 
 </mapper>

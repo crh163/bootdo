@@ -1,8 +1,5 @@
 package com.bootdo.api.entity.res.index;
 
-import com.bootdo.api.entity.db.PsyAudioRecord;
-import com.bootdo.api.entity.db.PsyClockRecord;
-import com.bootdo.api.entity.vo.question.QueryQuestion;
 import lombok.Data;
 
 import java.util.List;
@@ -16,10 +13,10 @@ public class ManagerIndexInfoRes {
 
     private String audioNumber;
 
-    private List<QueryQuestion> questionRecordList;
+    private List<com.bootdo.api.entity.vo.question.QueryQuestion> questionRecordList;
 
-    private List<PsyClockRecord> clockRecordList;
+    private List<com.bootdo.api.entity.vo.clock.QueryQuestion> clockRecordList;
 
-    private List<PsyAudioRecord> audioRecordList;
+    private List<com.bootdo.api.entity.vo.audio.QueryQuestion> audioRecordList;
 
 }

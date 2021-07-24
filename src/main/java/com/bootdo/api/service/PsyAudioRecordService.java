@@ -38,4 +38,9 @@ public class PsyAudioRecordService extends BaseService<PsyAudioRecordMapper, Psy
         return psyAudioRecordMapper.selectListBySearchKey(queryListReq);
     }
 
+    public List<QueryQuestion> getLastRecordList(String today) {
+        return psyAudioRecordMapper.getLastRecordList(today);
+    }
+
+
 }

@@ -50,38 +50,30 @@
         </div>
         <div class="right-tables">
             <div class="zyl-cen-left bs-backWhite">
-                <h1 class="zyl-data-tit bs-fs16">全市主要经济指标</h1>
+                <h1 class="zyl-data-tit bs-fs16">最新打卡记录</h1>
                 <div class="zyl-data-table">
-                    <table id="city_economic" class="right-table">
+                    <table id="clock_table" class="right-table">
                         <thead>
-                        <tr><td>指标</td><td>单位</td><td>1-2月</td><td>同比±%</td></tr>
+                        <tr><td width="10%">序号</td>
+                            <td width="30%">用户名称</td>
+                            <td width="30%">手机号码</td>
+                            <td width="30%">打卡时间</td></tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td>123</td>
-                            <td>123</td>
-                            <td>123</td>
-                            <td>123</td>
-                        </tr>
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>
             <div class="zyl-cen-left bs-backWhite">
-                <h1 class="zyl-data-tit bs-fs16">全市主要经济指标</h1>
+                <h1 class="zyl-data-tit bs-fs16">最新音频播放记录</h1>
                 <div class="zyl-data-table">
-                    <table id="city_economic" class="right-table">
+                    <table id="audio_table" class="right-table">
                         <thead>
-                        <tr><td>指标</td><td>单位</td><td>1-2月</td><td>同比±%</td></tr>
+                        <tr><td width="10%">序号</td>
+                            <td width="40%">音频名称</td>
+                            <td width="20%">用户名称</td>
+                            <td width="30%">播放时间</td></tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td>123</td>
-                            <td>123</td>
-                            <td>123</td>
-                            <td>123</td>
-                        </tr>
-                        </tbody>
+                        <tbody></tbody>
                     </table>
                 </div>
             </div>
@@ -103,10 +95,6 @@
                 ,change: function(value, date, endDate){
                     selDate = value;
                     $("#test13").val(value);
-                    var month = date.month;
-                    if((date.month)<10){
-                        month = "0"+date.month;
-                    }
                 }
             });
         });
@@ -126,18 +114,37 @@
                 $("#questionNumber").text(data.questionNumber);
                 $("#clockNumber").text(data.clockNumber);
                 $("#audioNumber").text(data.audioNumber);
-                for (var i=0;i<data.questionRecordList.length;i++) {
-                    var question = data.questionRecordList[i];
-                    var nicName = (question.name == null || question.name === '') ? question.nickName : question.name;
-                    $("#question_table").find("tbody").eq(0).append("<tr>" +
-                        "<td width=\"10%\">"+(i+1)+"</td><td width=\"40%\">"+question.title+"</td>" +
-                        "<td width=\"20%\">"+nicName+"</td><td width=\"30%\">"+
-                        question.submitDateFull+"</td></tr>");
-                }
+                setTableText(data);
             }
         });
     });
 
+    function setTableText(data) {
+        for (var i=0;i<data.questionRecordList.length;i++) {
+            var question = data.questionRecordList[i];
+            var nicName = (question.name == null || question.name === '') ? question.nickName : question.name;
+            $("#question_table").find("tbody").eq(0).append("<tr>" +
+                "<td width=\"10%\">"+(i+1)+"</td><td width=\"40%\">"+question.title+"</td>" +
+                "<td width=\"20%\">"+nicName+"</td><td width=\"30%\">"+
+                question.submitDateFull+"</td></tr>");
+        }
+        for (var i=0;i<data.clockRecordList.length;i++) {
+            var clock = data.clockRecordList[i];
+            var nicName = (clock.name == null || clock.name === '') ? clock.nickName : clock.name;
+            $("#clock_table").find("tbody").eq(0).append("<tr>" +
+                "<td width=\"10%\">"+(i+1)+"</td><td width=\"30%\">"+nicName+"</td>" +
+                "<td width=\"30%\">"+(clock.phone==null?'':clock.phone)+"</td><td width=\"30%\">"+
+                clock.submitDateFull+"</td></tr>");
+        }
+        for (var i=0;i<data.audioRecordList.length;i++) {
+            var audio = data.audioRecordList[i];
+            var nicName = (audio.name == null || audio.name === '') ? audio.nickName : audio.name;
+            $("#audio_table").find("tbody").eq(0).append("<tr>" +
+                "<td width=\"10%\">"+(i+1)+"</td><td width=\"40%\">"+audio.audioName+"</td>" +
+                "<td width=\"20%\">"+nicName+"</td><td width=\"30%\">"+
+                audio.submitDateFull+"</td></tr>");
+        }
+    }
 
 </script>
 </body>

@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.bootdo.api.entity.db.PsyClockRecord;
 import com.bootdo.api.entity.req.clock.ManagerQueryListReq;
 import com.bootdo.api.entity.vo.clock.QueryQuestion;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,4 +18,5 @@ public interface PsyClockRecordMapper extends BaseMapper<PsyClockRecord> {
 
     List<QueryQuestion> selectListBySearchKey(ManagerQueryListReq queryListReq);
 
+    List<QueryQuestion> getLastRecordList(@Param("today") String today);
 }

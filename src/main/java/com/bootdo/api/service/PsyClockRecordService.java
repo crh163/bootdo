@@ -55,4 +55,8 @@ public class PsyClockRecordService extends BaseService<PsyClockRecordMapper, Psy
         return psyClockRecordMapper.selectListBySearchKey(queryListReq);
     }
 
+    public List<QueryQuestion> getLastRecordList(String today) {
+        return psyClockRecordMapper.getLastRecordList(today);
+    }
+
 }

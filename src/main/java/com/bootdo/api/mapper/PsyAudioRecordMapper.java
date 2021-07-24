@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.bootdo.api.entity.db.PsyAudioRecord;
 import com.bootdo.api.entity.req.audio.ManagerQueryListReq;
 import com.bootdo.api.entity.vo.audio.QueryQuestion;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -16,5 +17,7 @@ public interface PsyAudioRecordMapper extends BaseMapper<PsyAudioRecord> {
     Integer selectListBySearchKeyCount(ManagerQueryListReq queryListReq);
 
     List<QueryQuestion> selectListBySearchKey(ManagerQueryListReq queryListReq);
+
+    List<QueryQuestion> getLastRecordList(@Param("today") String today);
 
 }

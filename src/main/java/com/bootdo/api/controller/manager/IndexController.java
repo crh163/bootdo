@@ -41,22 +41,15 @@ public class IndexController {
     public Response list() {
         String today = LocalDate.now().format(CommonConsts.DTF_DAY);
         List<String> todayList = psyQuestionRecordService.getAllTodayData(today);
-        List<QueryQuestion> questionList = psyQuestionRecordService.getLastRecordList(today);
-        List<PsyClockRecord> clockList = psyClockRecordService.list(new QueryWrapper<PsyClockRecord>()
-                .eq(ColumnConsts.SUBMIT_DATE, today).orderByDesc(ColumnConsts.SUBMIT_DATE_FULL)
-                .last("limit 0,4"));
-        List<PsyAudioRecord> audioList = psyAudioRecordService.list(new QueryWrapper<PsyAudioRecord>()
-                .eq(ColumnConsts.SUBMIT_DATE, today).orderByDesc(ColumnConsts.SUBMIT_DATE_FULL)
-                .last("limit 0,4"));
         ManagerIndexInfoRes res = new ManagerIndexInfoRes();
         if (todayList != null && todayList.size() == 3) {
             res.setQuestionNumber(todayList.get(0));
             res.setClockNumber(todayList.get(1));
             res.setAudioNumber(todayList.get(2));
         }
-        res.setQuestionRecordList(questionList);
-        res.setClockRecordList(clockList);
-        res.setAudioRecordList(audioList);
+        res.setQuestionRecordList(psyQuestionRecordService.getLastRecordList(today));
+        res.setClockRecordList(psyClockRecordService.getLastRecordList(today));
+        res.setAudioRecordList(psyAudioRecordService.getLastRecordList(today));
         return ResponseUtil.getSuccess(res);
     }
 

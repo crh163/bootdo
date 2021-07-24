@@ -30,4 +30,13 @@
         <if test="submitDate != null and submitDate != ''"> and a.submit_date = #{submitDate} </if>
     </select>
 
+    <select id="getLastRecordList" resultType="com.bootdo.api.entity.vo.audio.QueryQuestion">
+        select a.id,a.audio_name,c.nick_name,d.name,d.phone,a.submit_date_full
+        from psy_audio_record a
+        left join sys_wx_user c on a.open_id = c.open_id
+        left join sys_wx_user_info d on a.open_id = d.open_id
+        order by a.submit_date_full desc
+        limit 0,4
+    </select>
+
 </mapper>
