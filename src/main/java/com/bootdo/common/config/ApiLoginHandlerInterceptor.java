@@ -57,15 +57,14 @@ public class ApiLoginHandlerInterceptor implements HandlerInterceptor {
         SysWxUser sysWxUser = RedisTemplateUtil.getRedisString(
                 CommonConsts.WX_TOKEN_REDIS_PREFIX + token, SysWxUser.class);
         if (sysWxUser == null) {
-            SysWxUser dbUserInfo = sysWxUserService.getOne(new QueryWrapper<SysWxUser>()
+            sysWxUser = sysWxUserService.getOne(new QueryWrapper<SysWxUser>()
                     .eq(ColumnConsts.TOKEN, token));
-            if (dbUserInfo != null) {
-                opsForValue.set(CommonConsts.WX_TOKEN_REDIS_PREFIX + token,
-                        gson.toJson(dbUserInfo), 30, TimeUnit.DAYS);
-            } else {
+            if (sysWxUser == null) {
                 sendResponseText(response, ResponseCodeEnum.FAIL_NO_LOGIN);
                 return false;
             }
+            opsForValue.set(CommonConsts.WX_TOKEN_REDIS_PREFIX + token,
+                    gson.toJson(sysWxUser), 30, TimeUnit.DAYS);
         }
         // redis做接口幂等
         String idempotentKey = CommonConsts.API_REDIS_IMP_IDEMPOTENT + request.getRequestURI()

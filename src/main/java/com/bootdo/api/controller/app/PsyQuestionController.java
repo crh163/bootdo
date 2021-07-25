@@ -77,7 +77,7 @@ public class PsyQuestionController {
 
     @ApiOperation("获取问卷列表")
     @PostMapping("/getQuestionList")
-    public Response getQuestionList(CommonIdReq commonIdReq) {
+    public Response getQuestionList(@RequestBody CommonIdReq commonIdReq) {
         return ResponseUtil.getSuccess(psyQuestionService.selectQuestionListByIndexId(commonIdReq.getId()));
     }
 
