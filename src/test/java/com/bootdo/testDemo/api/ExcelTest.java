@@ -92,6 +92,41 @@ public class ExcelTest {
 
     }
 
+    /**
+     * 除1-11以外
+     * @throws Exception
+     */
+    @Test
+    public void excelIn2() throws Exception {
+        //童年创伤量表
+        addQuestion(0, new String[]{"从不", "偶尔", "有时", "常常", "总是"},
+                new String[]{"1", "2", "3", "4", "5"});
+        //IRI量表（共情量表）
+        addQuestion(1, new String[]{"非常不符合", "有些不符合", "不能确定", "有些符合", "非常符合"},
+                new String[]{"1", "2", "3", "4", "5"});
+        //TAS量表（述情障碍量表）
+        addQuestion(2, new String[]{"完全不同意", "不同意", "中立", "同意", "完全同意"},
+                new String[]{"1", "2", "3", "4", "5"});
+        //DARS量表（快感缺失量表）
+        addQuestion(3, new String[]{"无", "偶尔", "有时", "常常", "总是"},
+                new String[]{"0", "1", "2", "3", "4"});
+        //青少年自伤行为问卷
+        addQuestion(4, new String[]{"没有", "偶尔", "有时", "常常", "总是"},
+                new String[]{"0", "1", "2", "3", "4"});
+        //自伤功能问卷
+        addQuestion(5, new String[]{"完全不符合", "不符合", "不确定", "符合", "完全符合"},
+                new String[]{"0", "1", "2", "3", "4"});
+        //自尊量表
+        addQuestion(6, new String[]{"从不", "很少", "有时", "常常", "总是"},
+                new String[]{"1", "2", "3", "4", "5"});
+        //社会支持问卷
+        addQuestion(7, new String[]{"非常不同意", "不同意", "有点不同意", "中立", "有点同意", "同意", "非常同意"},
+                new String[]{"1", "2", "3", "4", "5", "6", "7"});
+        //生活满意度问卷
+        addQuestion(8, new String[]{"很可怕", "非常不满意", "满意与不满意部分差不多", "非常满意", "很幸福"},
+                new String[]{"1", "2", "3", "4", "5"});
+    }
+
     private void addScore(Long questionId, List<String> scoreStrList){
         for (String scoreStr : scoreStrList) {
             String[] split = scoreStr.split("#");
@@ -107,7 +142,7 @@ public class ExcelTest {
     }
 
     private Long addQuestion(Integer sheetNum, String[] optionNames, String[] optionScores) throws Exception {
-        String fileUrl = "C:\\Users\\Administrator\\Desktop\\question.xlsx";
+        String fileUrl = "C:\\Users\\Administrator\\Desktop\\question2.xlsx";
         InputStream in = new FileInputStream(new File(fileUrl));
         Workbook workbook = WorkbookFactory.create(in);
         Sheet sheet = workbook.getSheetAt(sheetNum);
@@ -115,6 +150,8 @@ public class ExcelTest {
         PsyQuestion question = new PsyQuestion();
         question.setTitle(row0.getCell(0).getStringCellValue());
         question.setGuide(row0.getCell(1).getStringCellValue());
+        question.setIndexId(1L);
+        question.setOrderNum(99);
         if (row0.getCell(2) != null) {
             question.setRemark(row0.getCell(2).getStringCellValue());
         }

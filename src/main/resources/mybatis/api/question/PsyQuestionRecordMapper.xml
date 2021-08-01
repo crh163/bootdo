@@ -21,4 +21,11 @@
         limit 0,8
     </select>
 
+    <select id="getSubmitQuestionIdByOpenId" resultType="Long">
+        select DISTINCT question_id
+        from psy_question_record
+        where open_id = #{openId}
+		and submit_date_full BETWEEN #{startDate} and #{endDate}
+    </select>
+
 </mapper>

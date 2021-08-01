@@ -16,4 +16,8 @@ public interface PsyQuestionRecordMapper extends BaseMapper<PsyQuestionRecord> {
     List<String> getAllTodayData(@Param("today") String today);
 
     List<QueryQuestion> getLastRecordList(@Param("today") String today);
+
+    List<Long> getSubmitQuestionIdByOpenId(@Param("openId") String openId,
+                                           @Param("startDate") String startDate,
+                                           @Param("endDate") String endDate);
 }

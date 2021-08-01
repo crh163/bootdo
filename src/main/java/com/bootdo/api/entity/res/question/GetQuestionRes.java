@@ -19,4 +19,7 @@ public class GetQuestionRes {
     @ApiModelProperty("问卷的问题总数（共xx问）")
     private Integer topicNumber;
 
+    @ApiModelProperty("是否已提交该问卷")
+    private boolean hasSubmitQuestion = false;
+
 }

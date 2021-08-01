@@ -16,6 +16,7 @@
         <if test="page != null and pageSize != null">
             LIMIT #{page}, #{pageSize}
         </if>
+        order by order_num desc
     </select>
 
     <select id="selectListBySearchKeyCount" resultType="Integer">

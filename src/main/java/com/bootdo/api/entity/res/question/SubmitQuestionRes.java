@@ -6,6 +6,9 @@ import lombok.Data;
 @Data
 public class SubmitQuestionRes {
 
+    @ApiModelProperty("问卷标题")
+    private String title;
+
     @ApiModelProperty("用户头像url")
     private String userAvatarUrl;
 

@@ -45,6 +45,8 @@ public class CommonConsts {
 
     public static final Integer ONE_INT = 1;
 
+    public static final String DICT_APP_QUESTION_TIME = "app_question_time";
+
     public static final String DICT_APP_QUESTION_LAST_TIME = "app_question_last_time";
 
 }

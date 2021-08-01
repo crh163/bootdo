@@ -14,11 +14,15 @@ import com.bootdo.api.mapper.PsyQuestionTopicRecordMapper;
 import com.bootdo.common.constant.ColumnConsts;
 import com.bootdo.common.constant.CommonConsts;
 import com.bootdo.common.domain.page.ManPage;
+import com.bootdo.common.domain.sys.DictDO;
+import com.bootdo.system.service.DictService;
 import com.google.gson.Gson;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -32,6 +36,9 @@ import java.util.stream.Collectors;
 @Service
 @Slf4j
 public class PsyQuestionRecordService extends BaseService<PsyQuestionRecordMapper, PsyQuestionRecord> {
+
+    @Autowired
+    private DictService dictService;
 
     @Autowired
     private PsyQuestionRecordMapper psyQuestionRecordMapper;
@@ -116,5 +123,24 @@ public class PsyQuestionRecordService extends BaseService<PsyQuestionRecordMappe
 
     public List<QueryQuestion> getLastRecordList(String today) {
         return psyQuestionRecordMapper.getLastRecordList(today);
+    }
+
+    public List<Long> getSubmitQuestionIdByOpenId(String openId) {
+        String startDate = "";
+        String endDate = "";
+        //问卷本次最后开始时间
+        List<DictDO> dictList = dictService.listByType(CommonConsts.DICT_APP_QUESTION_TIME);
+        if (!CollectionUtils.isEmpty(dictList)) {
+            startDate = dictList.get(0).getValue();
+        }
+        //问卷本次最后截止时间
+        dictList = dictService.listByType(CommonConsts.DICT_APP_QUESTION_LAST_TIME);
+        if (!CollectionUtils.isEmpty(dictList)) {
+            endDate = dictList.get(0).getValue();
+        }
+        if (StringUtils.isBlank(startDate) || StringUtils.isBlank(endDate)) {
+            return null;
+        }
+        return psyQuestionRecordMapper.getSubmitQuestionIdByOpenId(openId, startDate, endDate);
     }
 }

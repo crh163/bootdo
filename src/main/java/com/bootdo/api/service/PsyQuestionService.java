@@ -59,7 +59,7 @@ public class PsyQuestionService extends BaseService<PsyQuestionMapper, PsyQuesti
             throw new BasicException(ResponseCodeEnum.NOT_EXIST_QUESTION);
         }
         List<PsyQuestionTopic> questionTopics = topicService.list(new QueryWrapper<PsyQuestionTopic>()
-                .eq(ColumnConsts.QUESTION_ID, id));
+                .eq(ColumnConsts.QUESTION_ID, id).orderByAsc(ColumnConsts.ORDER_NUM));
         List<GetQuestionTopic> topics = new ArrayList<>();
         for (PsyQuestionTopic questionTopic : questionTopics) {
             GetQuestionTopic topic = new GetQuestionTopic();

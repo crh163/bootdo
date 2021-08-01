@@ -9,6 +9,7 @@ import com.bootdo.api.entity.req.common.CommonIdReq;
 import com.bootdo.api.entity.req.question.SubmitQuestionReq;
 import com.bootdo.api.entity.req.question.info.TopicSelect;
 import com.bootdo.api.entity.res.common.Response;
+import com.bootdo.api.entity.res.question.GetQuestionRes;
 import com.bootdo.api.entity.res.question.SubmitQuestionRes;
 import com.bootdo.api.service.*;
 import com.bootdo.common.constant.ColumnConsts;
@@ -78,7 +79,18 @@ public class PsyQuestionController {
     @ApiOperation("获取问卷列表")
     @PostMapping("/getQuestionList")
     public Response getQuestionList(@RequestBody CommonIdReq commonIdReq) {
-        return ResponseUtil.getSuccess(psyQuestionService.selectQuestionListByIndexId(commonIdReq.getId()));
+        SysWxUser userInfo = (SysWxUser) request.getAttribute(CommonConsts.WX_API_USER_INFO);
+        List<GetQuestionRes> getQuestionResList = psyQuestionService.selectQuestionListByIndexId(commonIdReq.getId());
+        List<Long> questionIds = psyQuestionRecordService.getSubmitQuestionIdByOpenId(userInfo.getOpenId());
+        if (questionIds == null) {
+            return ResponseUtil.getSuccess(getQuestionResList);
+        }
+        for (GetQuestionRes questionRes : getQuestionResList) {
+            if (questionIds.contains(questionRes.getId())) {
+                questionRes.setHasSubmitQuestion(true);
+            }
+        }
+        return ResponseUtil.getSuccess(getQuestionResList);
     }
 
     @ApiOperation("根据问卷id获取问卷详细信息")
@@ -140,6 +152,7 @@ public class PsyQuestionController {
         Integer selectedScore = psyQuestionTopicOptionsService.selectSumScoreByIds(questionReq.getQuestionId(), selectedOptionId);
 
         SubmitQuestionRes submitQuestionRes = new SubmitQuestionRes();
+        submitQuestionRes.setTitle(question.getTitle());
         submitQuestionRes.setSubmitDate(LocalDateTime.now().format(CommonConsts.DTF_SECONDS));
         submitQuestionRes.setSumScore(question.getSumScore());
         submitQuestionRes.setSelectedScore(selectedScore);
