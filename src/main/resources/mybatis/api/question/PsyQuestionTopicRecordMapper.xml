@@ -43,10 +43,10 @@
         <if test="submitDate != null and submitDate != ''">
             and a.submit_date = #{submitDate}
         </if>
+        order by a.submit_date_full desc
         <if test="page != null and pageSize != null">
             LIMIT #{page}, #{pageSize}
         </if>
-        order by order_num desc
     </select>
 
     <select id="selectListBySearchKeyCount" resultType="Integer">
