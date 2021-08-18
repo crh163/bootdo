@@ -72,10 +72,10 @@ public class AppIndexController {
      *
      * @return
      */
-    private IndexInfoRes buildBaseIndexInfoRes(){
+    private IndexInfoRes buildBaseIndexInfoRes() {
         IndexInfoRes indexInfoRes = new IndexInfoRes();
         //问卷本次最后截止时间
-        List<DictDO> dictList = dictService.listByType(CommonConsts.DICT_APP_QUESTION_TIME);
+        List<DictDO> dictList = dictService.listByType(CommonConsts.DICT_APP_QUESTION_LAST_TIME);
         if (!CollectionUtils.isEmpty(dictList)) {
             indexInfoRes.setQuestionLastTime(dictList.get(0).getValue());
         }

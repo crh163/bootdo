@@ -12,7 +12,7 @@ spring:
     time-zone: GMT+8
     date-format: yyyy-MM-dd HH:mm:ss
   profiles: 
-    active: dev
+    active: pro
   servlet:
     multipart:
       max-file-size: 30Mb
@@ -48,7 +48,7 @@ mybatis-plus:
 
 wechat:
   loginUrl: https://api.weixin.qq.com/sns/jscode2session
-  appid: wxfc8818dad214c4d3
-  secret: e6fe91c0197a0229d32ec596f4a679e5
+  appid: wx143c3da6cedd344a
+  secret: fe9d1bfcd0e5955a334305d76338e5c1
   grantType: authorization_code
 
