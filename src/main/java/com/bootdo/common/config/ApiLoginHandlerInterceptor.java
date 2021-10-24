@@ -60,7 +60,7 @@ public class ApiLoginHandlerInterceptor implements HandlerInterceptor {
             sysWxUser = sysWxUserService.getOne(new QueryWrapper<SysWxUser>()
                     .eq(ColumnConsts.TOKEN, token));
             if (sysWxUser == null) {
-                sendResponseText(response, ResponseCodeEnum.FAIL_NO_LOGIN);
+                sendResponseText(request, response, ResponseCodeEnum.FAIL_NO_LOGIN);
                 return false;
             }
             opsForValue.set(CommonConsts.WX_TOKEN_REDIS_PREFIX + token,
@@ -70,7 +70,7 @@ public class ApiLoginHandlerInterceptor implements HandlerInterceptor {
         String idempotentKey = CommonConsts.API_REDIS_IMP_IDEMPOTENT + request.getRequestURI()
                 + ":" + sysWxUser.getOpenId();
         if (StringUtils.isNotBlank(RedisTemplateUtil.getRedisString(idempotentKey))) {
-            sendResponseText(response, ResponseCodeEnum.FAIL_IDEMPOTENT);
+            sendResponseText(request, response, ResponseCodeEnum.FAIL_IDEMPOTENT);
             return false;
         }
         // 请求写入redis做幂等 2秒内不允许重复请求 value为当前时间
@@ -86,12 +86,16 @@ public class ApiLoginHandlerInterceptor implements HandlerInterceptor {
      * @param codeEnum
      * @throws IOException
      */
-    private void sendResponseText(HttpServletResponse response, ResponseCodeEnum codeEnum) throws IOException {
+    private void sendResponseText(HttpServletRequest request, HttpServletResponse response,
+                                  ResponseCodeEnum codeEnum) throws IOException {
         PrintWriter pw = response.getWriter();
         Response res = new Response();
         res.setCode(codeEnum.getCode());
         res.setMsg(codeEnum.getMsg());
-        pw.write(gson.toJson(res));
+        String resStr = gson.toJson(res);
+        log.info("loginHandler request error, url : {}, token : {} ,return {}", request.getRequestURI(),
+                request.getHeader(CommonConsts.X_ACCESS_TOKEN), resStr);
+        pw.write(resStr);
         pw.flush();
         pw.close();
     }

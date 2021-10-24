@@ -122,7 +122,7 @@
     function setTableText(data) {
         for (var i=0;i<data.questionRecordList.length;i++) {
             var question = data.questionRecordList[i];
-            var nicName = (question.name == null || question.name === '') ? question.nickName : question.name;
+            var nicName = (question.name == null || question.name === '') ? (question.nickName == null ? '' : question.nickName) : question.name;
             $("#question_table").find("tbody").eq(0).append("<tr>" +
                 "<td width=\"10%\">"+(i+1)+"</td><td width=\"40%\">"+question.title+"</td>" +
                 "<td width=\"20%\">"+nicName+"</td><td width=\"30%\">"+
@@ -130,7 +130,7 @@
         }
         for (var i=0;i<data.clockRecordList.length;i++) {
             var clock = data.clockRecordList[i];
-            var nicName = (clock.name == null || clock.name === '') ? clock.nickName : clock.name;
+            var nicName = (clock.name == null || clock.name === '') ? (clock.nickName == null ? '' : clock.nickName) : clock.name;
             $("#clock_table").find("tbody").eq(0).append("<tr>" +
                 "<td width=\"10%\">"+(i+1)+"</td><td width=\"30%\">"+nicName+"</td>" +
                 "<td width=\"30%\">"+(clock.phone==null?'':clock.phone)+"</td><td width=\"30%\">"+
@@ -138,7 +138,7 @@
         }
         for (var i=0;i<data.audioRecordList.length;i++) {
             var audio = data.audioRecordList[i];
-            var nicName = (audio.name == null || audio.name === '') ? audio.nickName : audio.name;
+            var nicName = (audio.name == null || audio.name === '') ? (audio.nickName == null ? '' : audio.nickName) : audio.name;
             $("#audio_table").find("tbody").eq(0).append("<tr>" +
                 "<td width=\"10%\">"+(i+1)+"</td><td width=\"40%\">"+audio.audioName+"</td>" +
                 "<td width=\"20%\">"+nicName+"</td><td width=\"30%\">"+
