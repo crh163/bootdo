@@ -55,6 +55,7 @@ public class SysWxUserService extends BaseService<SysWxUserMapper, SysWxUser> {
             opsForValue.set(CommonConsts.WX_TOKEN_REDIS_PREFIX + token,
                     new Gson().toJson(sysWxUser), 30, TimeUnit.DAYS);
         } else {
+            log.info("用户【{}】登录成功替换微信信息，token由【{}】转变成【{}】", wxUser.getNickName(), wxUser.getToken(), token);
             //删除以前的redis数据
             stringRedisTemplate.delete(CommonConsts.WX_TOKEN_REDIS_PREFIX + wxUser.getToken());
             wxUser.setSessionKey(sessionKey);
