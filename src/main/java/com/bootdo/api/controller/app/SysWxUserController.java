@@ -61,6 +61,7 @@ public class SysWxUserController {
             return ResponseUtil.getFail(sessionMap.get(CommonConsts.ERRMSG));
         }
         String token = sysWxUserService.handleWxSessionInfo(sessionMap, request);
+        log.info("登录成功，返回token【{}】", token);
         return ResponseUtil.getSuccess(token);
     }
 
