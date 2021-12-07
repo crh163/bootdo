@@ -27,8 +27,8 @@
         <!-- 配置日志所生成的目录以及生成文件名的规则 在logs/mylog-2017-06-31.0.log.zip -->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${LOG_PATH}/debug/debug.%d{yyyy-MM-dd}.%i.zip</fileNamePattern>
-            <!-- 如果按天来回滚，则最大保存时间为20天，20天之前的都将被清理掉 -->
-            <maxHistory>20</maxHistory>
+            <!-- 如果按天来回滚，则最大保存时间为30天，30天之前的都将被清理掉 -->
+            <maxHistory>30</maxHistory>
             <!-- 日志总保存量为10GB -->
             <totalSizeCap>10GB</totalSizeCap>
             <timeBasedFileNamingAndTriggeringPolicy

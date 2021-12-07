@@ -65,7 +65,7 @@ public class SysWxUserInfo extends BaseModel implements Serializable {
     private Integer diagOnlyChild;
 
     @ApiModelProperty("诊断信息-非独生子女家中排第几")
-    private Integer diagChildRank;
+    private String diagChildRank;
 
     @ApiModelProperty("诊断信息-居住方式 1 和父母住 2 父母其中一人长期外出 3 隔代住 4 单亲家庭 5其他")
     private Integer diagAddressType;

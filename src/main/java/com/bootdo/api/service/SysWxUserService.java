@@ -46,6 +46,7 @@ public class SysWxUserService extends BaseService<SysWxUserMapper, SysWxUser> {
         QueryWrapper<SysWxUser> wrapper = new QueryWrapper<SysWxUser>().eq(ColumnConsts.OPENID, openId);
         SysWxUser wxUser = getOne(wrapper);
         if (Objects.isNull(wxUser)) {
+            log.info("用户 openId【{}】第一次登录成功保存微信信息，token【{}】", openId, token);
             SysWxUser sysWxUser = new SysWxUser();
             sysWxUser.setSessionKey(sessionKey);
             sysWxUser.setToken(token);
