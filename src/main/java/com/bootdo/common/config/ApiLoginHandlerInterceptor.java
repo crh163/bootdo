@@ -53,7 +53,6 @@ public class ApiLoginHandlerInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String token = request.getHeader(CommonConsts.X_ACCESS_TOKEN);
-        log.info("token :【{}】", token);
         ValueOperations<String, String> opsForValue = redisTemplate.opsForValue();
         SysWxUser sysWxUser = RedisTemplateUtil.getRedisString(
                 CommonConsts.WX_TOKEN_REDIS_PREFIX + token, SysWxUser.class);
@@ -77,6 +76,8 @@ public class ApiLoginHandlerInterceptor implements HandlerInterceptor {
         // 请求写入redis做幂等 2秒内不允许重复请求 value为当前时间
         opsForValue.set(idempotentKey, LocalDateTime.now().toString(), 2, TimeUnit.SECONDS);
         request.setAttribute(CommonConsts.WX_API_USER_INFO, sysWxUser);
+        log.info("loginHandler request success, url : {}, token : {}, nickName : {}",
+                request.getRequestURI(), token, sysWxUser.getNickName());
         return true;
     }
 
