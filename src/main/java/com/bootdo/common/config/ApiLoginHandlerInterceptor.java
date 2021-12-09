@@ -90,6 +90,7 @@ public class ApiLoginHandlerInterceptor implements HandlerInterceptor {
      */
     private void sendResponseText(HttpServletRequest request, HttpServletResponse response,
                                   ResponseCodeEnum codeEnum) throws IOException {
+        response.setCharacterEncoding("utf-8");
         PrintWriter pw = response.getWriter();
         Response res = new Response();
         res.setCode(codeEnum.getCode());
