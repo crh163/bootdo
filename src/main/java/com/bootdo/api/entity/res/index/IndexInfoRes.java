@@ -18,4 +18,7 @@ public class IndexInfoRes {
     @ApiModelProperty("上一次打卡时间")
     private String beforeClockTime;
 
+    @ApiModelProperty("是否已提交微信用户信息 0 未提交 1 已提交")
+    private String submitWxUserInfo;
+
 }

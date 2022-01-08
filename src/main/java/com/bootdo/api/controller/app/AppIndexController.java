@@ -8,6 +8,7 @@ import com.bootdo.api.entity.res.index.IndexInfoRes;
 import com.bootdo.api.service.PsyClockRecordService;
 import com.bootdo.api.service.PsyQuestionRecordService;
 import com.bootdo.api.service.SysWxUserInfoService;
+import com.bootdo.api.service.SysWxUserService;
 import com.bootdo.common.constant.ColumnConsts;
 import com.bootdo.common.constant.CommonConsts;
 import com.bootdo.common.domain.sys.DictDO;
@@ -18,6 +19,7 @@ import com.bootdo.system.service.DictService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,6 +34,9 @@ import java.util.List;
 @Api(tags = "首页基础信息接口")
 @RequestMapping("/api/index")
 public class AppIndexController {
+
+    @Autowired
+    private SysWxUserService sysWxUserService;
 
     @Autowired
     private SysWxUserInfoService sysWxUserInfoService;
@@ -64,6 +69,10 @@ public class AppIndexController {
         indexInfoRes.setUserInfoStatus(FieldUtil.judgeClassHasNull(userInfo));
         indexInfoRes.setQuestionSubmitNewTime(psyQuestionRecordService.selectQuestionSubmitNewTime(sysWxUser.getOpenId()));
         indexInfoRes.setBeforeClockTime(psyClockRecordService.selectBeforeClockTime(sysWxUser.getOpenId()));
+        //查询用户微信信息
+        SysWxUser wxUser = sysWxUserService.getOne(new QueryWrapper<SysWxUser>()
+                .eq(ColumnConsts.OPENID, sysWxUser.getOpenId()));
+        indexInfoRes.setSubmitWxUserInfo(StringUtils.isNotBlank(wxUser.getNickName()) ? "1" : "0");
         return ResponseUtil.getSuccess(indexInfoRes);
     }
 
