@@ -7,6 +7,8 @@ public class QueryQuestion {
 
     private Long id;
 
+    private Long questionId;
+
     private String title;
 
     private String indexTitle;

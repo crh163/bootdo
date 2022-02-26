@@ -27,7 +27,7 @@
     </insert>
 
     <select id="selectListBySearchKey" resultType="com.bootdo.api.entity.vo.question.QueryQuestion">
-        select a.id,b.title,i.index_title,c.nick_name,d.name,
+        select a.id,b.id AS questionId,b.title,i.index_title,c.nick_name,d.name,
         a.submit_date_full,a.submit_score,a.sum_score
         from psy_question_record a
         left join psy_question b on a.question_id = b.id

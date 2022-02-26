@@ -102,3 +102,17 @@ function excelOutBatch() {
 	window.location.href = prefix + '/excelOutBatch?ids='+ids;
 }
 
+function excelOutBatchDetail() {
+	var rows = $('#exampleTable').bootstrapTable('getSelections');
+	if (rows.length == 0) {
+		layer.msg("请选择要导出的数据！");
+		return;
+	}
+	var ids = '';
+	$.each(rows, function(i, row) {
+		ids += row['id'] + ',';
+	});
+	ids = ids.substring(0,ids.length-1);
+	window.location.href = prefix + '/excelOutBatchDetail?ids='+ids;
+}
+
