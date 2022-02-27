@@ -121,8 +121,8 @@ public class QuestionRecordController {
                     continue;
                 }
                 List<List<String>> execlData = new ArrayList<>();
-                for (int i = 0; i < queryQuestions.size(); i++) {
-                    QueryQuestion queryQuestion = queryQuestions.get(i);
+                for (int i = 0; i < questionDatas.size(); i++) {
+                    QueryQuestion queryQuestion = questionDatas.get(i);
                     //查出问卷答案作为sheet的data
                     List<PsyQuestionTopicRecord> topicRecordList = psyQuestionTopicRecordService.list(new QueryWrapper<PsyQuestionTopicRecord>()
                             .orderByAsc(ColumnConsts.ORDER_NUM)
